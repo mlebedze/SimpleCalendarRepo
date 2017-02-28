@@ -1,0 +1,12 @@
+c:\users\mike\documents\visual studio 2012\Projects\SimpleCalendar\SimpleCalendar\bin\Debug\SimpleCalendar.exe.config
+c:\users\mike\documents\visual studio 2012\Projects\SimpleCalendar\SimpleCalendar\bin\Debug\SimpleCalendar.exe
+c:\users\mike\documents\visual studio 2012\Projects\SimpleCalendar\SimpleCalendar\bin\Debug\SimpleCalendar.pdb
+c:\users\mike\documents\visual studio 2012\Projects\SimpleCalendar\SimpleCalendar\obj\Debug\SimpleCalendar.csprojResolveAssemblyReference.cache
+c:\users\mike\documents\visual studio 2012\Projects\SimpleCalendar\SimpleCalendar\obj\Debug\SimpleCalendar.Form1.resources
+c:\users\mike\documents\visual studio 2012\Projects\SimpleCalendar\SimpleCalendar\obj\Debug\SimpleCalendar.Properties.Resources.resources
+c:\users\mike\documents\visual studio 2012\Projects\SimpleCalendar\SimpleCalendar\obj\Debug\SimpleCalendar.csproj.GenerateResource.Cache
+c:\users\mike\documents\visual studio 2012\Projects\SimpleCalendar\SimpleCalendar\obj\Debug\SimpleCalendar.exe
+c:\users\mike\documents\visual studio 2012\Projects\SimpleCalendar\SimpleCalendar\obj\Debug\SimpleCalendar.pdb
+c:\users\mike\documents\visual studio 2012\Projects\SimpleCalendar\SimpleCalendar\bin\Debug\MetroFramework.dll
+c:\users\mike\documents\visual studio 2012\Projects\SimpleCalendar\SimpleCalendar\obj\Debug\SimpleCalendar.FormWEventEdit.resources
+c:\users\mike\documents\visual studio 2012\Projects\SimpleCalendar\SimpleCalendar\obj\Debug\SimpleCalendar.FormWCategoryEdit.resources
