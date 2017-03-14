@@ -67,7 +67,7 @@ namespace SimpleCalendar
 
         private void DatePicker1_ValueChanged(object sender, EventArgs e)
         {
-            dateSelected = this.datePicker1.Value;
+            dateSelected = this.datePicker1.Value.Date;
             refreshDateFields(dateSelected);
             refreshTree(dateSelected);
         }
@@ -76,12 +76,14 @@ namespace SimpleCalendar
         {
             dateSelected = dateSelected.AddDays(-1);
             refreshDateFields(dateSelected);
+            refreshTree(dateSelected);
         }
 
         private void NextDayButton_Click(object sender, EventArgs e)
         {
             dateSelected = dateSelected.AddDays(1);
             refreshDateFields(dateSelected);
+            refreshTree(dateSelected);
         }
 
         private void SaveCategoryEditButton_Click(object sender, EventArgs e)
