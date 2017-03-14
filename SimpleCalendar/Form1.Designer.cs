@@ -30,26 +30,26 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Node4");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("All                             ", new System.Windows.Forms.TreeNode[] {
-            treeNode13});
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Node5");
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Work                     ", new System.Windows.Forms.TreeNode[] {
-            treeNode15});
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Feb 19, 2017 (1:00pm) - Practice");
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Feb 26, 2017 (1:00pm) - Practice");
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Mar 05, 2017 (2:00pm) - Return uniform");
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Mar 05, 2017 (9:30pm) - End of season party");
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Soccer                                   ", new System.Windows.Forms.TreeNode[] {
-            treeNode17,
-            treeNode18,
-            treeNode19,
-            treeNode20});
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Feb 18, 2017 (3:00pm) - Pick up package");
-            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Feb 19, 2017 (7:00pm) - Meet Sally for movie");
-            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Other                          ", new System.Windows.Forms.TreeNode[] {
-            treeNode22,
-            treeNode23});
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node4");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("All                             ", new System.Windows.Forms.TreeNode[] {
+            treeNode1});
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Node5");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Work                     ", new System.Windows.Forms.TreeNode[] {
+            treeNode3});
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Feb 19, 2017 (1:00pm) - Practice");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Feb 26, 2017 (1:00pm) - Practice");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Mar 05, 2017 (2:00pm) - Return uniform");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Mar 05, 2017 (9:30pm) - End of season party");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Soccer                                   ", new System.Windows.Forms.TreeNode[] {
+            treeNode5,
+            treeNode6,
+            treeNode7,
+            treeNode8});
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Feb 18, 2017 (3:00pm) - Pick up package");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Feb 19, 2017 (7:00pm) - Meet Sally for movie");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Other                          ", new System.Windows.Forms.TreeNode[] {
+            treeNode10,
+            treeNode11});
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.categoryEditPanel = new System.Windows.Forms.Panel();
@@ -65,7 +65,7 @@
             this.label30 = new System.Windows.Forms.Label();
             this.eventsDisplayPanel = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.eventsTreeView = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.createCategoryButton = new System.Windows.Forms.Label();
             this.createEventButton = new System.Windows.Forms.Label();
@@ -289,7 +289,7 @@
             // eventsDisplayPanel
             // 
             this.eventsDisplayPanel.Controls.Add(this.label2);
-            this.eventsDisplayPanel.Controls.Add(this.treeView1);
+            this.eventsDisplayPanel.Controls.Add(this.eventsTreeView);
             this.eventsDisplayPanel.Controls.Add(this.createCategoryButton);
             this.eventsDisplayPanel.Controls.Add(this.createEventButton);
             this.eventsDisplayPanel.Location = new System.Drawing.Point(236, 11);
@@ -309,90 +309,90 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Events";
             // 
-            // treeView1
+            // eventsTreeView
             // 
-            this.treeView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(55)))), ((int)(((byte)(73)))));
-            this.treeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.treeView1.ImageIndex = 0;
-            this.treeView1.ImageList = this.imageList1;
-            this.treeView1.Indent = 15;
-            this.treeView1.ItemHeight = 25;
-            this.treeView1.LineColor = System.Drawing.Color.White;
-            this.treeView1.Location = new System.Drawing.Point(34, 58);
-            this.treeView1.Name = "treeView1";
-            treeNode13.Name = "Node4";
-            treeNode13.Text = "Node4";
-            treeNode14.ForeColor = System.Drawing.Color.White;
-            treeNode14.ImageKey = "bluSq.png";
-            treeNode14.Name = "allNode";
-            treeNode14.NodeFont = new System.Drawing.Font("Tw Cen MT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode14.SelectedImageKey = "bluSq.png";
-            treeNode14.Text = "All                             ";
-            treeNode15.Name = "Node5";
-            treeNode15.Text = "Node5";
-            treeNode16.ForeColor = System.Drawing.Color.White;
-            treeNode16.ImageKey = "redTri.png";
-            treeNode16.Name = "Node1";
-            treeNode16.NodeFont = new System.Drawing.Font("Tw Cen MT", 14.25F);
-            treeNode16.SelectedImageKey = "redTri.png";
-            treeNode16.Text = "Work                     ";
-            treeNode17.ForeColor = System.Drawing.Color.White;
-            treeNode17.ImageKey = "whtDot.png";
-            treeNode17.Name = "Node6";
-            treeNode17.NodeFont = new System.Drawing.Font("Tw Cen MT Condensed", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode17.SelectedImageKey = "whtDot.png";
-            treeNode17.Text = "Feb 19, 2017 (1:00pm) - Practice";
-            treeNode18.ForeColor = System.Drawing.Color.White;
-            treeNode18.ImageKey = "whtDot.png";
-            treeNode18.Name = "Node1";
-            treeNode18.NodeFont = new System.Drawing.Font("Tw Cen MT Condensed", 11.25F, System.Drawing.FontStyle.Bold);
-            treeNode18.SelectedImageKey = "whtDot.png";
-            treeNode18.Text = "Feb 26, 2017 (1:00pm) - Practice";
-            treeNode19.ForeColor = System.Drawing.Color.White;
-            treeNode19.ImageKey = "whtDot.png";
-            treeNode19.Name = "Node0";
-            treeNode19.NodeFont = new System.Drawing.Font("Tw Cen MT Condensed", 11.25F, System.Drawing.FontStyle.Bold);
-            treeNode19.SelectedImageKey = "whtDot.png";
-            treeNode19.Text = "Mar 05, 2017 (2:00pm) - Return uniform";
-            treeNode20.ForeColor = System.Drawing.Color.White;
-            treeNode20.ImageKey = "whtDot.png";
-            treeNode20.Name = "Node2";
-            treeNode20.NodeFont = new System.Drawing.Font("Tw Cen MT Condensed", 11.25F, System.Drawing.FontStyle.Bold);
-            treeNode20.SelectedImageKey = "whtDot.png";
-            treeNode20.Text = "Mar 05, 2017 (9:30pm) - End of season party";
-            treeNode21.ForeColor = System.Drawing.Color.White;
-            treeNode21.ImageKey = "purCirc.png";
-            treeNode21.Name = "Node2";
-            treeNode21.NodeFont = new System.Drawing.Font("Tw Cen MT", 14.25F);
-            treeNode21.SelectedImageKey = "purCirc.png";
-            treeNode21.Text = "Soccer                                   ";
-            treeNode22.ForeColor = System.Drawing.Color.White;
-            treeNode22.ImageKey = "whtDot.png";
-            treeNode22.Name = "Node7";
-            treeNode22.NodeFont = new System.Drawing.Font("Tw Cen MT Condensed", 11.25F, System.Drawing.FontStyle.Bold);
-            treeNode22.SelectedImageKey = "whtDot.png";
-            treeNode22.Text = "Feb 18, 2017 (3:00pm) - Pick up package";
-            treeNode23.ForeColor = System.Drawing.Color.White;
-            treeNode23.ImageKey = "whtDot.png";
-            treeNode23.Name = "Node9";
-            treeNode23.NodeFont = new System.Drawing.Font("Tw Cen MT Condensed", 11.25F, System.Drawing.FontStyle.Bold);
-            treeNode23.SelectedImageKey = "whtDot.png";
-            treeNode23.Text = "Feb 19, 2017 (7:00pm) - Meet Sally for movie";
-            treeNode24.ForeColor = System.Drawing.Color.White;
-            treeNode24.ImageKey = "grStar.png";
-            treeNode24.Name = "Node3";
-            treeNode24.NodeFont = new System.Drawing.Font("Tw Cen MT", 14.25F);
-            treeNode24.SelectedImageKey = "grStar.png";
-            treeNode24.Text = "Other                          ";
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode14,
-            treeNode16,
-            treeNode21,
-            treeNode24});
-            this.treeView1.SelectedImageIndex = 0;
-            this.treeView1.ShowLines = false;
-            this.treeView1.Size = new System.Drawing.Size(311, 263);
-            this.treeView1.TabIndex = 3;
+            this.eventsTreeView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(55)))), ((int)(((byte)(73)))));
+            this.eventsTreeView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.eventsTreeView.ImageIndex = 0;
+            this.eventsTreeView.ImageList = this.imageList1;
+            this.eventsTreeView.Indent = 15;
+            this.eventsTreeView.ItemHeight = 25;
+            this.eventsTreeView.LineColor = System.Drawing.Color.White;
+            this.eventsTreeView.Location = new System.Drawing.Point(34, 58);
+            this.eventsTreeView.Name = "eventsTreeView";
+            treeNode1.Name = "Node4";
+            treeNode1.Text = "Node4";
+            treeNode2.ForeColor = System.Drawing.Color.White;
+            treeNode2.ImageKey = "bluSq.png";
+            treeNode2.Name = "allNode";
+            treeNode2.NodeFont = new System.Drawing.Font("Tw Cen MT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            treeNode2.SelectedImageKey = "bluSq.png";
+            treeNode2.Text = "All                             ";
+            treeNode3.Name = "Node5";
+            treeNode3.Text = "Node5";
+            treeNode4.ForeColor = System.Drawing.Color.White;
+            treeNode4.ImageKey = "redTri.png";
+            treeNode4.Name = "Node1";
+            treeNode4.NodeFont = new System.Drawing.Font("Tw Cen MT", 14.25F);
+            treeNode4.SelectedImageKey = "redTri.png";
+            treeNode4.Text = "Work                     ";
+            treeNode5.ForeColor = System.Drawing.Color.White;
+            treeNode5.ImageKey = "whtDot.png";
+            treeNode5.Name = "Node6";
+            treeNode5.NodeFont = new System.Drawing.Font("Tw Cen MT Condensed", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            treeNode5.SelectedImageKey = "whtDot.png";
+            treeNode5.Text = "Feb 19, 2017 (1:00pm) - Practice";
+            treeNode6.ForeColor = System.Drawing.Color.White;
+            treeNode6.ImageKey = "whtDot.png";
+            treeNode6.Name = "Node1";
+            treeNode6.NodeFont = new System.Drawing.Font("Tw Cen MT Condensed", 11.25F, System.Drawing.FontStyle.Bold);
+            treeNode6.SelectedImageKey = "whtDot.png";
+            treeNode6.Text = "Feb 26, 2017 (1:00pm) - Practice";
+            treeNode7.ForeColor = System.Drawing.Color.White;
+            treeNode7.ImageKey = "whtDot.png";
+            treeNode7.Name = "Node0";
+            treeNode7.NodeFont = new System.Drawing.Font("Tw Cen MT Condensed", 11.25F, System.Drawing.FontStyle.Bold);
+            treeNode7.SelectedImageKey = "whtDot.png";
+            treeNode7.Text = "Mar 05, 2017 (2:00pm) - Return uniform";
+            treeNode8.ForeColor = System.Drawing.Color.White;
+            treeNode8.ImageKey = "whtDot.png";
+            treeNode8.Name = "Node2";
+            treeNode8.NodeFont = new System.Drawing.Font("Tw Cen MT Condensed", 11.25F, System.Drawing.FontStyle.Bold);
+            treeNode8.SelectedImageKey = "whtDot.png";
+            treeNode8.Text = "Mar 05, 2017 (9:30pm) - End of season party";
+            treeNode9.ForeColor = System.Drawing.Color.White;
+            treeNode9.ImageKey = "purCirc.png";
+            treeNode9.Name = "Node2";
+            treeNode9.NodeFont = new System.Drawing.Font("Tw Cen MT", 14.25F);
+            treeNode9.SelectedImageKey = "purCirc.png";
+            treeNode9.Text = "Soccer                                   ";
+            treeNode10.ForeColor = System.Drawing.Color.White;
+            treeNode10.ImageKey = "whtDot.png";
+            treeNode10.Name = "Node7";
+            treeNode10.NodeFont = new System.Drawing.Font("Tw Cen MT Condensed", 11.25F, System.Drawing.FontStyle.Bold);
+            treeNode10.SelectedImageKey = "whtDot.png";
+            treeNode10.Text = "Feb 18, 2017 (3:00pm) - Pick up package";
+            treeNode11.ForeColor = System.Drawing.Color.White;
+            treeNode11.ImageKey = "whtDot.png";
+            treeNode11.Name = "Node9";
+            treeNode11.NodeFont = new System.Drawing.Font("Tw Cen MT Condensed", 11.25F, System.Drawing.FontStyle.Bold);
+            treeNode11.SelectedImageKey = "whtDot.png";
+            treeNode11.Text = "Feb 19, 2017 (7:00pm) - Meet Sally for movie";
+            treeNode12.ForeColor = System.Drawing.Color.White;
+            treeNode12.ImageKey = "grStar.png";
+            treeNode12.Name = "Node3";
+            treeNode12.NodeFont = new System.Drawing.Font("Tw Cen MT", 14.25F);
+            treeNode12.SelectedImageKey = "grStar.png";
+            treeNode12.Text = "Other                          ";
+            this.eventsTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode2,
+            treeNode4,
+            treeNode9,
+            treeNode12});
+            this.eventsTreeView.SelectedImageIndex = 0;
+            this.eventsTreeView.ShowLines = false;
+            this.eventsTreeView.Size = new System.Drawing.Size(311, 263);
+            this.eventsTreeView.TabIndex = 3;
             // 
             // imageList1
             // 
@@ -874,7 +874,7 @@
         private System.Windows.Forms.Label selectedDateDisplay;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.TreeView eventsTreeView;
         private System.Windows.Forms.Label exitButton;
         private System.Windows.Forms.Label nextDayButton;
         private System.Windows.Forms.Label prevDayButton;
