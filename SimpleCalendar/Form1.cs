@@ -14,6 +14,7 @@ namespace SimpleCalendar
     public partial class Form1 : Form
     {
         DateTime dateSelected;
+        Dictionary<DateTime, List<CalendarEvent>> eventsCollection = new Dictionary<DateTime, List<CalendarEvent>>();
 
         #region initialization
         public Form1()
