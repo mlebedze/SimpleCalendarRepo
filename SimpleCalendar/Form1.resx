@@ -121,7 +121,7 @@
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABYAAAAUCAYAAACJfM0wAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wwAADsMBx2+oZAAAAFBJREFUOE/tzMEKACAIA1D//6eNsV2ECLO8+aBDOmdjpHjhpXkGcozn6fQMOcbv
+        wgAADsIBFShKgAAAAFBJREFUOE/tzMEKACAIA1D//6eNsV2ECLO8+aBDOmdjpHjhpXkGcozn6fQMOcbv
         6HwPe8ZqVBNhznWdqiLMuX6jOsKf4z9aSqGtGFpKR5XZAiiKvUPHIfzQAAAAAElFTkSuQmCC
 </value>
   </data>
@@ -133,7 +133,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABg
-        CQAAAk1TRnQBSQFMAgEBBQEAATgBAAE4AQABFgEAARQBAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBBQEAAUABAAFAAQABFgEAARQBAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABWAMAASgDAAEBAQABCAUAAcABDRgAAYACAAGAAwACgAEAAYADAAGAAQABgAEAAoACAAPAAQABwAHc
         AcABAAHwAcoBpgEAATMFAAEzAQABMwEAATMBAAIzAgADFgEAAxwBAAMiAQADKQEAA1UBAANNAQADQgEA
         AzkBAAGAAXwB/wEAAlAB/wEAAZMBAAHWAQAB/wHsAcwBAAHGAdYB7wEAAdYC5wEAAZABqQGtAgAB/wEz
@@ -176,19 +176,10 @@
         C/8BAAs=
 </value>
   </data>
-  <metadata name="lineShape1.Bounds" type="System.Drawing.Rectangle, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>375, 58, 0, 333</value>
-  </metadata>
-  <metadata name="lineShape1.Location" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>375, 58</value>
-  </metadata>
-  <metadata name="lineShape1.Size" type="System.Drawing.Size, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>0, 333</value>
-  </metadata>
   <data name="pictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAp4AAAGJCAIAAACsL6R6AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wwAADsMBx2+oZAAA/7JJREFUeF7s/fWbHEmStgv3X3Su7/x0ds/Zd2d3Z3Z3Zml4pmeaGdWkVjNJrSZB
+        wgAADsIBFShKgAAA/7JJREFUeF7s/fWbHEmStgv3X3Su7/x0ds/Zd2d3Z3Z3Zml4pmeaGdWkVjNJrSZB
         i5mZmZlVYqlUzMzMyfHdEU+UK5SZFZWZlSWpZ+u5QiELd3Mzc3NzN/fMrMzHrAlMYAITmMAEJvA3hInU
         PoEJTGACE5jA3xQmUvsEJjCBCUxgAn9TmEjtE5jABCYwgQn8TWEitU9gAhOYwAQm8DeFidQ+gQlMYAIT
         mMDfFCZS+wQmMIEJTGACf1OYSO0TmMAEJjCBCfxNYSK1P3KIxWLRaDQSiXB3i5xCl5rAI4ZwOCwi5EB0

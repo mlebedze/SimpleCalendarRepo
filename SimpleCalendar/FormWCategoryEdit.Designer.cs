@@ -52,8 +52,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.label17 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -318,27 +316,6 @@
             this.imageList1.Images.SetKeyName(3, "redTri.png");
             this.imageList1.Images.SetKeyName(4, "whtDot.png");
             // 
-            // lineShape1
-            // 
-            this.lineShape1.BorderColor = System.Drawing.Color.White;
-            this.lineShape1.BorderWidth = 5;
-            this.lineShape1.Name = "lineShape1";
-            this.lineShape1.X1 = 375;
-            this.lineShape1.X2 = 375;
-            this.lineShape1.Y1 = 77;
-            this.lineShape1.Y2 = 410;
-            // 
-            // shapeContainer1
-            // 
-            this.shapeContainer1.Location = new System.Drawing.Point(0, 0);
-            this.shapeContainer1.Margin = new System.Windows.Forms.Padding(0);
-            this.shapeContainer1.Name = "shapeContainer1";
-            this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
-            this.lineShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(1045, 464);
-            this.shapeContainer1.TabIndex = 72;
-            this.shapeContainer1.TabStop = false;
-            // 
             // label17
             // 
             this.label17.AutoSize = true;
@@ -407,7 +384,6 @@
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.shapeContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormWCategoryEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -448,8 +424,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ImageList imageList1;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape1;
-        private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
