@@ -159,11 +159,6 @@ namespace SimpleCalendar
 
             Dictionary<CalendarCategory, List<CalendarEvent>> todayTemp = new Dictionary<CalendarCategory, List<CalendarEvent>>();
             List<CalendarCategory> categories = new List<CalendarCategory>();
-            CalendarCategory cat1 = new CalendarCategory();
-            cat1.color = Color.Blue;
-            cat1.name = "All";
-            cat1.symbol = Shape.Square;
-            categories.Add(cat1);
             CalendarCategory cat2 = new CalendarCategory();
             cat2.color = Color.Red;
             cat2.name = "Work";
@@ -191,7 +186,6 @@ namespace SimpleCalendar
             List<CalendarEvent> calEvents = new List<CalendarEvent>();
             calEvents.Add(someGenericEvent);
 
-            todayTemp.Add(cat1, calEvents);
             todayTemp.Add(cat2, calEvents);
             todayTemp.Add(cat3, calEvents);
             todayTemp.Add(cat4, calEvents);
@@ -206,6 +200,15 @@ namespace SimpleCalendar
             Dictionary<CalendarCategory, List<CalendarEvent>> todaysEvents = new Dictionary<CalendarCategory, List<CalendarEvent>>();
             if (eventsCollection.ContainsKey(date)) todaysEvents = eventsCollection[date];
 
+            //Initialize the tree's 'All events' sections
+            TreeNode nodeAll = new TreeNode("All                            ");
+            nodeAll.ImageKey = nodeAll.SelectedImageKey = "bluSq.png";
+            nodeAll.ForeColor = Color.White;
+            nodeAll.NodeFont = new Font(new FontFamily("Tw Cen MT"), 14.25f, FontStyle.Regular);
+            this.eventsTreeView.Nodes.Add(nodeAll);
+
+            List<CalendarEvent> allEventsToday = new List<CalendarEvent>();
+
             //Initialize the tree's primary nodes
             foreach (CalendarCategory cat in todaysEvents.Keys)
             {
@@ -217,8 +220,11 @@ namespace SimpleCalendar
 
                 node.ForeColor = Color.White;
                 node.NodeFont = new Font(new FontFamily("Tw Cen MT"), 14.25f, FontStyle.Regular);
+
+                List<CalendarEvent> orderedEvents = todaysEvents[cat].OrderBy(a => a.start).ToList();
                 foreach (CalendarEvent ev in todaysEvents[cat])
                 {
+                    allEventsToday.Add(ev);
                     TreeNode child = new TreeNode(ev.start.ToString("MMM dd (h:mmtt) - ") + ev.title + "                            ");
                     child.ImageKey = child.SelectedImageKey = "whtDot.png";
                     child.ForeColor = Color.White;
@@ -228,6 +234,16 @@ namespace SimpleCalendar
                 }
 
                 this.eventsTreeView.Nodes.Add(node);
+            }
+
+            //Add all events to the 'all' node
+            foreach (CalendarEvent ev in allEventsToday.OrderBy(a=>a.start))
+            {
+                TreeNode child = new TreeNode(ev.start.ToString("MMM dd (h:mmtt) - ") + ev.title + "                            ");
+                child.ImageKey = child.SelectedImageKey = "whtDot.png";
+                child.ForeColor = Color.White;
+                child.NodeFont = new Font(new FontFamily("Tw Cen MT Condensed"), 11.25f, FontStyle.Bold);
+                this.eventsTreeView.Nodes[0].Nodes.Add(child);
             }
         }
 
