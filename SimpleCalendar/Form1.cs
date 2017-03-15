@@ -1,42 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SimpleCalendar
 {
+
     public partial class Form1 : Form
     {
         public DateTime dateSelected = DateTime.Today;
-        public Dictionary<DateTime, Dictionary<CalendarCategory, List<CalendarEvent>>> eventsCollection = new Dictionary<DateTime, Dictionary<CalendarCategory, List<CalendarEvent>>>();
+        //public Dictionary<DateTime, Dictionary<CalendarCategory, List<CalendarEvent>>> eventsCollection = new Dictionary<DateTime, Dictionary<CalendarCategory, List<CalendarEvent>>>();
+
+        private Dictionary<string, CalendarCategory> eventCategories;
+        private SortedSet<CalendarEvent> allEvents;
+
+        private SortedSet<CalendarEvent> todaysEvents;
 
         #region initialization
         public Form1()
         {
             InitializeComponent();
 
-            dateSelected = DateTime.Today;
-            refreshDateFields(dateSelected);
-
             //Initial categories until we get a read file set up
-
-            loadEventsFromFile(out eventsCollection);
-            refreshTree(dateSelected);
-
-            //On the left hand side of the screen, initialize to show the events panel
-            this.eventsDisplayPanel.Dock = DockStyle.Fill;
-            this.categoryEditPanel.Dock = DockStyle.Fill;
-            this.createEventPanel.Dock = DockStyle.Fill;
-
-            this.eventsDisplayPanel.Visible = true;
-            this.categoryEditPanel.Visible = false;
-            this.createEventPanel.Visible = false;
+            loadEventsFromFile(out eventCategories, out allEvents);
+            RefreshCalendar();
 
             //Button interactions
             this.createEventButton.Click += CreateEventButton_Click;
@@ -55,11 +45,18 @@ namespace SimpleCalendar
             this.nextDayButton.Click += NextDayButton_Click;
             this.prevDayButton.Click += PrevDayButton_Click;
         }
-
         #endregion
 
-        #region events
+        private void RefreshCalendar()
+        {
+            todaysEvents = allEvents.GetViewBetween(new CalendarEvent() { StartingTime = dateSelected }, new CalendarEvent() { StartingTime = dateSelected.AddDays(1) });
 
+            refreshTree(dateSelected);
+            refreshDateFields(dateSelected);
+            dailyCalendar1.ChangeDate(dateSelected, todaysEvents);
+        }
+
+        #region events
         private void ExitButton_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -67,23 +64,21 @@ namespace SimpleCalendar
 
         private void DatePicker1_ValueChanged(object sender, EventArgs e)
         {
-            dateSelected = this.datePicker1.Value.Date;
-            refreshDateFields(dateSelected);
-            refreshTree(dateSelected);
+            // change the current date
+            dateSelected = datePicker1.Value.Date;
+
+            // refresh the calendar for current date
+            RefreshCalendar();
         }
 
         private void PrevDayButton_Click(object sender, EventArgs e)
         {
-            dateSelected = dateSelected.AddDays(-1);
-            refreshDateFields(dateSelected);
-            refreshTree(dateSelected);
+            datePicker1.Value = dateSelected.AddDays(-1);
         }
 
         private void NextDayButton_Click(object sender, EventArgs e)
         {
-            dateSelected = dateSelected.AddDays(1);
-            refreshDateFields(dateSelected);
-            refreshTree(dateSelected);
+            datePicker1.Value = dateSelected.AddDays(1);
         }
 
         private void SaveCategoryEditButton_Click(object sender, EventArgs e)
@@ -127,78 +122,155 @@ namespace SimpleCalendar
             this.categoryEditPanel.Visible = false;
             this.createEventPanel.Visible = true;
         }
-
         #endregion
 
         #region miscellaneous
+        private const int HT_CLIENT = 0x1;
+        private const int HT_CAPTION = 0x2;
+        private const int WM_NCHITTEST = 0x84;
 
         protected override void WndProc(ref Message m)
         {
             base.WndProc(ref m);
-            if (m.Msg == WM_NCHITTEST)
-                m.Result = (IntPtr)(HT_CAPTION);
+
+            if (m.Msg == WM_NCHITTEST) {
+                m.Result = (IntPtr) (HT_CAPTION);
+            }
         }
 
         private void refreshDateFields(DateTime date)
         {
-            this.selectedDateDisplay.Text = dateSelected.ToString("MMMM d, yyyy");
+            //this.selectedDateDisplay.Text = dateSelected.ToString("MMMM d, yyyy");
             currentTimeDisplay.Text = DateTime.Now.ToString("h:mm tt", CultureInfo.InvariantCulture);
 
-            this.calendarPartTodayDisp1.Text = date.ToString("dddd") + ",";
-            this.calendarPartTodayDisp2.Text = date.ToString("MMMM d");
+            //this.calendarPartTodayDisp1.Text = date.ToString("dddd") + ",";
+            //this.calendarPartTodayDisp2.Text = date.ToString("MMMM d");
 
-            this.calendarPartTmrDisp1.Text = date.AddDays(1).ToString("dddd") + ",";
-            this.calendarPartTmrDisp2.Text = date.AddDays(1).ToString("MMMM d");
+            //this.calendarPartTmrDisp1.Text = date.AddDays(1).ToString("dddd") + ",";
+            //this.calendarPartTmrDisp2.Text = date.AddDays(1).ToString("MMMM d");
         }
 
-        private void loadEventsFromFile(out Dictionary<DateTime, Dictionary<CalendarCategory, List<CalendarEvent>>> eventsCollection)
+        private void loadEventsFromFile(out Dictionary<string, CalendarCategory> categories, out SortedSet<CalendarEvent> events)
         {
             //FOR NOW WE JUST CREATE IT MANUALLY, WE WILL HAVE TO GET FROM FILE LATER..*******
             //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            eventsCollection = new Dictionary<DateTime, Dictionary<CalendarCategory, List<CalendarEvent>>>();
+            //eventsCollection = new Dictionary<DateTime, Dictionary<CalendarCategory, List<CalendarEvent>>>();
+            //Dictionary<CalendarCategory, List<CalendarEvent>> todayTemp = new Dictionary<CalendarCategory, List<CalendarEvent>>();
 
-            Dictionary<CalendarCategory, List<CalendarEvent>> todayTemp = new Dictionary<CalendarCategory, List<CalendarEvent>>();
-            List<CalendarCategory> categories = new List<CalendarCategory>();
-            CalendarCategory cat2 = new CalendarCategory();
-            cat2.color = Color.Red;
-            cat2.name = "Work";
-            cat2.symbol = Shape.Triangle;
-            categories.Add(cat2);
-            CalendarCategory cat3 = new CalendarCategory();
-            cat3.color = Color.Purple;
-            cat3.name = "Soccer";
-            cat3.symbol = Shape.Circle;
-            categories.Add(cat3);
-            CalendarCategory cat4 = new CalendarCategory();
-            cat4.color = Color.Green;
-            cat4.name = "Other";
-            cat4.symbol = Shape.Star;
-            categories.Add(cat4);
+            // dummy categories
+            CalendarCategory cat2 = new CalendarCategory() {
+                Name = "Work",
+                Symbol = Shape.Triangle,
+                Colour = Color.Red
+            };
+            CalendarCategory cat3 = new CalendarCategory() {
+                Name = "Soccer",
+                Symbol = Shape.Circle,
+                Colour = Color.Purple
+            };
+            CalendarCategory cat4 = new CalendarCategory() {
+                Name = "Other",
+                Symbol = Shape.Star,
+                Colour = Color.Green
+            };
 
-            CalendarEvent someGenericEvent = new CalendarEvent();
-            someGenericEvent.title = "test";
-            someGenericEvent.description = "something";
-            someGenericEvent.start = DateTime.Now;
-            someGenericEvent.end = DateTime.Now.AddHours(3);
-            someGenericEvent.recurring = RecurringType.None;
-            someGenericEvent.location = "?";
+            // dummy events
+            CalendarEvent testEventA = new CalendarEvent() {
+                Label = "TestEvent_A",
+                Description = "This is TestEvent_A",
+                StartingTime = DateTime.Today.AddHours(9),
+                EndingTime = DateTime.Today.AddHours(17),
+                Location = new Location() {
+                    Name = "Western University"
+                },
+                Category = cat2.Name,
+                Repetition = RecurringType.None
+            };
+            CalendarEvent testEventB = new CalendarEvent() {
+                Label = "TestEvent_B",
+                Description = "This is TestEvent_B",
+                StartingTime = DateTime.Today.AddHours(12),
+                EndingTime = DateTime.Today.AddHours(13).AddMinutes(30),
+                Location = new Location() {
+                    Name = "Western University"
+                },
+                Category = cat2.Name,
+                Repetition = RecurringType.None
+            };
+            CalendarEvent testEventC = new CalendarEvent() {
+                Label = "TestEvent_C",
+                Description = "This is TestEvent_C",
+                StartingTime = DateTime.Today.AddHours(18),
+                EndingTime = DateTime.Today.AddHours(20).AddMinutes(45),
+                Location = new Location() {
+                    Name = "Western University"
+                },
+                Category = cat3.Name,
+                Repetition = RecurringType.None
+            };
+            CalendarEvent testEventD = new CalendarEvent() {
+                Label = "TestEvent_D",
+                Description = "This is TestEvent_D",
+                StartingTime = DateTime.Today.AddHours(22),
+                EndingTime = DateTime.Today.AddHours(30),
+                Location = new Location() {
+                    Name = "Home"
+                },
+                Category = cat4.Name,
+                Repetition = RecurringType.None
+            };
+            CalendarEvent testEventE = new CalendarEvent() {
+                Label = "TestEvent_E",
+                Description = "This is TestEvent_E",
+                StartingTime = DateTime.Today.AddDays(1).AddHours(9),
+                EndingTime = DateTime.Today.AddDays(1).AddHours(17),
+                Location = new Location() {
+                    Name = "Western University"
+                },
+                Category = cat2.Name,
+                Repetition = RecurringType.None
+            };
 
-            List<CalendarEvent> calEvents = new List<CalendarEvent>();
-            calEvents.Add(someGenericEvent);
+            // create references to events in categories
+            cat2.Events.Add(testEventA);
+            cat2.Events.Add(testEventB);
+            cat3.Events.Add(testEventC);
+            cat4.Events.Add(testEventD);
+            cat2.Events.Add(testEventE);
+
+            events = new SortedSet<CalendarEvent>(new SortEventsByDate());
+            events.Add(testEventA);
+            events.Add(testEventB);
+            events.Add(testEventC);
+            events.Add(testEventD);
+            events.Add(testEventE);
+
+            categories = new Dictionary<string, CalendarCategory>();
+            categories.Add(cat2.Name, cat2);
+            categories.Add(cat3.Name, cat3);
+            categories.Add(cat4.Name, cat4);
+
+            /*List<CalendarEvent> calEvents = new List<CalendarEvent>();
+            calEvents.Add(testEventA);
+            calEvents.Add(testEventB);
+            calEvents.Add(testEventC);
+            calEvents.Add(testEventD);
+            calEvents.Add(testEventE);
 
             todayTemp.Add(cat2, calEvents);
             todayTemp.Add(cat3, calEvents);
             todayTemp.Add(cat4, calEvents);
 
-            eventsCollection.Add(DateTime.Today, todayTemp);
+            eventsCollection.Add(DateTime.Today, todayTemp);*/
         }
 
         public void refreshTree(DateTime date)
         {
+            // clear out tree view
             this.eventsTreeView.Nodes.Clear();
 
-            Dictionary<CalendarCategory, List<CalendarEvent>> todaysEvents = new Dictionary<CalendarCategory, List<CalendarEvent>>();
-            if (eventsCollection.ContainsKey(date)) todaysEvents = eventsCollection[date];
+            /*Dictionary<CalendarCategory, List<CalendarEvent>> todaysEvents = new Dictionary<CalendarCategory, List<CalendarEvent>>();
+            if (eventsCollection.ContainsKey(date)) todaysEvents = eventsCollection[date];*/
 
             //Initialize the tree's 'All events' sections
             TreeNode nodeAll = new TreeNode("All                            ");
@@ -207,25 +279,50 @@ namespace SimpleCalendar
             nodeAll.NodeFont = new Font(new FontFamily("Tw Cen MT"), 14.25f, FontStyle.Regular);
             this.eventsTreeView.Nodes.Add(nodeAll);
 
-            List<CalendarEvent> allEventsToday = new List<CalendarEvent>();
+            //List<CalendarEvent> allEventsToday = new List<CalendarEvent>();
+
+            foreach (CalendarCategory category in eventCategories.Values) {
+                string nodeImg = null;
+                if (category.Symbol == Shape.Circle && category.Colour == Color.Purple) nodeImg = "purCirc.png";
+                else if (category.Symbol == Shape.Star && category.Colour == Color.Green) nodeImg = "grStar.png";
+                else if (category.Symbol == Shape.Square && category.Colour == Color.Blue) nodeImg = "bluSq.png";
+                else if (category.Symbol == Shape.Triangle && category.Colour == Color.Red) nodeImg = "redTri.png";
+
+                TreeNode node = new TreeNode() {
+                    ForeColor = Color.White,
+                    ImageKey = nodeImg,
+                    NodeFont = new Font(new FontFamily("Tw Cen MT"), 14.25f, FontStyle.Regular),
+                    SelectedImageKey = nodeImg,
+                    Text = category.Name + "                            "
+                };
+
+                foreach (CalendarEvent ev in this.todaysEvents.Where((ev) => { return ev.Category == category.Name; })) {
+                    TreeNode child = new TreeNode(ev.StartingTime.ToString("MMM dd (h:mmtt) - ") + ev.Label + "                            ");
+                    child.ImageKey = child.SelectedImageKey = "whtDot.png";
+                    child.ForeColor = Color.White;
+                    child.NodeFont = new Font(new FontFamily("Tw Cen MT Condensed"), 11.25f, FontStyle.Bold);
+
+                    node.Nodes.Add(child);
+                }
+
+                eventsTreeView.Nodes.Add(node);
+            }
 
             //Initialize the tree's primary nodes
-            foreach (CalendarCategory cat in todaysEvents.Keys)
-            {
-                TreeNode node = new TreeNode(cat.name + "                            ");
-                if (cat.symbol == Shape.Circle && cat.color == Color.Purple) node.ImageKey = node.SelectedImageKey = "purCirc.png";
-                else if (cat.symbol == Shape.Star && cat.color == Color.Green) node.ImageKey = node.SelectedImageKey = "grStar.png";
-                else if (cat.symbol == Shape.Square && cat.color == Color.Blue) node.ImageKey = node.SelectedImageKey = "bluSq.png";
-                else if (cat.symbol == Shape.Triangle && cat.color == Color.Red) node.ImageKey = node.SelectedImageKey = "redTri.png";
+            /*foreach (CalendarCategory cat in todaysEvents.Keys) {
+                TreeNode node = new TreeNode(cat.Name + "                            ");
+                if (cat.Symbol == Shape.Circle && cat.Colour == Color.Purple) node.ImageKey = node.SelectedImageKey = "purCirc.png";
+                else if (cat.Symbol == Shape.Star && cat.Colour == Color.Green) node.ImageKey = node.SelectedImageKey = "grStar.png";
+                else if (cat.Symbol == Shape.Square && cat.Colour == Color.Blue) node.ImageKey = node.SelectedImageKey = "bluSq.png";
+                else if (cat.Symbol == Shape.Triangle && cat.Colour == Color.Red) node.ImageKey = node.SelectedImageKey = "redTri.png";
 
                 node.ForeColor = Color.White;
                 node.NodeFont = new Font(new FontFamily("Tw Cen MT"), 14.25f, FontStyle.Regular);
 
-                List<CalendarEvent> orderedEvents = todaysEvents[cat].OrderBy(a => a.start).ToList();
-                foreach (CalendarEvent ev in todaysEvents[cat])
-                {
+                List<CalendarEvent> orderedEvents = todaysEvents[cat].OrderBy(a => a.StartingTime).ToList();
+                foreach (CalendarEvent ev in todaysEvents[cat]) {
                     allEventsToday.Add(ev);
-                    TreeNode child = new TreeNode(ev.start.ToString("MMM dd (h:mmtt) - ") + ev.title + "                            ");
+                    TreeNode child = new TreeNode(ev.StartingTime.ToString("MMM dd (h:mmtt) - ") + ev.Label + "                            ");
                     child.ImageKey = child.SelectedImageKey = "whtDot.png";
                     child.ForeColor = Color.White;
                     child.NodeFont = new Font(new FontFamily("Tw Cen MT Condensed"), 11.25f, FontStyle.Bold);
@@ -234,23 +331,32 @@ namespace SimpleCalendar
                 }
 
                 this.eventsTreeView.Nodes.Add(node);
-            }
+            }*/
 
             //Add all events to the 'all' node
-            foreach (CalendarEvent ev in allEventsToday.OrderBy(a=>a.start))
-            {
-                TreeNode child = new TreeNode(ev.start.ToString("MMM dd (h:mmtt) - ") + ev.title + "                            ");
+            foreach (CalendarEvent ev in this.todaysEvents) {
+                TreeNode child = new TreeNode(ev.StartingTime.ToString("MMM dd (h:mmtt) - ") + ev.Label + "                            ");
                 child.ImageKey = child.SelectedImageKey = "whtDot.png";
                 child.ForeColor = Color.White;
                 child.NodeFont = new Font(new FontFamily("Tw Cen MT Condensed"), 11.25f, FontStyle.Bold);
                 this.eventsTreeView.Nodes[0].Nodes.Add(child);
             }
         }
-
         #endregion
 
-        private const int WM_NCHITTEST = 0x84;
-        private const int HT_CLIENT = 0x1;
-        private const int HT_CAPTION = 0x2;
+        private void dayViewButton_Click(object sender, EventArgs e)
+        {
+            dayViewPanel.Visible = true;
+        }
+
+        private void monthViewButton_Click(object sender, EventArgs e)
+        {
+            dayViewPanel.Visible = false;
+        }
+
+        private void currentTimeDisplay_Click(object sender, EventArgs e)
+        {
+            datePicker1.Value = DateTime.Today;
+        }
     }
 }

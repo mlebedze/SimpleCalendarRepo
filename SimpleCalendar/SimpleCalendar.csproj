@@ -51,16 +51,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalendarCategory.cs" />
-    <Compile Include="CalendarEvent.cs" />
+    <Compile Include="Library\CalendarCategory.cs" />
+    <Compile Include="Library\CalendarEvent.cs" />
+    <Compile Include="DailyCalendar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DailyCalendar.Designer.cs">
+      <DependentUpon>DailyCalendar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Library\Location.cs" />
+    <Compile Include="Library\SortEventsByDate.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DailyCalendar.resx">
+      <DependentUpon>DailyCalendar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
