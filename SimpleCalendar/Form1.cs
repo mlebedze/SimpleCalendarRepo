@@ -8,64 +8,143 @@ using System.Windows.Forms;
 
 namespace SimpleCalendar
 {
-
+    /// <summary>
+    /// Calendar service form.</summary>
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// The currently selected date.</summary>
         public DateTime dateSelected = DateTime.Today;
         //public Dictionary<DateTime, Dictionary<CalendarCategory, List<CalendarEvent>>> eventsCollection = new Dictionary<DateTime, Dictionary<CalendarCategory, List<CalendarEvent>>>();
 
+        /// <summary>
+        /// All user-created event categories.</summary>
         private Dictionary<string, CalendarCategory> eventCategories;
+
+        /// <summary>
+        /// All user-created events.</summary>
         private SortedSet<CalendarEvent> allEvents;
 
+        /// <summary>
+        /// All events which start on the currently selected date.</summary>
         private SortedSet<CalendarEvent> todaysEvents;
 
         #region initialization
+        /// <summary>
+        /// Initializes the calendar form.</summary>
         public Form1()
         {
+            // set up components on the form
             InitializeComponent();
 
-            //Initial categories until we get a read file set up
-            loadEventsFromFile(out eventCategories, out allEvents);
+            // load up saved calendar data from file
+            loadEventsFromFile(null, out eventCategories, out allEvents);
+
+            // mouse event handlers to make the form draggable
+            currentTimeDisplay.MouseDown += TopPanel_MouseDown;
+            currentTimeDisplay.MouseMove += TopPanel_MouseMove;
+            currentTimeDisplay.MouseUp += TopPanel_MouseUp;
+            spacerFormTime.MouseDown += TopPanel_MouseDown;
+            spacerFormTime.MouseMove += TopPanel_MouseMove;
+            spacerFormTime.MouseUp += TopPanel_MouseUp;
+
+            // set up component events
+            secondClock.Tick += SecondClock_Tick;
+            minuteClock.Tick += MinuteClock_Tick;
+
+            exitButton.Click += ExitButton_Click;
+
+            dateSelector.ValueChanged += DateSelector_ValueChanged;
+            nextDayButton.Click += NextDayButton_Click;
+            prevDayButton.Click += PrevDayButton_Click;
+
+            dayViewButton.Click += DayViewButton_Click;
+            monthViewButton.Click += MonthViewButton_Click;
+
+            createEventButton.Click += CreateEventButton_Click;
+            cancelEventModifyButton.Click += CancelEventsModifyButton_Click;
+            saveEventModifyButton.Click += SaveEventsModifyButton_Click;
+
+            createCategoryButton.Click += CreateCategoryButton_Click;
+            cancelCategoryModifyButton.Click += CancelCategoryEditButton_Click;
+            saveCategoryModifyButton.Click += SaveCategoryEditButton_Click;
+
+            // refresh all on-screen elements
             RefreshCalendar();
-
-            //Button interactions
-            this.createEventButton.Click += CreateEventButton_Click;
-            this.createCategoryButton.Click += CreateCategoryButton_Click;
-
-            this.cancelEventsEditButton.Click += CancelEventsEditButton_Click;
-            this.saveEventsEditButton.Click += SaveEventsEditButton_Click;
-
-            this.cancelCategoryEditButton.Click += CancelCategoryEditButton_Click;
-            this.saveCategoryEditButton.Click += SaveCategoryEditButton_Click;
-
-            this.exitButton.Click += ExitButton_Click;
-
-            this.datePicker1.ValueChanged += DatePicker1_ValueChanged;
-
-            this.nextDayButton.Click += NextDayButton_Click;
-            this.prevDayButton.Click += PrevDayButton_Click;
         }
         #endregion
 
-        private void RefreshCalendar()
-        {
-            todaysEvents = allEvents.GetViewBetween(new CalendarEvent() { StartingTime = dateSelected }, new CalendarEvent() { StartingTime = dateSelected.AddDays(1) });
+        #region events
+        /// <summary>
+        /// Whether the mouse button is currently held down.</summary>
+        private bool isMouseDown = false;
 
-            refreshTree(dateSelected);
-            refreshDateFields(dateSelected);
-            dailyCalendar1.ChangeDate(dateSelected, todaysEvents);
+        /// <summary>
+        /// The location of the form the last time the mouse button was held down.</summary>
+        private Point formLastLocation;
+
+        /// <summary>
+        /// Registers that the mouse button has been clicked on the top panel.</summary>
+        private void TopPanel_MouseDown(object sender, MouseEventArgs e)
+        {
+            // record that user has pressed the mouse button
+            isMouseDown = true;
+
+            // record the form's current location on the screen
+            formLastLocation = e.Location;
         }
 
-        #region events
+        /// <summary>
+        /// Registers that the mouse button has been released on the top panel.</summary>
+        private void TopPanel_MouseUp(object sender, MouseEventArgs e)
+        {
+            // record that user has released the mouse button
+            isMouseDown = false;
+        }
+
+        /// <summary>
+        /// Registers that the mouse button has been moved on the top panel.</summary>
+        private void TopPanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            // if the mouse is held down, move the form
+            if (isMouseDown) {
+                // move the form to the location where the mouse currently is
+                Location = new Point((Location.X - formLastLocation.X) + e.X, (Location.Y - formLastLocation.Y) + e.Y);
+
+                // redraw the form
+                Update();
+            }
+        }
+
+        /// <summary>
+        /// This function is executed every second.</summary>
+        private void SecondClock_Tick(object sender, EventArgs e)
+        {
+            // update the clock
+            UpdateClock();
+        }
+
+        /// <summary>
+        /// This function is executed every minute.</summary>
+        private void MinuteClock_Tick(object sender, EventArgs e)
+        {
+            // update the calendar view
+            dailyCalendar.ChangeDate(dateSelected, todaysEvents);
+        }
+
+        /// <summary>
+        /// Closes the form and exits the program.</summary>
         private void ExitButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
-        private void DatePicker1_ValueChanged(object sender, EventArgs e)
+        /// <summary>
+        /// Changes the currently selected date.</summary>
+        private void DateSelector_ValueChanged(object sender, EventArgs e)
         {
             // change the current date
-            dateSelected = datePicker1.Value.Date;
+            dateSelected = dateSelector.Value.Date;
 
             // refresh the calendar for current date
             RefreshCalendar();
@@ -73,89 +152,152 @@ namespace SimpleCalendar
 
         private void PrevDayButton_Click(object sender, EventArgs e)
         {
-            datePicker1.Value = dateSelected.AddDays(-1);
+            dateSelector.Value = dateSelected.AddDays(-1);
         }
 
         private void NextDayButton_Click(object sender, EventArgs e)
         {
-            datePicker1.Value = dateSelected.AddDays(1);
+            dateSelector.Value = dateSelected.AddDays(1);
         }
 
-        private void SaveCategoryEditButton_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Changes the calendar view to a daily view.</summary>
+        private void DayViewButton_Click(object sender, EventArgs e)
         {
-            this.eventsDisplayPanel.Visible = true;
-            this.categoryEditPanel.Visible = false;
-            this.createEventPanel.Visible = false;
+            dayViewPanel.Visible = true;
+            monthViewPanel.Visible = false;
         }
 
-        private void CancelCategoryEditButton_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Changes the calendar view to a monthly view.</summary>
+        private void MonthViewButton_Click(object sender, EventArgs e)
         {
-            this.eventsDisplayPanel.Visible = true;
-            this.categoryEditPanel.Visible = false;
-            this.createEventPanel.Visible = false;
+            dayViewPanel.Visible = false;
+            monthViewPanel.Visible = true;
         }
 
-        private void SaveEventsEditButton_Click(object sender, EventArgs e)
-        {
-            this.eventsDisplayPanel.Visible = true;
-            this.categoryEditPanel.Visible = false;
-            this.createEventPanel.Visible = false;
-        }
-
-        private void CancelEventsEditButton_Click(object sender, EventArgs e)
-        {
-            this.eventsDisplayPanel.Visible = true;
-            this.categoryEditPanel.Visible = false;
-            this.createEventPanel.Visible = false;
-        }
-
-        private void CreateCategoryButton_Click(object sender, EventArgs e)
-        {
-            this.eventsDisplayPanel.Visible = false;
-            this.categoryEditPanel.Visible = true;
-            this.createEventPanel.Visible = false;
-        }
-
+        /// <summary>
+        /// Switches view to allow the user to create a new event.</summary>
         private void CreateEventButton_Click(object sender, EventArgs e)
         {
-            this.eventsDisplayPanel.Visible = false;
-            this.categoryEditPanel.Visible = false;
-            this.createEventPanel.Visible = true;
+            // ensure previous inputs are cleared
+            ClearEventModify();
+
+            // switches view to event creation
+            eventModifyPanel.Visible = true;
+            eventsDisplayPanel.Visible = false;
+            categoryModifyPanel.Visible = false;
+        }
+
+        /// <summary>
+        /// Cancels the modification of an event.</summary>
+        private void CancelEventsModifyButton_Click(object sender, EventArgs e)
+        {
+            // switches view back to events list
+            eventsDisplayPanel.Visible = true;
+            eventModifyPanel.Visible = false;
+            categoryModifyPanel.Visible = false;
+        }
+
+        /// <summary>
+        /// Verfies the event information is valid, and creates a new event if it is.</summary>
+        private void SaveEventsModifyButton_Click(object sender, EventArgs e)
+        {
+            // check for valid input
+            if (ValidateEventModify()) {
+                // creates a new event
+                CalendarEvent ev = new CalendarEvent() {
+                    Label = labelField.Text,
+                    Description = descriptionField.Text,
+                    StartingTime = startingDate.Value.Date.AddMinutes(startingTime.Value.TimeOfDay.TotalMinutes),
+                    EndingTime = endingDate.Value.Date.AddMinutes(endingTime.Value.TimeOfDay.TotalMinutes),
+                    Location = new Location() {
+                        Name = locationField.Text
+                    },
+                    Category = categoryDropDown.SelectedItem.ToString(),
+                    Repetition = RecurringType.None
+                };
+                allEvents.Add(ev);
+
+                // insert event in the appropriate category's event list
+                CalendarCategory category;
+                if (eventCategories.TryGetValue(ev.Category, out category)) {
+                    category.Events.Add(ev);
+                }
+
+                // refresh the calendar
+                RefreshCalendar();
+
+                // switches view back to events list
+                eventsDisplayPanel.Visible = true;
+                eventModifyPanel.Visible = false;
+                categoryModifyPanel.Visible = false;
+            }
+        }
+
+        /// <summary>
+        /// Cancels the modification of an event.</summary>
+        private void CreateCategoryButton_Click(object sender, EventArgs e)
+        {
+            // ensure previous inputs are cleared
+            ClearCategoryModify();
+
+            // switches view back to events list
+            categoryModifyPanel.Visible = true;
+            eventsDisplayPanel.Visible = false;
+            eventModifyPanel.Visible = false;
+        }
+
+        /// <summary>
+        /// Cancels the modification of a category.</summary>
+        private void CancelCategoryEditButton_Click(object sender, EventArgs e)
+        {
+            // switches view back to events list
+            eventsDisplayPanel.Visible = true;
+            eventModifyPanel.Visible = false;
+            categoryModifyPanel.Visible = false;
+        }
+
+        /// <summary>
+        /// Verfies the category information is valid, and creates a new category if it is.</summary>
+        private void SaveCategoryEditButton_Click(object sender, EventArgs e)
+        {
+            // check for valid input
+            if (ValidateCategoryModify()) {
+                // switches view back to events list
+                eventsDisplayPanel.Visible = true;
+                eventModifyPanel.Visible = false;
+                categoryModifyPanel.Visible = false;
+            }
         }
         #endregion
 
         #region miscellaneous
-        private const int HT_CLIENT = 0x1;
-        private const int HT_CAPTION = 0x2;
-        private const int WM_NCHITTEST = 0x84;
-
-        protected override void WndProc(ref Message m)
+        /// <summary>
+        /// Refreshes the calendar view and the events list.</summary>
+        private void RefreshCalendar()
         {
-            base.WndProc(ref m);
+            // today's event include all events from 12 AM of today's date to 12 AM of tomorrow's date
+            todaysEvents = allEvents.GetViewBetween(new CalendarEvent() { StartingTime = dateSelected }, new CalendarEvent() { StartingTime = dateSelected.AddDays(1) });
 
-            if (m.Msg == WM_NCHITTEST) {
-                m.Result = (IntPtr) (HT_CAPTION);
-            }
+            // refresh the events list
+            refreshTree(dateSelected);
+
+            // refresh the calendar view
+            dailyCalendar.ChangeDate(dateSelected, todaysEvents);
         }
 
-        private void refreshDateFields(DateTime date)
+        /// <summary>
+        /// Updates the clock that's on the top of the form.</summary>
+        private void UpdateClock()
         {
-            //this.selectedDateDisplay.Text = dateSelected.ToString("MMMM d, yyyy");
             currentTimeDisplay.Text = DateTime.Now.ToString("h:mm tt", CultureInfo.InvariantCulture);
-
-            //this.calendarPartTodayDisp1.Text = date.ToString("dddd") + ",";
-            //this.calendarPartTodayDisp2.Text = date.ToString("MMMM d");
-
-            //this.calendarPartTmrDisp1.Text = date.AddDays(1).ToString("dddd") + ",";
-            //this.calendarPartTmrDisp2.Text = date.AddDays(1).ToString("MMMM d");
         }
 
-        private void loadEventsFromFile(out Dictionary<string, CalendarCategory> categories, out SortedSet<CalendarEvent> events)
+        private void loadEventsFromFile(string filename, out Dictionary<string, CalendarCategory> categories, out SortedSet<CalendarEvent> events)
         {
             //FOR NOW WE JUST CREATE IT MANUALLY, WE WILL HAVE TO GET FROM FILE LATER..*******
             //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            //eventsCollection = new Dictionary<DateTime, Dictionary<CalendarCategory, List<CalendarEvent>>>();
-            //Dictionary<CalendarCategory, List<CalendarEvent>> todayTemp = new Dictionary<CalendarCategory, List<CalendarEvent>>();
 
             // dummy categories
             CalendarCategory cat2 = new CalendarCategory() {
@@ -249,62 +391,73 @@ namespace SimpleCalendar
             categories.Add(cat2.Name, cat2);
             categories.Add(cat3.Name, cat3);
             categories.Add(cat4.Name, cat4);
-
-            /*List<CalendarEvent> calEvents = new List<CalendarEvent>();
-            calEvents.Add(testEventA);
-            calEvents.Add(testEventB);
-            calEvents.Add(testEventC);
-            calEvents.Add(testEventD);
-            calEvents.Add(testEventE);
-
-            todayTemp.Add(cat2, calEvents);
-            todayTemp.Add(cat3, calEvents);
-            todayTemp.Add(cat4, calEvents);
-
-            eventsCollection.Add(DateTime.Today, todayTemp);*/
         }
 
         public void refreshTree(DateTime date)
         {
-            // clear out tree view
-            this.eventsTreeView.Nodes.Clear();
+            // define the fonts used in the tree view
+            Font treeCategoryFont = new Font("Tw Cen MT", 14.25F);
+            Font treeEventFont = new Font("Tw Cen MT Condensed", 11.25F, FontStyle.Bold);
 
-            /*Dictionary<CalendarCategory, List<CalendarEvent>> todaysEvents = new Dictionary<CalendarCategory, List<CalendarEvent>>();
-            if (eventsCollection.ContainsKey(date)) todaysEvents = eventsCollection[date];*/
+            // clear out tree view
+            eventsTreeView.Nodes.Clear();
 
             //Initialize the tree's 'All events' sections
-            TreeNode nodeAll = new TreeNode("All                            ");
-            nodeAll.ImageKey = nodeAll.SelectedImageKey = "bluSq.png";
-            nodeAll.ForeColor = Color.White;
-            nodeAll.NodeFont = new Font(new FontFamily("Tw Cen MT"), 14.25f, FontStyle.Regular);
-            this.eventsTreeView.Nodes.Add(nodeAll);
+            string nodeImg = "bluSq.png";
+            TreeNode node = new TreeNode() {
+                ContextMenuStrip = categoryContextMenu,
+                ForeColor = Color.White,
+                ImageKey = nodeImg,
+                NodeFont = treeCategoryFont,
+                SelectedImageKey = nodeImg,
+                Text = "All                            "
+            };
+            eventsTreeView.Nodes.Add(node);
 
-            //List<CalendarEvent> allEventsToday = new List<CalendarEvent>();
+            //Add all events to the 'all' node
+            foreach (CalendarEvent ev in todaysEvents) {
+                eventsTreeView.Nodes[0].Nodes.Add(new TreeNode() {
+                    ContextMenuStrip = eventContextMenu,
+                    ForeColor = Color.White,
+                    ImageKey = "whtDot.png",
+                    NodeFont = treeEventFont,
+                    SelectedImageKey = "whtDot.png",
+                    Text = ev.StartingTime.ToString("MMM dd (h:mmtt) - ") + ev.Label + "                            "
+                });
+            }
 
+            // create a tree node for each category
             foreach (CalendarCategory category in eventCategories.Values) {
-                string nodeImg = null;
+                // determine the correct symbol to use
+                nodeImg = null;
                 if (category.Symbol == Shape.Circle && category.Colour == Color.Purple) nodeImg = "purCirc.png";
                 else if (category.Symbol == Shape.Star && category.Colour == Color.Green) nodeImg = "grStar.png";
                 else if (category.Symbol == Shape.Square && category.Colour == Color.Blue) nodeImg = "bluSq.png";
                 else if (category.Symbol == Shape.Triangle && category.Colour == Color.Red) nodeImg = "redTri.png";
 
-                TreeNode node = new TreeNode() {
+                // create the category tree node
+                node = new TreeNode() {
+                    ContextMenuStrip = categoryContextMenu,
                     ForeColor = Color.White,
                     ImageKey = nodeImg,
-                    NodeFont = new Font(new FontFamily("Tw Cen MT"), 14.25f, FontStyle.Regular),
+                    NodeFont = treeCategoryFont,
                     SelectedImageKey = nodeImg,
                     Text = category.Name + "                            "
                 };
 
-                foreach (CalendarEvent ev in this.todaysEvents.Where((ev) => { return ev.Category == category.Name; })) {
-                    TreeNode child = new TreeNode(ev.StartingTime.ToString("MMM dd (h:mmtt) - ") + ev.Label + "                            ");
-                    child.ImageKey = child.SelectedImageKey = "whtDot.png";
-                    child.ForeColor = Color.White;
-                    child.NodeFont = new Font(new FontFamily("Tw Cen MT Condensed"), 11.25f, FontStyle.Bold);
-
-                    node.Nodes.Add(child);
+                // add all of today's event under this category as children of the category tree node
+                foreach (CalendarEvent ev in todaysEvents.Where((ev) => { return ev.Category == category.Name; })) {
+                    node.Nodes.Add(new TreeNode() {
+                        ContextMenuStrip = eventContextMenu,
+                        ForeColor = Color.White,
+                        ImageKey = "whtDot.png",
+                        NodeFont = treeEventFont,
+                        SelectedImageKey = "whtDot.png",
+                        Text = ev.StartingTime.ToString("MMM dd (h:mmtt) - ") + ev.Label + "                            "
+                    });
                 }
 
+                // add category node to tree view
                 eventsTreeView.Nodes.Add(node);
             }
 
@@ -332,31 +485,69 @@ namespace SimpleCalendar
 
                 this.eventsTreeView.Nodes.Add(node);
             }*/
+        }
 
-            //Add all events to the 'all' node
-            foreach (CalendarEvent ev in this.todaysEvents) {
-                TreeNode child = new TreeNode(ev.StartingTime.ToString("MMM dd (h:mmtt) - ") + ev.Label + "                            ");
-                child.ImageKey = child.SelectedImageKey = "whtDot.png";
-                child.ForeColor = Color.White;
-                child.NodeFont = new Font(new FontFamily("Tw Cen MT Condensed"), 11.25f, FontStyle.Bold);
-                this.eventsTreeView.Nodes[0].Nodes.Add(child);
+        /// <summary>
+        /// Clears the event modification panel of all input.</summary>
+        private void ClearEventModify()
+        {
+            // reset text boxes
+            labelField.Text = string.Empty;
+            locationField.Text = string.Empty;
+            descriptionField.Text = string.Empty;
+
+            // reset date pickers
+            startingDate.Value = DateTime.Now;
+            startingTime.Value = DateTime.Now;
+            endingDate.Value = DateTime.Now;
+            endingTime.Value = DateTime.Now;
+
+            // reset category drop downs
+            categoryDropDown.Items.Clear();
+            categoryDropDown.Items.Add("Uncategorized");
+            categoryDropDown.Items.AddRange(eventCategories.Keys.ToArray());
+        }
+
+        /// <summary>
+        /// Verifies that the event information the user has entered is valid.</summary>
+        /// <returns>True if the event is valid, false otherwise.</returns>
+        private bool ValidateEventModify()
+        {
+            bool isValidEvent = true;
+
+            // check that the label field in not empty
+            if (string.IsNullOrWhiteSpace(labelField.Text)) {
+                Console.WriteLine("Error: Event label cannot be empty");
+                isValidEvent = false;
             }
+
+            // check that a category for the event has been selected
+            if (string.IsNullOrWhiteSpace(categoryDropDown.Text)) {
+                Console.WriteLine("Error: Event must be assigned a category");
+                isValidEvent = false;
+            }
+
+            DateTime startTime = startingDate.Value.Date.AddMinutes(startingTime.Value.TimeOfDay.TotalMinutes);
+            DateTime endTime = endingDate.Value.Date.AddMinutes(endingTime.Value.TimeOfDay.TotalMinutes);
+            if (startTime > endTime) {
+                Console.WriteLine("Error: The end date for the event must come after the start date");
+                isValidEvent = false;
+            }
+
+            return isValidEvent;
+        }
+
+        private void ClearCategoryModify()
+        {
+        }
+
+        /// <summary>
+        /// Verifies that the category information the user has entered is valid.</summary>
+        /// <returns>True if the category is valid, false otherwise.</returns>
+        private bool ValidateCategoryModify()
+        {
+            return true;
         }
         #endregion
-
-        private void dayViewButton_Click(object sender, EventArgs e)
-        {
-            dayViewPanel.Visible = true;
-        }
-
-        private void monthViewButton_Click(object sender, EventArgs e)
-        {
-            dayViewPanel.Visible = false;
-        }
-
-        private void currentTimeDisplay_Click(object sender, EventArgs e)
-        {
-            datePicker1.Value = DateTime.Today;
-        }
     }
 }

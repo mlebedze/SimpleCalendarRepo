@@ -29,55 +29,30 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node4");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("All                             ", new System.Windows.Forms.TreeNode[] {
-            treeNode1});
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Node5");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Work                     ", new System.Windows.Forms.TreeNode[] {
-            treeNode3});
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Feb 19, 2017 (1:00pm) - Practice");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Feb 26, 2017 (1:00pm) - Practice");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Mar 05, 2017 (2:00pm) - Return uniform");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Mar 05, 2017 (9:30pm) - End of season party");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Soccer                                   ", new System.Windows.Forms.TreeNode[] {
-            treeNode5,
-            treeNode6,
-            treeNode7,
-            treeNode8});
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Feb 18, 2017 (3:00pm) - Pick up package");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Feb 19, 2017 (7:00pm) - Meet Sally for movie");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Other                          ", new System.Windows.Forms.TreeNode[] {
-            treeNode10,
-            treeNode11});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.mainPanel = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.eventsDisplayPanel = new System.Windows.Forms.Panel();
-            this.eventsTreeView = new System.Windows.Forms.TreeView();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.eventsLabel = new System.Windows.Forms.Label();
-            this.eventButtonsPanel = new System.Windows.Forms.Panel();
-            this.createEventButton = new System.Windows.Forms.Label();
-            this.createCategoryButton = new System.Windows.Forms.Label();
-            this.createEventPanel = new System.Windows.Forms.Panel();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.label16 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.saveEventsEditButton = new System.Windows.Forms.Label();
-            this.cancelEventsEditButton = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.categoryEditPanel = new System.Windows.Forms.Panel();
+            this.eventModifyPanel = new System.Windows.Forms.Panel();
+            this.eventModifyBody = new System.Windows.Forms.TableLayoutPanel();
+            this.labelLabel = new System.Windows.Forms.Label();
+            this.labelField = new System.Windows.Forms.TextBox();
+            this.startDateLabel = new System.Windows.Forms.Label();
+            this.startingDate = new System.Windows.Forms.DateTimePicker();
+            this.startingTime = new System.Windows.Forms.DateTimePicker();
+            this.endDateLabel = new System.Windows.Forms.Label();
+            this.endingDate = new System.Windows.Forms.DateTimePicker();
+            this.endingTime = new System.Windows.Forms.DateTimePicker();
+            this.categoryLabel = new System.Windows.Forms.Label();
+            this.categoryDropDown = new System.Windows.Forms.ComboBox();
+            this.locationLabel = new System.Windows.Forms.Label();
+            this.locationField = new System.Windows.Forms.TextBox();
+            this.descriptionLabel = new System.Windows.Forms.Label();
+            this.descriptionField = new System.Windows.Forms.TextBox();
+            this.eventModifyLabel = new System.Windows.Forms.Label();
+            this.eventModifyButtonsPanel = new System.Windows.Forms.Panel();
+            this.cancelEventModifyButton = new System.Windows.Forms.Label();
+            this.saveEventModifyButton = new System.Windows.Forms.Label();
+            this.categoryModifyPanel = new System.Windows.Forms.Panel();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
@@ -85,15 +60,24 @@
             this.label26 = new System.Windows.Forms.Label();
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.label27 = new System.Windows.Forms.Label();
-            this.saveCategoryEditButton = new System.Windows.Forms.Label();
-            this.cancelCategoryEditButton = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
+            this.categoryModifyLabel = new System.Windows.Forms.Label();
+            this.categoryModifyButtonsPanel = new System.Windows.Forms.Panel();
+            this.cancelCategoryModifyButton = new System.Windows.Forms.Label();
+            this.saveCategoryModifyButton = new System.Windows.Forms.Label();
+            this.eventsDisplayPanel = new System.Windows.Forms.Panel();
+            this.eventsTreeView = new System.Windows.Forms.TreeView();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.eventsLabel = new System.Windows.Forms.Label();
+            this.eventButtonsPanel = new System.Windows.Forms.Panel();
+            this.createEventButton = new System.Windows.Forms.Label();
+            this.createCategoryButton = new System.Windows.Forms.Label();
             this.dayViewPanel = new System.Windows.Forms.Panel();
             this.spacerEventsPanel = new System.Windows.Forms.Label();
             this.remainingEventsLabel = new System.Windows.Forms.Label();
             this.remainingLabel = new System.Windows.Forms.Label();
             this.spacerCalendarRemaining = new System.Windows.Forms.Label();
-            this.dailyCalendar1 = new SimpleCalendar.DailyCalendar();
+            this.dailyCalendar = new SimpleCalendar.DailyCalendar();
+            this.monthViewPanel = new System.Windows.Forms.Panel();
             this.viewSelectionPanel = new System.Windows.Forms.Panel();
             this.viewLabel = new System.Windows.Forms.Label();
             this.spacerLabelDay = new System.Windows.Forms.Label();
@@ -101,27 +85,40 @@
             this.spacerDayMonth = new System.Windows.Forms.Label();
             this.monthViewButton = new System.Windows.Forms.Button();
             this.bottomPanel = new System.Windows.Forms.Panel();
-            this.datePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateSelector = new System.Windows.Forms.DateTimePicker();
             this.nextDayButton = new System.Windows.Forms.Label();
             this.prevDayButton = new System.Windows.Forms.Label();
             this.currentTimeDisplay = new System.Windows.Forms.Label();
             this.exitButton = new System.Windows.Forms.Label();
             this.topPanel = new System.Windows.Forms.Panel();
             this.spacerFormTime = new System.Windows.Forms.Label();
+            this.categoryContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.modifyCategoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteCategoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eventContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editEventToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteEventToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.secondClock = new System.Windows.Forms.Timer(this.components);
+            this.minuteClock = new System.Windows.Forms.Timer(this.components);
             this.mainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.eventModifyPanel.SuspendLayout();
+            this.eventModifyBody.SuspendLayout();
+            this.eventModifyButtonsPanel.SuspendLayout();
+            this.categoryModifyPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            this.categoryModifyButtonsPanel.SuspendLayout();
             this.eventsDisplayPanel.SuspendLayout();
             this.eventButtonsPanel.SuspendLayout();
-            this.createEventPanel.SuspendLayout();
-            this.categoryEditPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.dayViewPanel.SuspendLayout();
             this.viewSelectionPanel.SuspendLayout();
             this.bottomPanel.SuspendLayout();
             this.topPanel.SuspendLayout();
+            this.categoryContextMenu.SuspendLayout();
+            this.eventContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -145,14 +142,15 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.eventModifyPanel);
+            this.splitContainer1.Panel1.Controls.Add(this.categoryModifyPanel);
             this.splitContainer1.Panel1.Controls.Add(this.eventsDisplayPanel);
-            this.splitContainer1.Panel1.Controls.Add(this.createEventPanel);
-            this.splitContainer1.Panel1.Controls.Add(this.categoryEditPanel);
             this.splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(10);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dayViewPanel);
+            this.splitContainer1.Panel2.Controls.Add(this.monthViewPanel);
             this.splitContainer1.Panel2.Controls.Add(this.viewSelectionPanel);
             this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(10);
             this.splitContainer1.Size = new System.Drawing.Size(1024, 512);
@@ -160,392 +158,272 @@
             this.splitContainer1.TabIndex = 17;
             this.splitContainer1.TabStop = false;
             // 
-            // eventsDisplayPanel
+            // eventModifyPanel
             // 
-            this.eventsDisplayPanel.Controls.Add(this.eventsTreeView);
-            this.eventsDisplayPanel.Controls.Add(this.eventsLabel);
-            this.eventsDisplayPanel.Controls.Add(this.eventButtonsPanel);
-            this.eventsDisplayPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.eventsDisplayPanel.Location = new System.Drawing.Point(10, 10);
-            this.eventsDisplayPanel.Name = "eventsDisplayPanel";
-            this.eventsDisplayPanel.Size = new System.Drawing.Size(368, 490);
-            this.eventsDisplayPanel.TabIndex = 21;
+            this.eventModifyPanel.Controls.Add(this.eventModifyBody);
+            this.eventModifyPanel.Controls.Add(this.eventModifyLabel);
+            this.eventModifyPanel.Controls.Add(this.eventModifyButtonsPanel);
+            this.eventModifyPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.eventModifyPanel.Location = new System.Drawing.Point(10, 10);
+            this.eventModifyPanel.Name = "eventModifyPanel";
+            this.eventModifyPanel.Size = new System.Drawing.Size(368, 490);
+            this.eventModifyPanel.TabIndex = 22;
+            this.eventModifyPanel.Visible = false;
             // 
-            // eventsTreeView
+            // eventModifyBody
             // 
-            this.eventsTreeView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.eventsTreeView.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.eventsTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.eventsTreeView.FullRowSelect = true;
-            this.eventsTreeView.ImageIndex = 0;
-            this.eventsTreeView.ImageList = this.imageList1;
-            this.eventsTreeView.Indent = 15;
-            this.eventsTreeView.ItemHeight = 25;
-            this.eventsTreeView.LineColor = System.Drawing.Color.White;
-            this.eventsTreeView.Location = new System.Drawing.Point(0, 28);
-            this.eventsTreeView.Name = "eventsTreeView";
-            treeNode1.Name = "Node4";
-            treeNode1.Text = "Node4";
-            treeNode2.ForeColor = System.Drawing.Color.White;
-            treeNode2.ImageKey = "bluSq.png";
-            treeNode2.Name = "allNode";
-            treeNode2.NodeFont = new System.Drawing.Font("Tw Cen MT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode2.SelectedImageKey = "bluSq.png";
-            treeNode2.Text = "All                             ";
-            treeNode3.Name = "Node5";
-            treeNode3.Text = "Node5";
-            treeNode4.ForeColor = System.Drawing.Color.White;
-            treeNode4.ImageKey = "redTri.png";
-            treeNode4.Name = "Node1";
-            treeNode4.NodeFont = new System.Drawing.Font("Tw Cen MT", 14.25F);
-            treeNode4.SelectedImageKey = "redTri.png";
-            treeNode4.Text = "Work                     ";
-            treeNode5.ForeColor = System.Drawing.Color.White;
-            treeNode5.ImageKey = "whtDot.png";
-            treeNode5.Name = "Node6";
-            treeNode5.NodeFont = new System.Drawing.Font("Tw Cen MT Condensed", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode5.SelectedImageKey = "whtDot.png";
-            treeNode5.Text = "Feb 19, 2017 (1:00pm) - Practice";
-            treeNode6.ForeColor = System.Drawing.Color.White;
-            treeNode6.ImageKey = "whtDot.png";
-            treeNode6.Name = "Node1";
-            treeNode6.NodeFont = new System.Drawing.Font("Tw Cen MT Condensed", 11.25F, System.Drawing.FontStyle.Bold);
-            treeNode6.SelectedImageKey = "whtDot.png";
-            treeNode6.Text = "Feb 26, 2017 (1:00pm) - Practice";
-            treeNode7.ForeColor = System.Drawing.Color.White;
-            treeNode7.ImageKey = "whtDot.png";
-            treeNode7.Name = "Node0";
-            treeNode7.NodeFont = new System.Drawing.Font("Tw Cen MT Condensed", 11.25F, System.Drawing.FontStyle.Bold);
-            treeNode7.SelectedImageKey = "whtDot.png";
-            treeNode7.Text = "Mar 05, 2017 (2:00pm) - Return uniform";
-            treeNode8.ForeColor = System.Drawing.Color.White;
-            treeNode8.ImageKey = "whtDot.png";
-            treeNode8.Name = "Node2";
-            treeNode8.NodeFont = new System.Drawing.Font("Tw Cen MT Condensed", 11.25F, System.Drawing.FontStyle.Bold);
-            treeNode8.SelectedImageKey = "whtDot.png";
-            treeNode8.Text = "Mar 05, 2017 (9:30pm) - End of season party";
-            treeNode9.ForeColor = System.Drawing.Color.White;
-            treeNode9.ImageKey = "purCirc.png";
-            treeNode9.Name = "Node2";
-            treeNode9.NodeFont = new System.Drawing.Font("Tw Cen MT", 14.25F);
-            treeNode9.SelectedImageKey = "purCirc.png";
-            treeNode9.Text = "Soccer                                   ";
-            treeNode10.ForeColor = System.Drawing.Color.White;
-            treeNode10.ImageKey = "whtDot.png";
-            treeNode10.Name = "Node7";
-            treeNode10.NodeFont = new System.Drawing.Font("Tw Cen MT Condensed", 11.25F, System.Drawing.FontStyle.Bold);
-            treeNode10.SelectedImageKey = "whtDot.png";
-            treeNode10.Text = "Feb 18, 2017 (3:00pm) - Pick up package";
-            treeNode11.ForeColor = System.Drawing.Color.White;
-            treeNode11.ImageKey = "whtDot.png";
-            treeNode11.Name = "Node9";
-            treeNode11.NodeFont = new System.Drawing.Font("Tw Cen MT Condensed", 11.25F, System.Drawing.FontStyle.Bold);
-            treeNode11.SelectedImageKey = "whtDot.png";
-            treeNode11.Text = "Feb 19, 2017 (7:00pm) - Meet Sally for movie";
-            treeNode12.ForeColor = System.Drawing.Color.White;
-            treeNode12.ImageKey = "grStar.png";
-            treeNode12.Name = "Node3";
-            treeNode12.NodeFont = new System.Drawing.Font("Tw Cen MT", 14.25F);
-            treeNode12.SelectedImageKey = "grStar.png";
-            treeNode12.Text = "Other                          ";
-            this.eventsTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2,
-            treeNode4,
-            treeNode9,
-            treeNode12});
-            this.eventsTreeView.SelectedImageIndex = 0;
-            this.eventsTreeView.ShowLines = false;
-            this.eventsTreeView.Size = new System.Drawing.Size(368, 437);
-            this.eventsTreeView.TabIndex = 3;
-            this.eventsTreeView.TabStop = false;
+            this.eventModifyBody.ColumnCount = 2;
+            this.eventModifyBody.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.eventModifyBody.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.eventModifyBody.Controls.Add(this.labelLabel, 0, 0);
+            this.eventModifyBody.Controls.Add(this.labelField, 1, 0);
+            this.eventModifyBody.Controls.Add(this.startDateLabel, 0, 1);
+            this.eventModifyBody.Controls.Add(this.startingDate, 1, 1);
+            this.eventModifyBody.Controls.Add(this.startingTime, 1, 2);
+            this.eventModifyBody.Controls.Add(this.endDateLabel, 0, 3);
+            this.eventModifyBody.Controls.Add(this.endingDate, 1, 3);
+            this.eventModifyBody.Controls.Add(this.endingTime, 1, 4);
+            this.eventModifyBody.Controls.Add(this.categoryLabel, 0, 5);
+            this.eventModifyBody.Controls.Add(this.categoryDropDown, 1, 5);
+            this.eventModifyBody.Controls.Add(this.locationLabel, 0, 6);
+            this.eventModifyBody.Controls.Add(this.locationField, 1, 6);
+            this.eventModifyBody.Controls.Add(this.descriptionLabel, 0, 7);
+            this.eventModifyBody.Controls.Add(this.descriptionField, 1, 7);
+            this.eventModifyBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.eventModifyBody.Location = new System.Drawing.Point(0, 28);
+            this.eventModifyBody.Name = "eventModifyBody";
+            this.eventModifyBody.Padding = new System.Windows.Forms.Padding(8);
+            this.eventModifyBody.RowCount = 8;
+            this.eventModifyBody.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.eventModifyBody.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.eventModifyBody.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.eventModifyBody.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.eventModifyBody.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.eventModifyBody.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.eventModifyBody.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.eventModifyBody.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.eventModifyBody.Size = new System.Drawing.Size(368, 437);
+            this.eventModifyBody.TabIndex = 64;
             // 
-            // imageList1
+            // labelLabel
             // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "bluSq.png");
-            this.imageList1.Images.SetKeyName(1, "grStar.png");
-            this.imageList1.Images.SetKeyName(2, "purCirc.png");
-            this.imageList1.Images.SetKeyName(3, "redTri.png");
-            this.imageList1.Images.SetKeyName(4, "whtDot.png");
+            this.labelLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelLabel.Font = new System.Drawing.Font("Tw Cen MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelLabel.ForeColor = System.Drawing.Color.White;
+            this.labelLabel.Location = new System.Drawing.Point(11, 8);
+            this.labelLabel.Name = "labelLabel";
+            this.labelLabel.Size = new System.Drawing.Size(99, 31);
+            this.labelLabel.TabIndex = 49;
+            this.labelLabel.Text = "Label:";
+            this.labelLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // eventsLabel
+            // labelField
             // 
-            this.eventsLabel.BackColor = System.Drawing.Color.Transparent;
-            this.eventsLabel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.eventsLabel.Font = new System.Drawing.Font("Tw Cen MT", 18F);
-            this.eventsLabel.ForeColor = System.Drawing.Color.White;
-            this.eventsLabel.Location = new System.Drawing.Point(0, 0);
-            this.eventsLabel.Name = "eventsLabel";
-            this.eventsLabel.Size = new System.Drawing.Size(368, 28);
-            this.eventsLabel.TabIndex = 1;
-            this.eventsLabel.Text = "Events";
-            this.eventsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelField.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelField.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelField.Font = new System.Drawing.Font("Tw Cen MT", 12F);
+            this.labelField.Location = new System.Drawing.Point(116, 11);
+            this.labelField.Name = "labelField";
+            this.labelField.Size = new System.Drawing.Size(241, 25);
+            this.labelField.TabIndex = 50;
             // 
-            // eventButtonsPanel
+            // startDateLabel
             // 
-            this.eventButtonsPanel.Controls.Add(this.createEventButton);
-            this.eventButtonsPanel.Controls.Add(this.createCategoryButton);
-            this.eventButtonsPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.eventButtonsPanel.Location = new System.Drawing.Point(0, 465);
-            this.eventButtonsPanel.Name = "eventButtonsPanel";
-            this.eventButtonsPanel.Size = new System.Drawing.Size(368, 25);
-            this.eventButtonsPanel.TabIndex = 15;
+            this.startDateLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.startDateLabel.Font = new System.Drawing.Font("Tw Cen MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.startDateLabel.ForeColor = System.Drawing.Color.White;
+            this.startDateLabel.Location = new System.Drawing.Point(11, 39);
+            this.startDateLabel.Name = "startDateLabel";
+            this.startDateLabel.Size = new System.Drawing.Size(99, 31);
+            this.startDateLabel.TabIndex = 51;
+            this.startDateLabel.Text = "Start Date:";
+            this.startDateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // createEventButton
+            // startingDate
             // 
-            this.createEventButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(68)))), ((int)(((byte)(173)))));
-            this.createEventButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.createEventButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.createEventButton.Font = new System.Drawing.Font("Tw Cen MT", 12F);
-            this.createEventButton.Location = new System.Drawing.Point(0, 0);
-            this.createEventButton.Name = "createEventButton";
-            this.createEventButton.Size = new System.Drawing.Size(126, 25);
-            this.createEventButton.TabIndex = 13;
-            this.createEventButton.Text = "Create New Event";
+            this.startingDate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.startingDate.Font = new System.Drawing.Font("Tw Cen MT", 12F);
+            this.startingDate.Location = new System.Drawing.Point(116, 42);
+            this.startingDate.Name = "startingDate";
+            this.startingDate.ShowUpDown = true;
+            this.startingDate.Size = new System.Drawing.Size(241, 25);
+            this.startingDate.TabIndex = 52;
             // 
-            // createCategoryButton
+            // startingTime
             // 
-            this.createCategoryButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(68)))), ((int)(((byte)(173)))));
-            this.createCategoryButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.createCategoryButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.createCategoryButton.Font = new System.Drawing.Font("Tw Cen MT", 12F);
-            this.createCategoryButton.Location = new System.Drawing.Point(214, 0);
-            this.createCategoryButton.Name = "createCategoryButton";
-            this.createCategoryButton.Size = new System.Drawing.Size(154, 25);
-            this.createCategoryButton.TabIndex = 14;
-            this.createCategoryButton.Text = "Create New Category";
+            this.startingTime.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.startingTime.Font = new System.Drawing.Font("Tw Cen MT", 12F);
+            this.startingTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.startingTime.Location = new System.Drawing.Point(116, 73);
+            this.startingTime.Name = "startingTime";
+            this.startingTime.ShowUpDown = true;
+            this.startingTime.Size = new System.Drawing.Size(241, 25);
+            this.startingTime.TabIndex = 63;
             // 
-            // createEventPanel
+            // endDateLabel
             // 
-            this.createEventPanel.Controls.Add(this.textBox6);
-            this.createEventPanel.Controls.Add(this.checkBox1);
-            this.createEventPanel.Controls.Add(this.textBox5);
-            this.createEventPanel.Controls.Add(this.label20);
-            this.createEventPanel.Controls.Add(this.textBox4);
-            this.createEventPanel.Controls.Add(this.label19);
-            this.createEventPanel.Controls.Add(this.textBox3);
-            this.createEventPanel.Controls.Add(this.label18);
-            this.createEventPanel.Controls.Add(this.textBox2);
-            this.createEventPanel.Controls.Add(this.label17);
-            this.createEventPanel.Controls.Add(this.dateTimePicker2);
-            this.createEventPanel.Controls.Add(this.label16);
-            this.createEventPanel.Controls.Add(this.textBox1);
-            this.createEventPanel.Controls.Add(this.label21);
-            this.createEventPanel.Controls.Add(this.saveEventsEditButton);
-            this.createEventPanel.Controls.Add(this.cancelEventsEditButton);
-            this.createEventPanel.Controls.Add(this.label24);
-            this.createEventPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.createEventPanel.Location = new System.Drawing.Point(10, 10);
-            this.createEventPanel.Name = "createEventPanel";
-            this.createEventPanel.Size = new System.Drawing.Size(368, 490);
-            this.createEventPanel.TabIndex = 22;
-            this.createEventPanel.Visible = false;
+            this.endDateLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.endDateLabel.Font = new System.Drawing.Font("Tw Cen MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.endDateLabel.ForeColor = System.Drawing.Color.White;
+            this.endDateLabel.Location = new System.Drawing.Point(11, 101);
+            this.endDateLabel.Name = "endDateLabel";
+            this.endDateLabel.Size = new System.Drawing.Size(99, 31);
+            this.endDateLabel.TabIndex = 55;
+            this.endDateLabel.Text = "End Date:";
+            this.endDateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // textBox6
+            // endingDate
             // 
-            this.textBox6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(182)))), ((int)(((byte)(201)))));
-            this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox6.Enabled = false;
-            this.textBox6.Font = new System.Drawing.Font("Tw Cen MT", 10F);
-            this.textBox6.ForeColor = System.Drawing.Color.Black;
-            this.textBox6.Location = new System.Drawing.Point(236, 312);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(112, 22);
-            this.textBox6.TabIndex = 62;
-            this.textBox6.Text = "        Weekly      v";
+            this.endingDate.Font = new System.Drawing.Font("Tw Cen MT", 12F);
+            this.endingDate.Location = new System.Drawing.Point(116, 104);
+            this.endingDate.Name = "endingDate";
+            this.endingDate.ShowUpDown = true;
+            this.endingDate.Size = new System.Drawing.Size(241, 25);
+            this.endingDate.TabIndex = 64;
             // 
-            // checkBox1
+            // endingTime
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("Tw Cen MT", 11F);
-            this.checkBox1.ForeColor = System.Drawing.Color.White;
-            this.checkBox1.Location = new System.Drawing.Point(250, 291);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(84, 21);
-            this.checkBox1.TabIndex = 61;
-            this.checkBox1.Text = "Recurring";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.endingTime.Font = new System.Drawing.Font("Tw Cen MT", 12F);
+            this.endingTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.endingTime.Location = new System.Drawing.Point(116, 135);
+            this.endingTime.Name = "endingTime";
+            this.endingTime.ShowUpDown = true;
+            this.endingTime.Size = new System.Drawing.Size(241, 25);
+            this.endingTime.TabIndex = 65;
             // 
-            // textBox5
+            // categoryLabel
             // 
-            this.textBox5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(182)))), ((int)(((byte)(201)))));
-            this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox5.Location = new System.Drawing.Point(61, 244);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(285, 20);
-            this.textBox5.TabIndex = 60;
+            this.categoryLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.categoryLabel.Font = new System.Drawing.Font("Tw Cen MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.categoryLabel.ForeColor = System.Drawing.Color.White;
+            this.categoryLabel.Location = new System.Drawing.Point(11, 163);
+            this.categoryLabel.Name = "categoryLabel";
+            this.categoryLabel.Size = new System.Drawing.Size(99, 33);
+            this.categoryLabel.TabIndex = 57;
+            this.categoryLabel.Text = "Category:";
+            this.categoryLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label20
+            // categoryDropDown
             // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Tw Cen MT", 11F);
-            this.label20.ForeColor = System.Drawing.Color.White;
-            this.label20.Location = new System.Drawing.Point(58, 224);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(77, 17);
-            this.label20.TabIndex = 59;
-            this.label20.Text = "Description:";
+            this.categoryDropDown.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.categoryDropDown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.categoryDropDown.Font = new System.Drawing.Font("Tw Cen MT", 12F);
+            this.categoryDropDown.FormattingEnabled = true;
+            this.categoryDropDown.Location = new System.Drawing.Point(116, 166);
+            this.categoryDropDown.Name = "categoryDropDown";
+            this.categoryDropDown.Size = new System.Drawing.Size(241, 27);
+            this.categoryDropDown.TabIndex = 67;
             // 
-            // textBox4
+            // locationLabel
             // 
-            this.textBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(182)))), ((int)(((byte)(201)))));
-            this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox4.Location = new System.Drawing.Point(61, 197);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(285, 20);
-            this.textBox4.TabIndex = 58;
+            this.locationLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.locationLabel.Font = new System.Drawing.Font("Tw Cen MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.locationLabel.ForeColor = System.Drawing.Color.White;
+            this.locationLabel.Location = new System.Drawing.Point(11, 196);
+            this.locationLabel.Name = "locationLabel";
+            this.locationLabel.Size = new System.Drawing.Size(99, 31);
+            this.locationLabel.TabIndex = 66;
+            this.locationLabel.Text = "Location:";
+            this.locationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label19
+            // locationField
             // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Tw Cen MT", 11F);
-            this.label19.ForeColor = System.Drawing.Color.White;
-            this.label19.Location = new System.Drawing.Point(58, 177);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(61, 17);
-            this.label19.TabIndex = 57;
-            this.label19.Text = "Location:";
+            this.locationField.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.locationField.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.locationField.Font = new System.Drawing.Font("Tw Cen MT", 12F);
+            this.locationField.Location = new System.Drawing.Point(116, 199);
+            this.locationField.Name = "locationField";
+            this.locationField.Size = new System.Drawing.Size(241, 25);
+            this.locationField.TabIndex = 69;
             // 
-            // textBox3
+            // descriptionLabel
             // 
-            this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(182)))), ((int)(((byte)(201)))));
-            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox3.Font = new System.Drawing.Font("Tw Cen MT", 11F);
-            this.textBox3.ForeColor = System.Drawing.Color.Black;
-            this.textBox3.Location = new System.Drawing.Point(282, 168);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(64, 23);
-            this.textBox3.TabIndex = 56;
+            this.descriptionLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.descriptionLabel.Font = new System.Drawing.Font("Tw Cen MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.descriptionLabel.ForeColor = System.Drawing.Color.White;
+            this.descriptionLabel.Location = new System.Drawing.Point(11, 227);
+            this.descriptionLabel.Name = "descriptionLabel";
+            this.descriptionLabel.Size = new System.Drawing.Size(99, 202);
+            this.descriptionLabel.TabIndex = 59;
+            this.descriptionLabel.Text = "Description:";
+            this.descriptionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label18
+            // descriptionField
             // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Tw Cen MT", 11F);
-            this.label18.ForeColor = System.Drawing.Color.White;
-            this.label18.Location = new System.Drawing.Point(233, 168);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(45, 17);
-            this.label18.TabIndex = 55;
-            this.label18.Text = "   End:";
+            this.descriptionField.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.descriptionField.Font = new System.Drawing.Font("Tw Cen MT", 12F);
+            this.descriptionField.Location = new System.Drawing.Point(116, 230);
+            this.descriptionField.Multiline = true;
+            this.descriptionField.Name = "descriptionField";
+            this.descriptionField.Size = new System.Drawing.Size(241, 196);
+            this.descriptionField.TabIndex = 68;
             // 
-            // textBox2
+            // eventModifyLabel
             // 
-            this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(182)))), ((int)(((byte)(201)))));
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox2.Font = new System.Drawing.Font("Tw Cen MT", 11F);
-            this.textBox2.ForeColor = System.Drawing.Color.Black;
-            this.textBox2.Location = new System.Drawing.Point(282, 139);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(64, 23);
-            this.textBox2.TabIndex = 54;
-            this.textBox2.Text = " 2.30pm";
+            this.eventModifyLabel.BackColor = System.Drawing.Color.Transparent;
+            this.eventModifyLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.eventModifyLabel.Font = new System.Drawing.Font("Tw Cen MT", 18F);
+            this.eventModifyLabel.ForeColor = System.Drawing.Color.White;
+            this.eventModifyLabel.Location = new System.Drawing.Point(0, 0);
+            this.eventModifyLabel.Name = "eventModifyLabel";
+            this.eventModifyLabel.Size = new System.Drawing.Size(368, 28);
+            this.eventModifyLabel.TabIndex = 46;
+            this.eventModifyLabel.Text = "Create/Modify Event...";
+            this.eventModifyLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label17
+            // eventModifyButtonsPanel
             // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Tw Cen MT", 11F);
-            this.label17.ForeColor = System.Drawing.Color.White;
-            this.label17.Location = new System.Drawing.Point(233, 139);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(47, 17);
-            this.label17.TabIndex = 53;
-            this.label17.Text = "*Start:";
+            this.eventModifyButtonsPanel.Controls.Add(this.cancelEventModifyButton);
+            this.eventModifyButtonsPanel.Controls.Add(this.saveEventModifyButton);
+            this.eventModifyButtonsPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.eventModifyButtonsPanel.Location = new System.Drawing.Point(0, 465);
+            this.eventModifyButtonsPanel.Name = "eventModifyButtonsPanel";
+            this.eventModifyButtonsPanel.Size = new System.Drawing.Size(368, 25);
+            this.eventModifyButtonsPanel.TabIndex = 63;
             // 
-            // dateTimePicker2
+            // cancelEventModifyButton
             // 
-            this.dateTimePicker2.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(182)))), ((int)(((byte)(201)))));
-            this.dateTimePicker2.Font = new System.Drawing.Font("Tw Cen MT", 8F);
-            this.dateTimePicker2.Location = new System.Drawing.Point(107, 139);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(120, 19);
-            this.dateTimePicker2.TabIndex = 52;
+            this.cancelEventModifyButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(68)))), ((int)(((byte)(173)))));
+            this.cancelEventModifyButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.cancelEventModifyButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.cancelEventModifyButton.Font = new System.Drawing.Font("Tw Cen MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cancelEventModifyButton.Location = new System.Drawing.Point(0, 0);
+            this.cancelEventModifyButton.Name = "cancelEventModifyButton";
+            this.cancelEventModifyButton.Size = new System.Drawing.Size(160, 25);
+            this.cancelEventModifyButton.TabIndex = 47;
+            this.cancelEventModifyButton.Text = "Cancel";
+            this.cancelEventModifyButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label16
+            // saveEventModifyButton
             // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Tw Cen MT", 11F);
-            this.label16.ForeColor = System.Drawing.Color.White;
-            this.label16.Location = new System.Drawing.Point(58, 139);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(47, 17);
-            this.label16.TabIndex = 51;
-            this.label16.Text = "*Date:";
+            this.saveEventModifyButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(68)))), ((int)(((byte)(173)))));
+            this.saveEventModifyButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.saveEventModifyButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.saveEventModifyButton.Font = new System.Drawing.Font("Tw Cen MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveEventModifyButton.Location = new System.Drawing.Point(208, 0);
+            this.saveEventModifyButton.Name = "saveEventModifyButton";
+            this.saveEventModifyButton.Size = new System.Drawing.Size(160, 25);
+            this.saveEventModifyButton.TabIndex = 48;
+            this.saveEventModifyButton.Text = "Save Changes";
+            this.saveEventModifyButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox1
+            // categoryModifyPanel
             // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(182)))), ((int)(((byte)(201)))));
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Location = new System.Drawing.Point(107, 113);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(239, 20);
-            this.textBox1.TabIndex = 50;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Tw Cen MT", 11F);
-            this.label21.ForeColor = System.Drawing.Color.White;
-            this.label21.Location = new System.Drawing.Point(58, 116);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(43, 17);
-            this.label21.TabIndex = 49;
-            this.label21.Text = "*Title:";
-            // 
-            // saveEventsEditButton
-            // 
-            this.saveEventsEditButton.AutoSize = true;
-            this.saveEventsEditButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(68)))), ((int)(((byte)(173)))));
-            this.saveEventsEditButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.saveEventsEditButton.Font = new System.Drawing.Font("Tw Cen MT", 13F);
-            this.saveEventsEditButton.Location = new System.Drawing.Point(61, 311);
-            this.saveEventsEditButton.Name = "saveEventsEditButton";
-            this.saveEventsEditButton.Size = new System.Drawing.Size(114, 22);
-            this.saveEventsEditButton.TabIndex = 48;
-            this.saveEventsEditButton.Text = "Save Changes";
-            // 
-            // cancelEventsEditButton
-            // 
-            this.cancelEventsEditButton.AutoSize = true;
-            this.cancelEventsEditButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(68)))), ((int)(((byte)(173)))));
-            this.cancelEventsEditButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cancelEventsEditButton.Font = new System.Drawing.Font("Tw Cen MT", 13F);
-            this.cancelEventsEditButton.Location = new System.Drawing.Point(61, 279);
-            this.cancelEventsEditButton.Name = "cancelEventsEditButton";
-            this.cancelEventsEditButton.Size = new System.Drawing.Size(60, 22);
-            this.cancelEventsEditButton.TabIndex = 47;
-            this.cancelEventsEditButton.Text = "Cancel";
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.BackColor = System.Drawing.Color.Transparent;
-            this.label24.Font = new System.Drawing.Font("Tw Cen MT", 18F);
-            this.label24.ForeColor = System.Drawing.Color.White;
-            this.label24.Location = new System.Drawing.Point(90, 57);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(234, 28);
-            this.label24.TabIndex = 46;
-            this.label24.Text = "Create/Modify Event...";
-            // 
-            // categoryEditPanel
-            // 
-            this.categoryEditPanel.Controls.Add(this.pictureBox3);
-            this.categoryEditPanel.Controls.Add(this.textBox7);
-            this.categoryEditPanel.Controls.Add(this.label25);
-            this.categoryEditPanel.Controls.Add(this.textBox8);
-            this.categoryEditPanel.Controls.Add(this.label26);
-            this.categoryEditPanel.Controls.Add(this.textBox9);
-            this.categoryEditPanel.Controls.Add(this.label27);
-            this.categoryEditPanel.Controls.Add(this.saveCategoryEditButton);
-            this.categoryEditPanel.Controls.Add(this.cancelCategoryEditButton);
-            this.categoryEditPanel.Controls.Add(this.label30);
-            this.categoryEditPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.categoryEditPanel.Location = new System.Drawing.Point(10, 10);
-            this.categoryEditPanel.Name = "categoryEditPanel";
-            this.categoryEditPanel.Size = new System.Drawing.Size(368, 490);
-            this.categoryEditPanel.TabIndex = 23;
-            this.categoryEditPanel.Visible = false;
+            this.categoryModifyPanel.Controls.Add(this.pictureBox3);
+            this.categoryModifyPanel.Controls.Add(this.textBox7);
+            this.categoryModifyPanel.Controls.Add(this.label25);
+            this.categoryModifyPanel.Controls.Add(this.textBox8);
+            this.categoryModifyPanel.Controls.Add(this.label26);
+            this.categoryModifyPanel.Controls.Add(this.textBox9);
+            this.categoryModifyPanel.Controls.Add(this.label27);
+            this.categoryModifyPanel.Controls.Add(this.categoryModifyLabel);
+            this.categoryModifyPanel.Controls.Add(this.categoryModifyButtonsPanel);
+            this.categoryModifyPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.categoryModifyPanel.Location = new System.Drawing.Point(10, 10);
+            this.categoryModifyPanel.Name = "categoryModifyPanel";
+            this.categoryModifyPanel.Size = new System.Drawing.Size(368, 490);
+            this.categoryModifyPanel.TabIndex = 23;
+            this.categoryModifyPanel.Visible = false;
             // 
             // pictureBox3
             // 
@@ -621,41 +499,141 @@
             this.label27.TabIndex = 80;
             this.label27.Text = "*Name:";
             // 
-            // saveCategoryEditButton
+            // categoryModifyLabel
             // 
-            this.saveCategoryEditButton.AutoSize = true;
-            this.saveCategoryEditButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(68)))), ((int)(((byte)(173)))));
-            this.saveCategoryEditButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.saveCategoryEditButton.Font = new System.Drawing.Font("Tw Cen MT", 13F);
-            this.saveCategoryEditButton.Location = new System.Drawing.Point(203, 263);
-            this.saveCategoryEditButton.Name = "saveCategoryEditButton";
-            this.saveCategoryEditButton.Size = new System.Drawing.Size(114, 22);
-            this.saveCategoryEditButton.TabIndex = 79;
-            this.saveCategoryEditButton.Text = "Save Changes";
+            this.categoryModifyLabel.BackColor = System.Drawing.Color.Transparent;
+            this.categoryModifyLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.categoryModifyLabel.Font = new System.Drawing.Font("Tw Cen MT", 18F);
+            this.categoryModifyLabel.ForeColor = System.Drawing.Color.White;
+            this.categoryModifyLabel.Location = new System.Drawing.Point(0, 0);
+            this.categoryModifyLabel.Name = "categoryModifyLabel";
+            this.categoryModifyLabel.Size = new System.Drawing.Size(368, 28);
+            this.categoryModifyLabel.TabIndex = 77;
+            this.categoryModifyLabel.Text = "Create/Modify Category...";
+            this.categoryModifyLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // cancelCategoryEditButton
+            // categoryModifyButtonsPanel
             // 
-            this.cancelCategoryEditButton.AutoSize = true;
-            this.cancelCategoryEditButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(68)))), ((int)(((byte)(173)))));
-            this.cancelCategoryEditButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cancelCategoryEditButton.Font = new System.Drawing.Font("Tw Cen MT", 13F);
-            this.cancelCategoryEditButton.Location = new System.Drawing.Point(110, 263);
-            this.cancelCategoryEditButton.Name = "cancelCategoryEditButton";
-            this.cancelCategoryEditButton.Size = new System.Drawing.Size(60, 22);
-            this.cancelCategoryEditButton.TabIndex = 78;
-            this.cancelCategoryEditButton.Text = "Cancel";
+            this.categoryModifyButtonsPanel.Controls.Add(this.cancelCategoryModifyButton);
+            this.categoryModifyButtonsPanel.Controls.Add(this.saveCategoryModifyButton);
+            this.categoryModifyButtonsPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.categoryModifyButtonsPanel.Location = new System.Drawing.Point(0, 465);
+            this.categoryModifyButtonsPanel.Name = "categoryModifyButtonsPanel";
+            this.categoryModifyButtonsPanel.Size = new System.Drawing.Size(368, 25);
+            this.categoryModifyButtonsPanel.TabIndex = 64;
             // 
-            // label30
+            // cancelCategoryModifyButton
             // 
-            this.label30.AutoSize = true;
-            this.label30.BackColor = System.Drawing.Color.Transparent;
-            this.label30.Font = new System.Drawing.Font("Tw Cen MT", 18F);
-            this.label30.ForeColor = System.Drawing.Color.White;
-            this.label30.Location = new System.Drawing.Point(78, 105);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(274, 28);
-            this.label30.TabIndex = 77;
-            this.label30.Text = "Create/Modify Category...";
+            this.cancelCategoryModifyButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(68)))), ((int)(((byte)(173)))));
+            this.cancelCategoryModifyButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.cancelCategoryModifyButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.cancelCategoryModifyButton.Font = new System.Drawing.Font("Tw Cen MT", 13F);
+            this.cancelCategoryModifyButton.Location = new System.Drawing.Point(0, 0);
+            this.cancelCategoryModifyButton.Name = "cancelCategoryModifyButton";
+            this.cancelCategoryModifyButton.Size = new System.Drawing.Size(160, 25);
+            this.cancelCategoryModifyButton.TabIndex = 78;
+            this.cancelCategoryModifyButton.Text = "Cancel";
+            this.cancelCategoryModifyButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // saveCategoryModifyButton
+            // 
+            this.saveCategoryModifyButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(68)))), ((int)(((byte)(173)))));
+            this.saveCategoryModifyButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.saveCategoryModifyButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.saveCategoryModifyButton.Font = new System.Drawing.Font("Tw Cen MT", 13F);
+            this.saveCategoryModifyButton.Location = new System.Drawing.Point(208, 0);
+            this.saveCategoryModifyButton.Name = "saveCategoryModifyButton";
+            this.saveCategoryModifyButton.Size = new System.Drawing.Size(160, 25);
+            this.saveCategoryModifyButton.TabIndex = 79;
+            this.saveCategoryModifyButton.Text = "Save Changes";
+            this.saveCategoryModifyButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // eventsDisplayPanel
+            // 
+            this.eventsDisplayPanel.Controls.Add(this.eventsTreeView);
+            this.eventsDisplayPanel.Controls.Add(this.eventsLabel);
+            this.eventsDisplayPanel.Controls.Add(this.eventButtonsPanel);
+            this.eventsDisplayPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.eventsDisplayPanel.Location = new System.Drawing.Point(10, 10);
+            this.eventsDisplayPanel.Name = "eventsDisplayPanel";
+            this.eventsDisplayPanel.Size = new System.Drawing.Size(368, 490);
+            this.eventsDisplayPanel.TabIndex = 21;
+            // 
+            // eventsTreeView
+            // 
+            this.eventsTreeView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.eventsTreeView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.eventsTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.eventsTreeView.FullRowSelect = true;
+            this.eventsTreeView.ImageIndex = 0;
+            this.eventsTreeView.ImageList = this.imageList1;
+            this.eventsTreeView.Indent = 15;
+            this.eventsTreeView.ItemHeight = 25;
+            this.eventsTreeView.Location = new System.Drawing.Point(0, 28);
+            this.eventsTreeView.Name = "eventsTreeView";
+            this.eventsTreeView.SelectedImageIndex = 0;
+            this.eventsTreeView.Size = new System.Drawing.Size(368, 437);
+            this.eventsTreeView.TabIndex = 3;
+            this.eventsTreeView.TabStop = false;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "bluSq.png");
+            this.imageList1.Images.SetKeyName(1, "grStar.png");
+            this.imageList1.Images.SetKeyName(2, "purCirc.png");
+            this.imageList1.Images.SetKeyName(3, "redTri.png");
+            this.imageList1.Images.SetKeyName(4, "whtDot.png");
+            // 
+            // eventsLabel
+            // 
+            this.eventsLabel.BackColor = System.Drawing.Color.Transparent;
+            this.eventsLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.eventsLabel.Font = new System.Drawing.Font("Tw Cen MT", 18F);
+            this.eventsLabel.ForeColor = System.Drawing.Color.White;
+            this.eventsLabel.Location = new System.Drawing.Point(0, 0);
+            this.eventsLabel.Name = "eventsLabel";
+            this.eventsLabel.Size = new System.Drawing.Size(368, 28);
+            this.eventsLabel.TabIndex = 1;
+            this.eventsLabel.Text = "Events";
+            this.eventsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // eventButtonsPanel
+            // 
+            this.eventButtonsPanel.Controls.Add(this.createEventButton);
+            this.eventButtonsPanel.Controls.Add(this.createCategoryButton);
+            this.eventButtonsPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.eventButtonsPanel.Location = new System.Drawing.Point(0, 465);
+            this.eventButtonsPanel.Name = "eventButtonsPanel";
+            this.eventButtonsPanel.Size = new System.Drawing.Size(368, 25);
+            this.eventButtonsPanel.TabIndex = 15;
+            // 
+            // createEventButton
+            // 
+            this.createEventButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(68)))), ((int)(((byte)(173)))));
+            this.createEventButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.createEventButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.createEventButton.Font = new System.Drawing.Font("Tw Cen MT", 12F);
+            this.createEventButton.Location = new System.Drawing.Point(0, 0);
+            this.createEventButton.Name = "createEventButton";
+            this.createEventButton.Size = new System.Drawing.Size(160, 25);
+            this.createEventButton.TabIndex = 13;
+            this.createEventButton.Text = "Create New Event";
+            this.createEventButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // createCategoryButton
+            // 
+            this.createCategoryButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(68)))), ((int)(((byte)(173)))));
+            this.createCategoryButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.createCategoryButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.createCategoryButton.Font = new System.Drawing.Font("Tw Cen MT", 12F);
+            this.createCategoryButton.Location = new System.Drawing.Point(208, 0);
+            this.createCategoryButton.Name = "createCategoryButton";
+            this.createCategoryButton.Size = new System.Drawing.Size(160, 25);
+            this.createCategoryButton.TabIndex = 14;
+            this.createCategoryButton.Text = "Create New Category";
+            this.createCategoryButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // dayViewPanel
             // 
@@ -663,7 +641,7 @@
             this.dayViewPanel.Controls.Add(this.remainingEventsLabel);
             this.dayViewPanel.Controls.Add(this.remainingLabel);
             this.dayViewPanel.Controls.Add(this.spacerCalendarRemaining);
-            this.dayViewPanel.Controls.Add(this.dailyCalendar1);
+            this.dayViewPanel.Controls.Add(this.dailyCalendar);
             this.dayViewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dayViewPanel.Location = new System.Drawing.Point(10, 10);
             this.dayViewPanel.Name = "dayViewPanel";
@@ -713,15 +691,24 @@
             this.spacerCalendarRemaining.Size = new System.Drawing.Size(0, 13);
             this.spacerCalendarRemaining.TabIndex = 22;
             // 
-            // dailyCalendar1
+            // dailyCalendar
             // 
-            this.dailyCalendar1.BackColor = System.Drawing.Color.White;
-            this.dailyCalendar1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.dailyCalendar1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dailyCalendar1.Location = new System.Drawing.Point(0, 0);
-            this.dailyCalendar1.Name = "dailyCalendar1";
-            this.dailyCalendar1.Size = new System.Drawing.Size(608, 283);
-            this.dailyCalendar1.TabIndex = 21;
+            this.dailyCalendar.BackColor = System.Drawing.Color.White;
+            this.dailyCalendar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dailyCalendar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dailyCalendar.Location = new System.Drawing.Point(0, 0);
+            this.dailyCalendar.Name = "dailyCalendar";
+            this.dailyCalendar.Size = new System.Drawing.Size(608, 283);
+            this.dailyCalendar.TabIndex = 21;
+            // 
+            // monthViewPanel
+            // 
+            this.monthViewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.monthViewPanel.Location = new System.Drawing.Point(10, 10);
+            this.monthViewPanel.Name = "monthViewPanel";
+            this.monthViewPanel.Size = new System.Drawing.Size(608, 458);
+            this.monthViewPanel.TabIndex = 24;
+            this.monthViewPanel.Visible = false;
             // 
             // viewSelectionPanel
             // 
@@ -771,7 +758,6 @@
             this.dayViewButton.TabStop = false;
             this.dayViewButton.Text = "D";
             this.dayViewButton.UseVisualStyleBackColor = false;
-            this.dayViewButton.Click += new System.EventHandler(this.dayViewButton_Click);
             // 
             // spacerDayMonth
             // 
@@ -795,12 +781,11 @@
             this.monthViewButton.TabStop = false;
             this.monthViewButton.Text = "M";
             this.monthViewButton.UseVisualStyleBackColor = false;
-            this.monthViewButton.Click += new System.EventHandler(this.monthViewButton_Click);
             // 
             // bottomPanel
             // 
             this.bottomPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.bottomPanel.Controls.Add(this.datePicker1);
+            this.bottomPanel.Controls.Add(this.dateSelector);
             this.bottomPanel.Controls.Add(this.nextDayButton);
             this.bottomPanel.Controls.Add(this.prevDayButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -809,15 +794,15 @@
             this.bottomPanel.Size = new System.Drawing.Size(1024, 32);
             this.bottomPanel.TabIndex = 16;
             // 
-            // datePicker1
+            // dateSelector
             // 
-            this.datePicker1.Font = new System.Drawing.Font("Tw Cen MT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.datePicker1.Location = new System.Drawing.Point(412, 2);
-            this.datePicker1.Name = "datePicker1";
-            this.datePicker1.ShowUpDown = true;
-            this.datePicker1.Size = new System.Drawing.Size(200, 28);
-            this.datePicker1.TabIndex = 10;
-            this.datePicker1.TabStop = false;
+            this.dateSelector.Font = new System.Drawing.Font("Tw Cen MT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateSelector.Location = new System.Drawing.Point(412, 2);
+            this.dateSelector.Name = "dateSelector";
+            this.dateSelector.ShowUpDown = true;
+            this.dateSelector.Size = new System.Drawing.Size(200, 28);
+            this.dateSelector.TabIndex = 10;
+            this.dateSelector.TabStop = false;
             // 
             // nextDayButton
             // 
@@ -857,7 +842,6 @@
             this.currentTimeDisplay.TabIndex = 15;
             this.currentTimeDisplay.Text = "0:00 AM";
             this.currentTimeDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.currentTimeDisplay.Click += new System.EventHandler(this.currentTimeDisplay_Click);
             // 
             // exitButton
             // 
@@ -892,6 +876,56 @@
             this.spacerFormTime.Size = new System.Drawing.Size(23, 32);
             this.spacerFormTime.TabIndex = 16;
             // 
+            // categoryContextMenu
+            // 
+            this.categoryContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.modifyCategoryToolStripMenuItem,
+            this.deleteCategoryToolStripMenuItem});
+            this.categoryContextMenu.Name = "contextMenuStrip1";
+            this.categoryContextMenu.Size = new System.Drawing.Size(164, 48);
+            // 
+            // modifyCategoryToolStripMenuItem
+            // 
+            this.modifyCategoryToolStripMenuItem.Name = "modifyCategoryToolStripMenuItem";
+            this.modifyCategoryToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.modifyCategoryToolStripMenuItem.Text = "Modify Category";
+            // 
+            // deleteCategoryToolStripMenuItem
+            // 
+            this.deleteCategoryToolStripMenuItem.Name = "deleteCategoryToolStripMenuItem";
+            this.deleteCategoryToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.deleteCategoryToolStripMenuItem.Text = "Delete Category";
+            // 
+            // eventContextMenu
+            // 
+            this.eventContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editEventToolStripMenuItem,
+            this.deleteEventToolStripMenuItem});
+            this.eventContextMenu.Name = "contextMenuStrip1";
+            this.eventContextMenu.Size = new System.Drawing.Size(145, 48);
+            // 
+            // editEventToolStripMenuItem
+            // 
+            this.editEventToolStripMenuItem.Name = "editEventToolStripMenuItem";
+            this.editEventToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.editEventToolStripMenuItem.Text = "Modify Event";
+            // 
+            // deleteEventToolStripMenuItem
+            // 
+            this.deleteEventToolStripMenuItem.Name = "deleteEventToolStripMenuItem";
+            this.deleteEventToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.deleteEventToolStripMenuItem.Text = "Delete Event";
+            // 
+            // secondClock
+            // 
+            this.secondClock.Enabled = true;
+            this.secondClock.Interval = 1000;
+            // 
+            // minuteClock
+            // 
+            this.minuteClock.Enabled = true;
+            this.minuteClock.Interval = 60000;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -909,18 +943,23 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.eventModifyPanel.ResumeLayout(false);
+            this.eventModifyBody.ResumeLayout(false);
+            this.eventModifyBody.PerformLayout();
+            this.eventModifyButtonsPanel.ResumeLayout(false);
+            this.categoryModifyPanel.ResumeLayout(false);
+            this.categoryModifyPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            this.categoryModifyButtonsPanel.ResumeLayout(false);
             this.eventsDisplayPanel.ResumeLayout(false);
             this.eventButtonsPanel.ResumeLayout(false);
-            this.createEventPanel.ResumeLayout(false);
-            this.createEventPanel.PerformLayout();
-            this.categoryEditPanel.ResumeLayout(false);
-            this.categoryEditPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.dayViewPanel.ResumeLayout(false);
             this.dayViewPanel.PerformLayout();
             this.viewSelectionPanel.ResumeLayout(false);
             this.bottomPanel.ResumeLayout(false);
             this.topPanel.ResumeLayout(false);
+            this.categoryContextMenu.ResumeLayout(false);
+            this.eventContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -944,26 +983,19 @@
         private System.Windows.Forms.Button monthViewButton;
         private System.Windows.Forms.Button dayViewButton;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Panel createEventPanel;
+        private System.Windows.Forms.Panel eventModifyPanel;
         private System.Windows.Forms.Panel eventsDisplayPanel;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label saveEventsEditButton;
-        private System.Windows.Forms.Label cancelEventsEditButton;
-        private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.Panel categoryEditPanel;
+        private System.Windows.Forms.Label descriptionLabel;
+        private System.Windows.Forms.Label categoryLabel;
+        private System.Windows.Forms.Label endDateLabel;
+        private System.Windows.Forms.DateTimePicker startingDate;
+        private System.Windows.Forms.Label startDateLabel;
+        private System.Windows.Forms.TextBox labelField;
+        private System.Windows.Forms.Label labelLabel;
+        private System.Windows.Forms.Label saveEventModifyButton;
+        private System.Windows.Forms.Label cancelEventModifyButton;
+        private System.Windows.Forms.Label eventModifyLabel;
+        private System.Windows.Forms.Panel categoryModifyPanel;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.Label label25;
@@ -971,10 +1003,10 @@
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.Label saveCategoryEditButton;
-        private System.Windows.Forms.Label cancelCategoryEditButton;
-        private System.Windows.Forms.Label label30;
-        private DailyCalendar dailyCalendar1;
+        private System.Windows.Forms.Label saveCategoryModifyButton;
+        private System.Windows.Forms.Label cancelCategoryModifyButton;
+        private System.Windows.Forms.Label categoryModifyLabel;
+        private DailyCalendar dailyCalendar;
         private System.Windows.Forms.Panel topPanel;
         private System.Windows.Forms.Label spacerFormTime;
         private System.Windows.Forms.Panel viewSelectionPanel;
@@ -983,8 +1015,27 @@
         private System.Windows.Forms.Panel dayViewPanel;
         private System.Windows.Forms.Label spacerCalendarRemaining;
         private System.Windows.Forms.Label spacerEventsPanel;
-        private System.Windows.Forms.DateTimePicker datePicker1;
+        private System.Windows.Forms.DateTimePicker dateSelector;
         private System.Windows.Forms.Panel eventButtonsPanel;
+        private System.Windows.Forms.ContextMenuStrip categoryContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem modifyCategoryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteCategoryToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip eventContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem editEventToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteEventToolStripMenuItem;
+        private System.Windows.Forms.Panel monthViewPanel;
+        private System.Windows.Forms.Panel eventModifyButtonsPanel;
+        private System.Windows.Forms.Panel categoryModifyButtonsPanel;
+        private System.Windows.Forms.TableLayoutPanel eventModifyBody;
+        private System.Windows.Forms.DateTimePicker startingTime;
+        private System.Windows.Forms.DateTimePicker endingDate;
+        private System.Windows.Forms.DateTimePicker endingTime;
+        private System.Windows.Forms.Label locationLabel;
+        private System.Windows.Forms.ComboBox categoryDropDown;
+        private System.Windows.Forms.TextBox descriptionField;
+        private System.Windows.Forms.TextBox locationField;
+        private System.Windows.Forms.Timer secondClock;
+        private System.Windows.Forms.Timer minuteClock;
     }
 }
 
