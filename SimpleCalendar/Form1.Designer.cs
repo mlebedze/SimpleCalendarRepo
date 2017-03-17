@@ -48,6 +48,7 @@
             this.locationField = new System.Windows.Forms.TextBox();
             this.descriptionLabel = new System.Windows.Forms.Label();
             this.descriptionField = new System.Windows.Forms.TextBox();
+            this.eventErrors = new System.Windows.Forms.TextBox();
             this.eventModifyLabel = new System.Windows.Forms.Label();
             this.eventModifyButtonsPanel = new System.Windows.Forms.Panel();
             this.cancelEventModifyButton = new System.Windows.Forms.Label();
@@ -76,7 +77,6 @@
             this.remainingEventsLabel = new System.Windows.Forms.Label();
             this.remainingLabel = new System.Windows.Forms.Label();
             this.spacerCalendarRemaining = new System.Windows.Forms.Label();
-            this.dailyCalendar = new SimpleCalendar.DailyCalendar();
             this.monthViewPanel = new System.Windows.Forms.Panel();
             this.viewSelectionPanel = new System.Windows.Forms.Panel();
             this.viewLabel = new System.Windows.Forms.Label();
@@ -96,10 +96,11 @@
             this.modifyCategoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteCategoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eventContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.editEventToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modifyEventToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteEventToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.secondClock = new System.Windows.Forms.Timer(this.components);
             this.minuteClock = new System.Windows.Forms.Timer(this.components);
+            this.dailyCalendar = new SimpleCalendar.DailyCalendar();
             this.mainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -161,6 +162,7 @@
             // eventModifyPanel
             // 
             this.eventModifyPanel.Controls.Add(this.eventModifyBody);
+            this.eventModifyPanel.Controls.Add(this.eventErrors);
             this.eventModifyPanel.Controls.Add(this.eventModifyLabel);
             this.eventModifyPanel.Controls.Add(this.eventModifyButtonsPanel);
             this.eventModifyPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -202,7 +204,7 @@
             this.eventModifyBody.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.eventModifyBody.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.eventModifyBody.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.eventModifyBody.Size = new System.Drawing.Size(368, 437);
+            this.eventModifyBody.Size = new System.Drawing.Size(368, 332);
             this.eventModifyBody.TabIndex = 64;
             // 
             // labelLabel
@@ -334,7 +336,7 @@
             this.locationField.Location = new System.Drawing.Point(116, 199);
             this.locationField.Name = "locationField";
             this.locationField.Size = new System.Drawing.Size(241, 25);
-            this.locationField.TabIndex = 69;
+            this.locationField.TabIndex = 68;
             // 
             // descriptionLabel
             // 
@@ -343,7 +345,7 @@
             this.descriptionLabel.ForeColor = System.Drawing.Color.White;
             this.descriptionLabel.Location = new System.Drawing.Point(11, 227);
             this.descriptionLabel.Name = "descriptionLabel";
-            this.descriptionLabel.Size = new System.Drawing.Size(99, 202);
+            this.descriptionLabel.Size = new System.Drawing.Size(99, 97);
             this.descriptionLabel.TabIndex = 59;
             this.descriptionLabel.Text = "Description:";
             this.descriptionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -355,8 +357,23 @@
             this.descriptionField.Location = new System.Drawing.Point(116, 230);
             this.descriptionField.Multiline = true;
             this.descriptionField.Name = "descriptionField";
-            this.descriptionField.Size = new System.Drawing.Size(241, 196);
-            this.descriptionField.TabIndex = 68;
+            this.descriptionField.Size = new System.Drawing.Size(241, 91);
+            this.descriptionField.TabIndex = 69;
+            // 
+            // eventErrors
+            // 
+            this.eventErrors.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.eventErrors.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.eventErrors.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.eventErrors.Font = new System.Drawing.Font("Tw Cen MT", 12F, System.Drawing.FontStyle.Bold);
+            this.eventErrors.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
+            this.eventErrors.Location = new System.Drawing.Point(0, 360);
+            this.eventErrors.Multiline = true;
+            this.eventErrors.Name = "eventErrors";
+            this.eventErrors.ReadOnly = true;
+            this.eventErrors.Size = new System.Drawing.Size(368, 105);
+            this.eventErrors.TabIndex = 65;
+            this.eventErrors.TabStop = false;
             // 
             // eventModifyLabel
             // 
@@ -368,7 +385,7 @@
             this.eventModifyLabel.Name = "eventModifyLabel";
             this.eventModifyLabel.Size = new System.Drawing.Size(368, 28);
             this.eventModifyLabel.TabIndex = 46;
-            this.eventModifyLabel.Text = "Create/Modify Event...";
+            this.eventModifyLabel.Text = "Modify Event Panel";
             this.eventModifyLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // eventModifyButtonsPanel
@@ -691,16 +708,6 @@
             this.spacerCalendarRemaining.Size = new System.Drawing.Size(0, 13);
             this.spacerCalendarRemaining.TabIndex = 22;
             // 
-            // dailyCalendar
-            // 
-            this.dailyCalendar.BackColor = System.Drawing.Color.White;
-            this.dailyCalendar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.dailyCalendar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dailyCalendar.Location = new System.Drawing.Point(0, 0);
-            this.dailyCalendar.Name = "dailyCalendar";
-            this.dailyCalendar.Size = new System.Drawing.Size(608, 283);
-            this.dailyCalendar.TabIndex = 21;
-            // 
             // monthViewPanel
             // 
             this.monthViewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -899,16 +906,16 @@
             // eventContextMenu
             // 
             this.eventContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editEventToolStripMenuItem,
+            this.modifyEventToolStripMenuItem,
             this.deleteEventToolStripMenuItem});
             this.eventContextMenu.Name = "contextMenuStrip1";
             this.eventContextMenu.Size = new System.Drawing.Size(145, 48);
             // 
-            // editEventToolStripMenuItem
+            // modifyEventToolStripMenuItem
             // 
-            this.editEventToolStripMenuItem.Name = "editEventToolStripMenuItem";
-            this.editEventToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.editEventToolStripMenuItem.Text = "Modify Event";
+            this.modifyEventToolStripMenuItem.Name = "modifyEventToolStripMenuItem";
+            this.modifyEventToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.modifyEventToolStripMenuItem.Text = "Modify Event";
             // 
             // deleteEventToolStripMenuItem
             // 
@@ -925,6 +932,16 @@
             // 
             this.minuteClock.Enabled = true;
             this.minuteClock.Interval = 60000;
+            // 
+            // dailyCalendar
+            // 
+            this.dailyCalendar.BackColor = System.Drawing.Color.White;
+            this.dailyCalendar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dailyCalendar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dailyCalendar.Location = new System.Drawing.Point(0, 0);
+            this.dailyCalendar.Name = "dailyCalendar";
+            this.dailyCalendar.Size = new System.Drawing.Size(608, 283);
+            this.dailyCalendar.TabIndex = 21;
             // 
             // Form1
             // 
@@ -944,6 +961,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.eventModifyPanel.ResumeLayout(false);
+            this.eventModifyPanel.PerformLayout();
             this.eventModifyBody.ResumeLayout(false);
             this.eventModifyBody.PerformLayout();
             this.eventModifyButtonsPanel.ResumeLayout(false);
@@ -1021,7 +1039,7 @@
         private System.Windows.Forms.ToolStripMenuItem modifyCategoryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteCategoryToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip eventContextMenu;
-        private System.Windows.Forms.ToolStripMenuItem editEventToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem modifyEventToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteEventToolStripMenuItem;
         private System.Windows.Forms.Panel monthViewPanel;
         private System.Windows.Forms.Panel eventModifyButtonsPanel;
@@ -1036,6 +1054,7 @@
         private System.Windows.Forms.TextBox locationField;
         private System.Windows.Forms.Timer secondClock;
         private System.Windows.Forms.Timer minuteClock;
+        private System.Windows.Forms.TextBox eventErrors;
     }
 }
 

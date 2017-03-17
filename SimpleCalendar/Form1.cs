@@ -29,6 +29,10 @@ namespace SimpleCalendar
         /// All events which start on the currently selected date.</summary>
         private SortedSet<CalendarEvent> todaysEvents;
 
+        /// <summary>
+        /// The current event being modified.</summary>
+        private CalendarEvent currentEvent;
+
         #region initialization
         /// <summary>
         /// Initializes the calendar form.</summary>
@@ -68,6 +72,12 @@ namespace SimpleCalendar
             createCategoryButton.Click += CreateCategoryButton_Click;
             cancelCategoryModifyButton.Click += CancelCategoryEditButton_Click;
             saveCategoryModifyButton.Click += SaveCategoryEditButton_Click;
+
+            eventsTreeView.NodeMouseClick += EventsTreeView_NodeMouseClick;
+            modifyEventToolStripMenuItem.Click += ModifyEventMenuItem_Click;
+            deleteEventToolStripMenuItem.Click += DeleteEventMenuItem_Click;
+            modifyCategoryToolStripMenuItem.Click += ModifyCategoryMenuItem_Click;
+            deleteCategoryToolStripMenuItem.Click += DeleteCategoryMenuItem_Click;
 
             // refresh all on-screen elements
             RefreshCalendar();
@@ -180,10 +190,15 @@ namespace SimpleCalendar
         /// Switches view to allow the user to create a new event.</summary>
         private void CreateEventButton_Click(object sender, EventArgs e)
         {
+            currentEvent = null;
+
             // ensure previous inputs are cleared
             ClearEventModify();
 
-            // switches view to event creation
+            // set title of panel
+            eventModifyLabel.Text = "Create Event";
+
+            // switch view to event creation
             eventModifyPanel.Visible = true;
             eventsDisplayPanel.Visible = false;
             categoryModifyPanel.Visible = false;
@@ -193,7 +208,7 @@ namespace SimpleCalendar
         /// Cancels the modification of an event.</summary>
         private void CancelEventsModifyButton_Click(object sender, EventArgs e)
         {
-            // switches view back to events list
+            // switch view back to events list
             eventsDisplayPanel.Visible = true;
             eventModifyPanel.Visible = false;
             categoryModifyPanel.Visible = false;
@@ -205,30 +220,54 @@ namespace SimpleCalendar
         {
             // check for valid input
             if (ValidateEventModify()) {
-                // creates a new event
-                CalendarEvent ev = new CalendarEvent() {
-                    Label = labelField.Text,
-                    Description = descriptionField.Text,
-                    StartingTime = startingDate.Value.Date.AddMinutes(startingTime.Value.TimeOfDay.TotalMinutes),
-                    EndingTime = endingDate.Value.Date.AddMinutes(endingTime.Value.TimeOfDay.TotalMinutes),
-                    Location = new Location() {
-                        Name = locationField.Text
-                    },
-                    Category = categoryDropDown.SelectedItem.ToString(),
-                    Repetition = RecurringType.None
-                };
-                allEvents.Add(ev);
+                if (currentEvent == null) {
+                    // create a new event
+                    CalendarEvent ev = new CalendarEvent() {
+                        Label = labelField.Text,
+                        Description = descriptionField.Text,
+                        StartingTime = startingDate.Value.Date.AddMinutes(startingTime.Value.TimeOfDay.TotalMinutes),
+                        EndingTime = endingDate.Value.Date.AddMinutes(endingTime.Value.TimeOfDay.TotalMinutes),
+                        Location = new Location() {
+                            Name = locationField.Text
+                        },
+                        Category = categoryDropDown.SelectedItem.ToString(),
+                        Repetition = RecurringType.None
+                    };
+                    allEvents.Add(ev);
 
-                // insert event in the appropriate category's event list
-                CalendarCategory category;
-                if (eventCategories.TryGetValue(ev.Category, out category)) {
-                    category.Events.Add(ev);
+                    // insert event in the appropriate category's event list
+                    CalendarCategory category;
+                    if (eventCategories.TryGetValue(ev.Category, out category)) {
+                        category.Events.Add(ev);
+                    }
+                } else {
+                    // remove event from its old category
+                    CalendarCategory category;
+                    if (eventCategories.TryGetValue(currentEvent.Category, out category)) {
+                        category.Events.Remove(currentEvent);
+                    }
+
+                    // update event
+                    currentEvent.Label = labelField.Text;
+                    currentEvent.Description = descriptionField.Text;
+                    currentEvent.StartingTime = startingDate.Value.Date.AddMinutes(startingTime.Value.TimeOfDay.TotalMinutes);
+                    currentEvent.EndingTime = endingDate.Value.Date.AddMinutes(endingTime.Value.TimeOfDay.TotalMinutes);
+                    currentEvent.Location = new Location() {
+                        Name = locationField.Text
+                    };
+                    currentEvent.Category = categoryDropDown.SelectedItem.ToString();
+                    currentEvent.Repetition = RecurringType.None;
+
+                    // insert event into its new category
+                    if (eventCategories.TryGetValue(currentEvent.Category, out category)) {
+                        category.Events.Add(currentEvent);
+                    }
                 }
 
                 // refresh the calendar
                 RefreshCalendar();
 
-                // switches view back to events list
+                // switch view back to events list
                 eventsDisplayPanel.Visible = true;
                 eventModifyPanel.Visible = false;
                 categoryModifyPanel.Visible = false;
@@ -242,7 +281,7 @@ namespace SimpleCalendar
             // ensure previous inputs are cleared
             ClearCategoryModify();
 
-            // switches view back to events list
+            // switch view back to events list
             categoryModifyPanel.Visible = true;
             eventsDisplayPanel.Visible = false;
             eventModifyPanel.Visible = false;
@@ -252,7 +291,7 @@ namespace SimpleCalendar
         /// Cancels the modification of a category.</summary>
         private void CancelCategoryEditButton_Click(object sender, EventArgs e)
         {
-            // switches view back to events list
+            // switch view back to events list
             eventsDisplayPanel.Visible = true;
             eventModifyPanel.Visible = false;
             categoryModifyPanel.Visible = false;
@@ -264,11 +303,103 @@ namespace SimpleCalendar
         {
             // check for valid input
             if (ValidateCategoryModify()) {
-                // switches view back to events list
+                // switch view back to events list
                 eventsDisplayPanel.Visible = true;
                 eventModifyPanel.Visible = false;
                 categoryModifyPanel.Visible = false;
             }
+        }
+
+        /// <summary>
+        /// Sets behaviour where right-clicking a tree node will also set it as being selected.</summary>
+        private void EventsTreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            // make right-clicks on tree nodes set them as selected
+            if (e.Button == MouseButtons.Right) {
+                eventsTreeView.SelectedNode = e.Node;
+            }
+        }
+
+        /// <summary>
+        /// Takes the user to the event modification panel for the selected event.</summary>
+        private void ModifyEventMenuItem_Click(object sender, EventArgs e)
+        {
+            // get the selected event
+            TreeNode parentNode = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeView).SelectedNode;
+            currentEvent = parentNode.Tag as CalendarEvent;
+
+            // ensure previous inputs are cleared
+            ClearEventModify();
+
+            // set title of panel
+            eventModifyLabel.Text = "Modify Event";
+
+            // fill in event details in controls
+            labelField.Text = currentEvent.Label;
+            startingDate.Value = currentEvent.StartingTime.Date;
+            startingTime.Value = currentEvent.StartingTime;
+            endingDate.Value = currentEvent.EndingTime.Date;
+            endingTime.Value = currentEvent.EndingTime;
+            categoryDropDown.SelectedIndex = categoryDropDown.FindStringExact(currentEvent.Category);
+            locationField.Text = currentEvent.Location.Name;
+            descriptionField.Text = currentEvent.Description;
+
+            // switch view to events modification
+            eventModifyPanel.Visible = true;
+            eventsDisplayPanel.Visible = false;
+            categoryModifyPanel.Visible = false;
+        }
+
+        /// <summary>
+        /// Shows a confirmation before allowing the user to delete the selected event.</summary>
+        private void DeleteEventMenuItem_Click(object sender, EventArgs e)
+        {
+            // get the selected event
+            TreeNode parentNode = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeView).SelectedNode;
+            currentEvent = parentNode.Tag as CalendarEvent;
+
+            // create a string with event data
+            string checkString = currentEvent.Label + "\r\n"
+                + currentEvent.StartingTime.ToString() + " - " + currentEvent.EndingTime.ToString() + "\r\n"
+                + "Category: " + currentEvent.Category + "\r\n"
+                + "Location: " + currentEvent.Location.Name + "\r\n"
+                + "Description: " + currentEvent.Description;
+
+            // show a confirmation dialog to user before deleting event
+            DialogResult check = MessageBox.Show("Are you sure you wish to delete this event?\r\n\r\n" + checkString, "Delete Event", MessageBoxButtons.YesNo);
+            if (check == DialogResult.Yes) {
+                // delete the event
+                allEvents.Remove(currentEvent);
+                CalendarCategory category;
+                if (eventCategories.TryGetValue(currentEvent.Category, out category)) {
+                    category.Events.Remove(currentEvent);
+                }
+
+                // refresh the form
+                RefreshCalendar();
+            }
+        }
+
+        /// <summary>
+        /// Takes the user to the category modification panel for the selected category.</summary>
+        private void ModifyCategoryMenuItem_Click(object sender, EventArgs e)
+        {
+            // get the selected category
+            TreeNode parentNode = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeView).SelectedNode;
+            CalendarCategory selectedEvent = parentNode.Tag as CalendarCategory;
+
+            // TODO: Edit Category
+        }
+
+        /// <summary>
+        /// Shows a confirmation before allowing the user to delete the selected category.</summary>
+        private void DeleteCategoryMenuItem_Click(object sender, EventArgs e)
+        {
+            // get the selected category
+            TreeNode parentNode = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeView).SelectedNode;
+            CalendarCategory selectedEvent = parentNode.Tag as CalendarCategory;
+
+            // TODO: Delete Category
         }
         #endregion
 
@@ -405,7 +536,6 @@ namespace SimpleCalendar
             //Initialize the tree's 'All events' sections
             string nodeImg = "bluSq.png";
             TreeNode node = new TreeNode() {
-                ContextMenuStrip = categoryContextMenu,
                 ForeColor = Color.White,
                 ImageKey = nodeImg,
                 NodeFont = treeCategoryFont,
@@ -422,6 +552,7 @@ namespace SimpleCalendar
                     ImageKey = "whtDot.png",
                     NodeFont = treeEventFont,
                     SelectedImageKey = "whtDot.png",
+                    Tag = ev,
                     Text = ev.StartingTime.ToString("MMM dd (h:mmtt) - ") + ev.Label + "                            "
                 });
             }
@@ -442,6 +573,7 @@ namespace SimpleCalendar
                     ImageKey = nodeImg,
                     NodeFont = treeCategoryFont,
                     SelectedImageKey = nodeImg,
+                    Tag = category,
                     Text = category.Name + "                            "
                 };
 
@@ -453,6 +585,7 @@ namespace SimpleCalendar
                         ImageKey = "whtDot.png",
                         NodeFont = treeEventFont,
                         SelectedImageKey = "whtDot.png",
+                        Tag = ev,
                         Text = ev.StartingTime.ToString("MMM dd (h:mmtt) - ") + ev.Label + "                            "
                     });
                 }
@@ -506,6 +639,9 @@ namespace SimpleCalendar
             categoryDropDown.Items.Clear();
             categoryDropDown.Items.Add("Uncategorized");
             categoryDropDown.Items.AddRange(eventCategories.Keys.ToArray());
+
+            // reset errors field
+            eventErrors.Clear();
         }
 
         /// <summary>
@@ -514,24 +650,35 @@ namespace SimpleCalendar
         private bool ValidateEventModify()
         {
             bool isValidEvent = true;
+            List<string> errors = new List<string>();
 
             // check that the label field in not empty
             if (string.IsNullOrWhiteSpace(labelField.Text)) {
-                Console.WriteLine("Error: Event label cannot be empty");
+                errors.Add("Error: Event label cannot be empty");
                 isValidEvent = false;
             }
 
             // check that a category for the event has been selected
             if (string.IsNullOrWhiteSpace(categoryDropDown.Text)) {
-                Console.WriteLine("Error: Event must be assigned a category");
+                errors.Add("Error: Event must be assigned a category");
                 isValidEvent = false;
             }
 
             DateTime startTime = startingDate.Value.Date.AddMinutes(startingTime.Value.TimeOfDay.TotalMinutes);
             DateTime endTime = endingDate.Value.Date.AddMinutes(endingTime.Value.TimeOfDay.TotalMinutes);
             if (startTime > endTime) {
-                Console.WriteLine("Error: The end date for the event must come after the start date");
+                errors.Add("Error: The end date for the event must come after the start date");
                 isValidEvent = false;
+            }
+
+            // write errors to output
+            eventErrors.Clear();
+            if (errors.Count >= 0) {
+                eventErrors.Text += "Please resolve the following errors:";
+
+                foreach (string err in errors) {
+                    eventErrors.Text += "\r\n  " + err;
+                }
             }
 
             return isValidEvent;
