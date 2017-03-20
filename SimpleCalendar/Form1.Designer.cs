@@ -77,6 +77,7 @@
             this.remainingEventsLabel = new System.Windows.Forms.Label();
             this.remainingLabel = new System.Windows.Forms.Label();
             this.spacerCalendarRemaining = new System.Windows.Forms.Label();
+            this.dailyCalendar = new SimpleCalendar.DailyCalendar();
             this.monthViewPanel = new System.Windows.Forms.Panel();
             this.viewSelectionPanel = new System.Windows.Forms.Panel();
             this.viewLabel = new System.Windows.Forms.Label();
@@ -100,7 +101,6 @@
             this.deleteEventToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.secondClock = new System.Windows.Forms.Timer(this.components);
             this.minuteClock = new System.Windows.Forms.Timer(this.components);
-            this.dailyCalendar = new SimpleCalendar.DailyCalendar();
             this.mainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -708,6 +708,16 @@
             this.spacerCalendarRemaining.Size = new System.Drawing.Size(0, 13);
             this.spacerCalendarRemaining.TabIndex = 22;
             // 
+            // dailyCalendar
+            // 
+            this.dailyCalendar.BackColor = System.Drawing.Color.White;
+            this.dailyCalendar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dailyCalendar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dailyCalendar.Location = new System.Drawing.Point(0, 0);
+            this.dailyCalendar.Name = "dailyCalendar";
+            this.dailyCalendar.Size = new System.Drawing.Size(608, 283);
+            this.dailyCalendar.TabIndex = 21;
+            // 
             // monthViewPanel
             // 
             this.monthViewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -932,16 +942,6 @@
             // 
             this.minuteClock.Enabled = true;
             this.minuteClock.Interval = 60000;
-            // 
-            // dailyCalendar
-            // 
-            this.dailyCalendar.BackColor = System.Drawing.Color.White;
-            this.dailyCalendar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.dailyCalendar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dailyCalendar.Location = new System.Drawing.Point(0, 0);
-            this.dailyCalendar.Name = "dailyCalendar";
-            this.dailyCalendar.Size = new System.Drawing.Size(608, 283);
-            this.dailyCalendar.TabIndex = 21;
             // 
             // Form1
             // 
