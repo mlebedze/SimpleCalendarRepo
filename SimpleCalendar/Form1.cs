@@ -41,6 +41,9 @@ namespace SimpleCalendar
             // set up components on the form
             InitializeComponent();
 
+            // get the clock ready right away
+            UpdateClock();
+
             // load up saved calendar data from file
             loadEventsFromFile(null, out eventCategories, out allEvents);
 
@@ -63,6 +66,7 @@ namespace SimpleCalendar
             prevDayButton.Click += PrevDayButton_Click;
 
             dayViewButton.Click += DayViewButton_Click;
+            twoDayViewButton.Click += TwoDayViewButton_Click;
             monthViewButton.Click += MonthViewButton_Click;
 
             createEventButton.Click += CreateEventButton_Click;
@@ -175,6 +179,16 @@ namespace SimpleCalendar
         private void DayViewButton_Click(object sender, EventArgs e)
         {
             dayViewPanel.Visible = true;
+            twoDayViewPanel.Visible = false;
+            monthViewPanel.Visible = false;
+        }
+
+        /// <summary>
+        /// Changes the calendar view to a two-day view.</summary>
+        private void TwoDayViewButton_Click(object sender, EventArgs e)
+        {
+            dayViewPanel.Visible = false;
+            twoDayViewPanel.Visible = true;
             monthViewPanel.Visible = false;
         }
 
@@ -183,6 +197,7 @@ namespace SimpleCalendar
         private void MonthViewButton_Click(object sender, EventArgs e)
         {
             dayViewPanel.Visible = false;
+            twoDayViewPanel.Visible = false;
             monthViewPanel.Visible = true;
         }
 
