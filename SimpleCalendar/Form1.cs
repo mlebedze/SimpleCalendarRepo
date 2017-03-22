@@ -47,6 +47,16 @@ namespace SimpleCalendar
             // load up saved calendar data from file
             loadEventsFromFile(null, out eventCategories, out allEvents);
 
+            //Initialize for daily view
+            this.dailyCalendar.Visible = true;
+            this.indicatorPanelDayB.Visible = false;
+            this.indicatorPanelDayA.Visible = false;
+            this.dailyCalendar.Dock = DockStyle.Top;
+            this.indicatorPanelDayB .Dock = DockStyle.None;
+            this.indicatorPanelDayA.Dock = DockStyle.None;
+            //this.remainingEventsLabel.Dock = DockStyle.Fill;
+            //this.remainingLabel.Dock = DockStyle.Top;
+            
             // mouse event handlers to make the form draggable
             currentTimeDisplay.MouseDown += TopPanel_MouseDown;
             currentTimeDisplay.MouseMove += TopPanel_MouseMove;
@@ -143,7 +153,11 @@ namespace SimpleCalendar
         private void MinuteClock_Tick(object sender, EventArgs e)
         {
             // update the calendar view
+            SortedSet<CalendarEvent> tomorrowsEvents = allEvents.GetViewBetween(new CalendarEvent() { StartingTime = dateSelected.AddDays(1) }, new CalendarEvent() { StartingTime = dateSelected.AddDays(2) });
+
             dailyCalendar.ChangeDate(dateSelected, todaysEvents);
+            dailyCalendar2A.ChangeDate(dateSelected, todaysEvents);
+            dailyCalendar2B.ChangeDate(dateSelected.AddDays(1), tomorrowsEvents);
         }
 
         /// <summary>
@@ -178,27 +192,31 @@ namespace SimpleCalendar
         /// Changes the calendar view to a daily view.</summary>
         private void DayViewButton_Click(object sender, EventArgs e)
         {
-            dayViewPanel.Visible = true;
-            twoDayViewPanel.Visible = false;
-            monthViewPanel.Visible = false;
+            this.dailyCalendar.Visible = true;
+            this.indicatorPanelDayB.Visible = false;
+            this.indicatorPanelDayA.Visible = false;
+            this.dailyCalendar.Dock = DockStyle.Top;
+            this.indicatorPanelDayB.Dock = DockStyle.None;
+            this.indicatorPanelDayA.Dock = DockStyle.None;
         }
 
         /// <summary>
         /// Changes the calendar view to a two-day view.</summary>
         private void TwoDayViewButton_Click(object sender, EventArgs e)
         {
-            dayViewPanel.Visible = false;
-            twoDayViewPanel.Visible = true;
-            monthViewPanel.Visible = false;
+            this.dailyCalendar.Visible = false;
+            this.indicatorPanelDayB.Visible = true;
+            this.indicatorPanelDayA.Visible = true;
+            this.dailyCalendar.Dock = DockStyle.None;
+            this.indicatorPanelDayB.Dock = DockStyle.Top;
+            this.indicatorPanelDayA.Dock = DockStyle.Top;
         }
 
         /// <summary>
         /// Changes the calendar view to a monthly view.</summary>
         private void MonthViewButton_Click(object sender, EventArgs e)
         {
-            dayViewPanel.Visible = false;
-            twoDayViewPanel.Visible = false;
-            monthViewPanel.Visible = true;
+
         }
 
         /// <summary>
@@ -425,12 +443,15 @@ namespace SimpleCalendar
         {
             // today's event include all events from 12 AM of today's date to 12 AM of tomorrow's date
             todaysEvents = allEvents.GetViewBetween(new CalendarEvent() { StartingTime = dateSelected }, new CalendarEvent() { StartingTime = dateSelected.AddDays(1) });
+            SortedSet<CalendarEvent> tomorrowsEvents = allEvents.GetViewBetween(new CalendarEvent() { StartingTime = dateSelected.AddDays(1) }, new CalendarEvent() { StartingTime = dateSelected.AddDays(2) });
 
             // refresh the events list
             refreshTree(dateSelected);
 
             // refresh the calendar view
             dailyCalendar.ChangeDate(dateSelected, todaysEvents);
+            dailyCalendar2A.ChangeDate(dateSelected, todaysEvents);
+            dailyCalendar2B.ChangeDate(dateSelected.AddDays(1), tomorrowsEvents);
         }
 
         /// <summary>
