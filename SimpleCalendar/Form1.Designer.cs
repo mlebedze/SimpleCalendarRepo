@@ -205,11 +205,23 @@
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "bluSq.png");
-            this.imageList1.Images.SetKeyName(1, "grStar.png");
-            this.imageList1.Images.SetKeyName(2, "purCirc.png");
-            this.imageList1.Images.SetKeyName(3, "redTri.png");
-            this.imageList1.Images.SetKeyName(4, "whtDot.png");
+            this.imageList1.Images.SetKeyName(0, "bluCirc.png");
+            this.imageList1.Images.SetKeyName(1, "bluSq.png");
+            this.imageList1.Images.SetKeyName(2, "bluStar.png");
+            this.imageList1.Images.SetKeyName(3, "bluTri.png");
+            this.imageList1.Images.SetKeyName(4, "grCirc.png");
+            this.imageList1.Images.SetKeyName(5, "grSq.png");
+            this.imageList1.Images.SetKeyName(6, "grStar.png");
+            this.imageList1.Images.SetKeyName(7, "grTri.png");
+            this.imageList1.Images.SetKeyName(8, "purCirc.png");
+            this.imageList1.Images.SetKeyName(9, "purSq.png");
+            this.imageList1.Images.SetKeyName(10, "purStar.png");
+            this.imageList1.Images.SetKeyName(11, "purTri.png");
+            this.imageList1.Images.SetKeyName(12, "redCirc.png");
+            this.imageList1.Images.SetKeyName(13, "redSq.png");
+            this.imageList1.Images.SetKeyName(14, "redStar.png");
+            this.imageList1.Images.SetKeyName(15, "redTri.png");
+            this.imageList1.Images.SetKeyName(16, "whtDot.png");
             // 
             // eventsLabel
             // 

@@ -464,9 +464,6 @@ namespace SimpleCalendar
 
         private void loadEventsFromFile(string filename, out Dictionary<string, CalendarCategory> categories, out SortedSet<CalendarEvent> events)
         {
-            //FOR NOW WE JUST CREATE IT MANUALLY, WE WILL HAVE TO GET FROM FILE LATER..*******
-            //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
             categories = new Dictionary<string, CalendarCategory>();
             List<CalendarCategory> categoriesData = File.ReadAllLines("categoriesData.csv")
                    .Skip(1)
@@ -636,9 +633,21 @@ namespace SimpleCalendar
                 // determine the correct symbol to use
                 nodeImg = null;
                 if (category.Symbol == Shape.Circle && category.Colour == Color.Purple) nodeImg = "purCirc.png";
+                else if (category.Symbol == Shape.Circle && category.Colour == Color.Red) nodeImg = "redCirc.png";
+                else if (category.Symbol == Shape.Circle && category.Colour == Color.Blue) nodeImg = "bluCirc.png";
+                else if (category.Symbol == Shape.Circle && category.Colour == Color.Green) nodeImg = "grCirc.png";
+                else if (category.Symbol == Shape.Star && category.Colour == Color.Purple) nodeImg = "purStar.png";
+                else if (category.Symbol == Shape.Star && category.Colour == Color.Red) nodeImg = "redStar.png";
+                else if (category.Symbol == Shape.Star && category.Colour == Color.Blue) nodeImg = "bluStar.png";
                 else if (category.Symbol == Shape.Star && category.Colour == Color.Green) nodeImg = "grStar.png";
+                else if (category.Symbol == Shape.Square && category.Colour == Color.Purple) nodeImg = "purSq.png";
+                else if (category.Symbol == Shape.Square && category.Colour == Color.Red) nodeImg = "redSq.png";
                 else if (category.Symbol == Shape.Square && category.Colour == Color.Blue) nodeImg = "bluSq.png";
+                else if (category.Symbol == Shape.Square && category.Colour == Color.Green) nodeImg = "grSq.png";
+                else if (category.Symbol == Shape.Triangle && category.Colour == Color.Purple) nodeImg = "purTri.png";
                 else if (category.Symbol == Shape.Triangle && category.Colour == Color.Red) nodeImg = "redTri.png";
+                else if (category.Symbol == Shape.Triangle && category.Colour == Color.Blue) nodeImg = "bluTri.png";
+                else if (category.Symbol == Shape.Triangle && category.Colour == Color.Green) nodeImg = "grTri.png";
 
                 // create the category tree node
                 node = new TreeNode() {
@@ -710,9 +719,11 @@ namespace SimpleCalendar
             endingTime.Value = DateTime.Now;
 
             // reset category drop downs
+            categoryDropDown.BeginUpdate();
             categoryDropDown.Items.Clear();
             categoryDropDown.Items.Add("Uncategorized");
             categoryDropDown.Items.AddRange(eventCategories.Keys.ToArray());
+            categoryDropDown.EndUpdate();
 
             // reset errors field
             eventErrors.Clear();
@@ -760,6 +771,15 @@ namespace SimpleCalendar
 
         private void ClearCategoryModify()
         {
+            symbolDropDown.BeginUpdate();
+            symbolDropDown.Items.Clear();
+
+            symbolDropDown.Items.Add("Blue");
+            symbolDropDown.Items.Add("Green");
+            symbolDropDown.Items.Add("Purple");
+            symbolDropDown.Items.Add("Red");
+
+            symbolDropDown.EndUpdate();
         }
 
         /// <summary>
