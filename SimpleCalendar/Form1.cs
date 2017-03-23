@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -466,98 +467,135 @@ namespace SimpleCalendar
             //FOR NOW WE JUST CREATE IT MANUALLY, WE WILL HAVE TO GET FROM FILE LATER..*******
             //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-            // dummy categories
-            CalendarCategory cat2 = new CalendarCategory() {
-                Name = "Work",
-                Symbol = Shape.Triangle,
-                Colour = Color.Red
-            };
-            CalendarCategory cat3 = new CalendarCategory() {
-                Name = "Soccer",
-                Symbol = Shape.Circle,
-                Colour = Color.Purple
-            };
-            CalendarCategory cat4 = new CalendarCategory() {
-                Name = "Other",
-                Symbol = Shape.Star,
-                Colour = Color.Green
-            };
-
-            // dummy events
-            CalendarEvent testEventA = new CalendarEvent() {
-                Label = "TestEvent_A",
-                Description = "This is TestEvent_A",
-                StartingTime = DateTime.Today.AddHours(9),
-                EndingTime = DateTime.Today.AddHours(17),
-                Location = new Location() {
-                    Name = "Western University"
-                },
-                Category = cat2.Name,
-                Repetition = RecurringType.None
-            };
-            CalendarEvent testEventB = new CalendarEvent() {
-                Label = "TestEvent_B",
-                Description = "This is TestEvent_B",
-                StartingTime = DateTime.Today.AddHours(12),
-                EndingTime = DateTime.Today.AddHours(13).AddMinutes(30),
-                Location = new Location() {
-                    Name = "Western University"
-                },
-                Category = cat2.Name,
-                Repetition = RecurringType.None
-            };
-            CalendarEvent testEventC = new CalendarEvent() {
-                Label = "TestEvent_C",
-                Description = "This is TestEvent_C",
-                StartingTime = DateTime.Today.AddHours(18),
-                EndingTime = DateTime.Today.AddHours(20).AddMinutes(45),
-                Location = new Location() {
-                    Name = "Western University"
-                },
-                Category = cat3.Name,
-                Repetition = RecurringType.None
-            };
-            CalendarEvent testEventD = new CalendarEvent() {
-                Label = "TestEvent_D",
-                Description = "This is TestEvent_D",
-                StartingTime = DateTime.Today.AddHours(22),
-                EndingTime = DateTime.Today.AddHours(30),
-                Location = new Location() {
-                    Name = "Home"
-                },
-                Category = cat4.Name,
-                Repetition = RecurringType.None
-            };
-            CalendarEvent testEventE = new CalendarEvent() {
-                Label = "TestEvent_E",
-                Description = "This is TestEvent_E",
-                StartingTime = DateTime.Today.AddDays(1).AddHours(9),
-                EndingTime = DateTime.Today.AddDays(1).AddHours(17),
-                Location = new Location() {
-                    Name = "Western University"
-                },
-                Category = cat2.Name,
-                Repetition = RecurringType.None
-            };
-
-            // create references to events in categories
-            cat2.Events.Add(testEventA);
-            cat2.Events.Add(testEventB);
-            cat3.Events.Add(testEventC);
-            cat4.Events.Add(testEventD);
-            cat2.Events.Add(testEventE);
-
-            events = new SortedSet<CalendarEvent>(new SortEventsByDate());
-            events.Add(testEventA);
-            events.Add(testEventB);
-            events.Add(testEventC);
-            events.Add(testEventD);
-            events.Add(testEventE);
-
             categories = new Dictionary<string, CalendarCategory>();
-            categories.Add(cat2.Name, cat2);
-            categories.Add(cat3.Name, cat3);
-            categories.Add(cat4.Name, cat4);
+            List<CalendarCategory> categoriesData = File.ReadAllLines("categoriesData.csv")
+                   .Skip(1)
+                   .Select(x => x.Split(','))
+                   .Select(x => new CalendarCategory
+                   {
+                       Name = x[0],
+                       Symbol = (Shape)Enum.Parse(typeof(Shape), x[1]),
+                       Colour = Color.FromName(x[2])
+                   }).ToList();
+
+            events = new SortedSet<CalendarEvent>(File.ReadAllLines("eventsData.csv")
+                   .Skip(1)
+                   .Select(x => x.Split(','))
+                   .Select(x => new CalendarEvent
+                   {
+                       Label = x[0],
+                       Description = x[1],
+                       StartingTime = DateTime.Parse(x[2]),
+                       EndingTime = DateTime.Parse(x[3]),
+                       Location = new Location()
+                       {
+                           Name = x[4]
+                       },
+                       Category = x[5],
+                       Repetition = (RecurringType)Enum.Parse(typeof(RecurringType), x[6])
+                   }).ToList(), new SortEventsByDate());
+
+            foreach(CalendarCategory cat in categoriesData){
+                cat.Events.AddRange(events.Where(a=>a.Category == cat.Name));
+                categories.Add(cat.Name, cat);
+            }
+
+            #region if not from file, for testing
+
+            //// dummy categories
+            //CalendarCategory cat2 = new CalendarCategory() {
+            //    Name = "Work",
+            //    Symbol = Shape.Triangle,
+            //    Colour = Color.Red
+            //};
+            //CalendarCategory cat3 = new CalendarCategory() {
+            //    Name = "Soccer",
+            //    Symbol = Shape.Circle,
+            //    Colour = Color.Purple
+            //};
+            //CalendarCategory cat4 = new CalendarCategory() {
+            //    Name = "Other",
+            //    Symbol = Shape.Star,
+            //    Colour = Color.Green
+            //};
+
+            //// dummy events
+            //CalendarEvent testEventA = new CalendarEvent() {
+            //    Label = "TestEvent_A",
+            //    Description = "This is TestEvent_A",
+            //    StartingTime = DateTime.Today.AddHours(9),
+            //    EndingTime = DateTime.Today.AddHours(17),
+            //    Location = new Location() {
+            //        Name = "Western University"
+            //    },
+            //    Category = cat2.Name,
+            //    Repetition = RecurringType.None
+            //};
+            //CalendarEvent testEventB = new CalendarEvent() {
+            //    Label = "TestEvent_B",
+            //    Description = "This is TestEvent_B",
+            //    StartingTime = DateTime.Today.AddHours(12),
+            //    EndingTime = DateTime.Today.AddHours(13).AddMinutes(30),
+            //    Location = new Location() {
+            //        Name = "Western University"
+            //    },
+            //    Category = cat2.Name,
+            //    Repetition = RecurringType.None
+            //};
+            //CalendarEvent testEventC = new CalendarEvent() {
+            //    Label = "TestEvent_C",
+            //    Description = "This is TestEvent_C",
+            //    StartingTime = DateTime.Today.AddHours(18),
+            //    EndingTime = DateTime.Today.AddHours(20).AddMinutes(45),
+            //    Location = new Location() {
+            //        Name = "Western University"
+            //    },
+            //    Category = cat3.Name,
+            //    Repetition = RecurringType.None
+            //};
+            //CalendarEvent testEventD = new CalendarEvent() {
+            //    Label = "TestEvent_D",
+            //    Description = "This is TestEvent_D",
+            //    StartingTime = DateTime.Today.AddHours(22),
+            //    EndingTime = DateTime.Today.AddHours(30),
+            //    Location = new Location() {
+            //        Name = "Home"
+            //    },
+            //    Category = cat4.Name,
+            //    Repetition = RecurringType.None
+            //};
+            //CalendarEvent testEventE = new CalendarEvent() {
+            //    Label = "TestEvent_E",
+            //    Description = "This is TestEvent_E",
+            //    StartingTime = DateTime.Today.AddDays(1).AddHours(9),
+            //    EndingTime = DateTime.Today.AddDays(1).AddHours(17),
+            //    Location = new Location() {
+            //        Name = "Western University"
+            //    },
+            //    Category = cat2.Name,
+            //    Repetition = RecurringType.None
+            //};
+
+            //// create references to events in categories
+            //cat2.Events.Add(testEventA);
+            //cat2.Events.Add(testEventB);
+            //cat3.Events.Add(testEventC);
+            //cat4.Events.Add(testEventD);
+            //cat2.Events.Add(testEventE);
+
+            //events = new SortedSet<CalendarEvent>(new SortEventsByDate());
+            //events.Add(testEventA);
+            //events.Add(testEventB);
+            //events.Add(testEventC);
+            //events.Add(testEventD);
+            //events.Add(testEventE);
+
+            //categories = new Dictionary<string, CalendarCategory>();
+            //categories.Add(cat2.Name, cat2);
+            //categories.Add(cat3.Name, cat3);
+            //categories.Add(cat4.Name, cat4);
+
+            #endregion
         }
 
         public void refreshTree(DateTime date)
