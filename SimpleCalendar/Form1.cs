@@ -16,7 +16,6 @@ namespace SimpleCalendar
         /// <summary>
         /// The currently selected date.</summary>
         public DateTime dateSelected = DateTime.Today;
-        //public Dictionary<DateTime, Dictionary<CalendarCategory, List<CalendarEvent>>> eventsCollection = new Dictionary<DateTime, Dictionary<CalendarCategory, List<CalendarEvent>>>();
 
         /// <summary>
         /// All user-created event categories.</summary>
@@ -31,8 +30,16 @@ namespace SimpleCalendar
         private SortedSet<CalendarEvent> todaysEvents;
 
         /// <summary>
+        /// All events which start 24 hours after the currently selected date.</summary>
+        private SortedSet<CalendarEvent> tomorrowsEvents;
+
+        /// <summary>
         /// The current event being modified.</summary>
         private CalendarEvent currentEvent;
+
+        /// <summary>
+        /// The current category being modified.</summary>
+        private CalendarCategory currentCategory;
 
         #region initialization
         /// <summary>
@@ -48,16 +55,6 @@ namespace SimpleCalendar
             // load up saved calendar data from file
             loadEventsFromFile(null, out eventCategories, out allEvents);
 
-            //Initialize for daily view
-            this.dailyCalendar.Visible = true;
-            this.indicatorPanelDayB.Visible = false;
-            this.indicatorPanelDayA.Visible = false;
-            this.dailyCalendar.Dock = DockStyle.Top;
-            this.indicatorPanelDayB .Dock = DockStyle.None;
-            this.indicatorPanelDayA.Dock = DockStyle.None;
-            //this.remainingEventsLabel.Dock = DockStyle.Fill;
-            //this.remainingLabel.Dock = DockStyle.Top;
-            
             // mouse event handlers to make the form draggable
             currentTimeDisplay.MouseDown += TopPanel_MouseDown;
             currentTimeDisplay.MouseMove += TopPanel_MouseMove;
@@ -153,12 +150,8 @@ namespace SimpleCalendar
         /// This function is executed every minute.</summary>
         private void MinuteClock_Tick(object sender, EventArgs e)
         {
-            // update the calendar view
-            SortedSet<CalendarEvent> tomorrowsEvents = allEvents.GetViewBetween(new CalendarEvent() { StartingTime = dateSelected.AddDays(1) }, new CalendarEvent() { StartingTime = dateSelected.AddDays(2) });
-
-            dailyCalendar.ChangeDate(dateSelected, todaysEvents);
-            dailyCalendar2A.ChangeDate(dateSelected, todaysEvents);
-            dailyCalendar2B.ChangeDate(dateSelected.AddDays(1), tomorrowsEvents);
+            // update the current calendar view
+            RefreshCurrentView();
         }
 
         /// <summary>
@@ -193,31 +186,33 @@ namespace SimpleCalendar
         /// Changes the calendar view to a daily view.</summary>
         private void DayViewButton_Click(object sender, EventArgs e)
         {
-            this.dailyCalendar.Visible = true;
-            this.indicatorPanelDayB.Visible = false;
-            this.indicatorPanelDayA.Visible = false;
-            this.dailyCalendar.Dock = DockStyle.Top;
-            this.indicatorPanelDayB.Dock = DockStyle.None;
-            this.indicatorPanelDayA.Dock = DockStyle.None;
+            dayViewPanel.Visible = true;
+            twoDayViewPanel.Visible = false;
+            monthViewPanel.Visible = false;
+
+            RefreshCurrentView();
         }
 
         /// <summary>
         /// Changes the calendar view to a two-day view.</summary>
         private void TwoDayViewButton_Click(object sender, EventArgs e)
         {
-            this.dailyCalendar.Visible = false;
-            this.indicatorPanelDayB.Visible = true;
-            this.indicatorPanelDayA.Visible = true;
-            this.dailyCalendar.Dock = DockStyle.None;
-            this.indicatorPanelDayB.Dock = DockStyle.Top;
-            this.indicatorPanelDayA.Dock = DockStyle.Top;
+            dayViewPanel.Visible = false;
+            twoDayViewPanel.Visible = true;
+            monthViewPanel.Visible = false;
+
+            RefreshCurrentView();
         }
 
         /// <summary>
         /// Changes the calendar view to a monthly view.</summary>
         private void MonthViewButton_Click(object sender, EventArgs e)
         {
+            dayViewPanel.Visible = false;
+            twoDayViewPanel.Visible = false;
+            monthViewPanel.Visible = true;
 
+            RefreshCurrentView();
         }
 
         /// <summary>
@@ -312,8 +307,13 @@ namespace SimpleCalendar
         /// Cancels the modification of an event.</summary>
         private void CreateCategoryButton_Click(object sender, EventArgs e)
         {
+            currentCategory = null;
+
             // ensure previous inputs are cleared
             ClearCategoryModify();
+
+            // set title of panel
+            categoryModifyLabel.Text = "Create Category";
 
             // switch view back to events list
             categoryModifyPanel.Visible = true;
@@ -337,6 +337,45 @@ namespace SimpleCalendar
         {
             // check for valid input
             if (ValidateCategoryModify()) {
+                if (currentCategory == null) {
+                    // TODO: create a new category
+                    CalendarCategory cat = new CalendarCategory() {
+                        Name = nameField.Text,
+                        Symbol = (Shape) Enum.Parse(typeof(Shape), symbolDropDown.SelectedItem.ToString()),
+                        Colour = Color.FromName(colorDropDown.SelectedItem.ToString())
+                    };
+                    eventCategories.Add(cat.Name, cat);
+                } else {
+                    // check if it's only a change in symbol of colour
+                    CalendarCategory cat;
+                    if (eventCategories.TryGetValue(nameField.Text, out cat)) {
+                        // simply update the symbol and colour
+                        cat.Symbol = (Shape) Enum.Parse(typeof(Shape), symbolDropDown.SelectedItem.ToString());
+                        cat.Colour = Color.FromName(colorDropDown.SelectedItem.ToString());
+                    } else {
+                        // otherwise, 
+                        if (eventCategories.TryGetValue(currentCategory.Name, out cat)) {
+                            // set all event under the old category to use its new name
+                            foreach (CalendarEvent ev in cat.Events) {
+                                ev.Category = nameField.Text;
+                            }
+
+                            // remove the  category from the dictionary
+                            eventCategories.Remove(currentCategory.Name);
+
+                            // add back the category under its new name
+                            eventCategories.Add(nameField.Text, new CalendarCategory() {
+                                Name = nameField.Text,
+                                Symbol = (Shape) Enum.Parse(typeof(Shape), symbolDropDown.SelectedItem.ToString()),
+                                Colour = Color.FromName(colorDropDown.SelectedItem.ToString())
+                            });
+                        }
+                    }
+                }
+
+                // refresh the calendar
+                RefreshCalendar();
+
                 // switch view back to events list
                 eventsDisplayPanel.Visible = true;
                 eventModifyPanel.Visible = false;
@@ -420,9 +459,23 @@ namespace SimpleCalendar
         {
             // get the selected category
             TreeNode parentNode = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeView).SelectedNode;
-            CalendarCategory selectedEvent = parentNode.Tag as CalendarCategory;
+            currentCategory = parentNode.Tag as CalendarCategory;
 
-            // TODO: Edit Category
+            // ensure previous inputs are cleared
+            ClearCategoryModify();
+
+            // set title of panel
+            categoryModifyLabel.Text = "Modify Category";
+
+            // fill in event details in controls
+            nameField.Text = currentCategory.Name;
+            symbolDropDown.SelectedIndex = symbolDropDown.FindStringExact(currentCategory.Symbol.ToString());
+            colorDropDown.SelectedIndex = colorDropDown.FindStringExact(currentCategory.Colour.ToKnownColor().ToString());
+
+            // switch view to category modification
+            categoryModifyPanel.Visible = true;
+            eventsDisplayPanel.Visible = false;
+            eventModifyPanel.Visible = false;
         }
 
         /// <summary>
@@ -431,7 +484,7 @@ namespace SimpleCalendar
         {
             // get the selected category
             TreeNode parentNode = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeView).SelectedNode;
-            CalendarCategory selectedEvent = parentNode.Tag as CalendarCategory;
+            currentCategory = parentNode.Tag as CalendarCategory;
 
             // TODO: Delete Category
         }
@@ -442,17 +495,33 @@ namespace SimpleCalendar
         /// Refreshes the calendar view and the events list.</summary>
         private void RefreshCalendar()
         {
-            // today's event include all events from 12 AM of today's date to 12 AM of tomorrow's date
-            todaysEvents = allEvents.GetViewBetween(new CalendarEvent() { StartingTime = dateSelected }, new CalendarEvent() { StartingTime = dateSelected.AddDays(1) });
-            SortedSet<CalendarEvent> tomorrowsEvents = allEvents.GetViewBetween(new CalendarEvent() { StartingTime = dateSelected.AddDays(1) }, new CalendarEvent() { StartingTime = dateSelected.AddDays(2) });
+            // determine today's and tomorrow's events
+            todaysEvents = allEvents.GetViewBetween(new CalendarEvent() { StartingTime = dateSelected },
+                new CalendarEvent() { StartingTime = dateSelected.AddDays(1) });
+            tomorrowsEvents = allEvents.GetViewBetween(new CalendarEvent() { StartingTime = dateSelected.AddDays(1) },
+                new CalendarEvent() { StartingTime = dateSelected.AddDays(2) });
 
             // refresh the events list
             refreshTree(dateSelected);
 
-            // refresh the calendar view
-            dailyCalendar.ChangeDate(dateSelected, todaysEvents);
-            dailyCalendar2A.ChangeDate(dateSelected, todaysEvents);
-            dailyCalendar2B.ChangeDate(dateSelected.AddDays(1), tomorrowsEvents);
+            // refresh the current calendar view
+            RefreshCurrentView();
+        }
+
+        /// <summary>
+        /// Refreshes the calendar which is currently visible on the form.</summary>
+        private void RefreshCurrentView()
+        {
+            if (twoDayViewPanel.Visible) {
+                // update the two-day view calendar
+                todayCalendar.ChangeDate(dateSelected, todaysEvents);
+                tomorrowCalendar.ChangeDate(dateSelected.AddDays(1), tomorrowsEvents);
+            } else if (monthViewPanel.Visible) {
+                // TODO: update monthly calendar
+            } else {
+                // refresh daily view
+                dailyCalendar.ChangeDate(dateSelected, todaysEvents);
+            }
         }
 
         /// <summary>
@@ -468,32 +537,29 @@ namespace SimpleCalendar
             List<CalendarCategory> categoriesData = File.ReadAllLines("categoriesData.csv")
                    .Skip(1)
                    .Select(x => x.Split(','))
-                   .Select(x => new CalendarCategory
-                   {
+                   .Select(x => new CalendarCategory {
                        Name = x[0],
-                       Symbol = (Shape)Enum.Parse(typeof(Shape), x[1]),
+                       Symbol = (Shape) Enum.Parse(typeof(Shape), x[1]),
                        Colour = Color.FromName(x[2])
                    }).ToList();
 
             events = new SortedSet<CalendarEvent>(File.ReadAllLines("eventsData.csv")
                    .Skip(1)
                    .Select(x => x.Split(','))
-                   .Select(x => new CalendarEvent
-                   {
+                   .Select(x => new CalendarEvent {
                        Label = x[0],
                        Description = x[1],
                        StartingTime = DateTime.Parse(x[2]),
                        EndingTime = DateTime.Parse(x[3]),
-                       Location = new Location()
-                       {
+                       Location = new Location() {
                            Name = x[4]
                        },
                        Category = x[5],
-                       Repetition = (RecurringType)Enum.Parse(typeof(RecurringType), x[6])
+                       Repetition = (RecurringType) Enum.Parse(typeof(RecurringType), x[6])
                    }).ToList(), new SortEventsByDate());
 
-            foreach(CalendarCategory cat in categoriesData){
-                cat.Events.AddRange(events.Where(a=>a.Category == cat.Name));
+            foreach (CalendarCategory cat in categoriesData) {
+                cat.Events.AddRange(events.Where(a => a.Category == cat.Name));
                 categories.Add(cat.Name, cat);
             }
 
@@ -676,31 +742,6 @@ namespace SimpleCalendar
                 // add category node to tree view
                 eventsTreeView.Nodes.Add(node);
             }
-
-            //Initialize the tree's primary nodes
-            /*foreach (CalendarCategory cat in todaysEvents.Keys) {
-                TreeNode node = new TreeNode(cat.Name + "                            ");
-                if (cat.Symbol == Shape.Circle && cat.Colour == Color.Purple) node.ImageKey = node.SelectedImageKey = "purCirc.png";
-                else if (cat.Symbol == Shape.Star && cat.Colour == Color.Green) node.ImageKey = node.SelectedImageKey = "grStar.png";
-                else if (cat.Symbol == Shape.Square && cat.Colour == Color.Blue) node.ImageKey = node.SelectedImageKey = "bluSq.png";
-                else if (cat.Symbol == Shape.Triangle && cat.Colour == Color.Red) node.ImageKey = node.SelectedImageKey = "redTri.png";
-
-                node.ForeColor = Color.White;
-                node.NodeFont = new Font(new FontFamily("Tw Cen MT"), 14.25f, FontStyle.Regular);
-
-                List<CalendarEvent> orderedEvents = todaysEvents[cat].OrderBy(a => a.StartingTime).ToList();
-                foreach (CalendarEvent ev in todaysEvents[cat]) {
-                    allEventsToday.Add(ev);
-                    TreeNode child = new TreeNode(ev.StartingTime.ToString("MMM dd (h:mmtt) - ") + ev.Label + "                            ");
-                    child.ImageKey = child.SelectedImageKey = "whtDot.png";
-                    child.ForeColor = Color.White;
-                    child.NodeFont = new Font(new FontFamily("Tw Cen MT Condensed"), 11.25f, FontStyle.Bold);
-
-                    node.Nodes.Add(child);
-                }
-
-                this.eventsTreeView.Nodes.Add(node);
-            }*/
         }
 
         /// <summary>
@@ -718,7 +759,7 @@ namespace SimpleCalendar
             endingDate.Value = DateTime.Now;
             endingTime.Value = DateTime.Now;
 
-            // reset category drop downs
+            // reset category drop down
             categoryDropDown.BeginUpdate();
             categoryDropDown.Items.Clear();
             categoryDropDown.Items.Add("Uncategorized");
@@ -737,7 +778,7 @@ namespace SimpleCalendar
             bool isValidEvent = true;
             List<string> errors = new List<string>();
 
-            // check that the label field in not empty
+            // check that the label field is not empty
             if (string.IsNullOrWhiteSpace(labelField.Text)) {
                 errors.Add("Error: Event label cannot be empty");
                 isValidEvent = false;
@@ -769,17 +810,33 @@ namespace SimpleCalendar
             return isValidEvent;
         }
 
+        /// <summary>
+        /// Clears the category modification panel of all input.</summary>
         private void ClearCategoryModify()
         {
+            // reset text box
+            nameField.Text = string.Empty;
+
+            // reset symbol dropdown
             symbolDropDown.BeginUpdate();
             symbolDropDown.Items.Clear();
-
-            symbolDropDown.Items.Add("Blue");
-            symbolDropDown.Items.Add("Green");
-            symbolDropDown.Items.Add("Purple");
-            symbolDropDown.Items.Add("Red");
-
+            symbolDropDown.Items.Add("Circle");
+            symbolDropDown.Items.Add("Star");
+            symbolDropDown.Items.Add("Square");
+            symbolDropDown.Items.Add("Triangle");
             symbolDropDown.EndUpdate();
+
+            // reset color dropdown
+            colorDropDown.BeginUpdate();
+            colorDropDown.Items.Clear();
+            colorDropDown.Items.Add("Blue");
+            colorDropDown.Items.Add("Green");
+            colorDropDown.Items.Add("Purple");
+            colorDropDown.Items.Add("Red");
+            colorDropDown.EndUpdate();
+
+            // reset errors field
+            categoryErrors.Clear();
         }
 
         /// <summary>
@@ -787,7 +844,67 @@ namespace SimpleCalendar
         /// <returns>True if the category is valid, false otherwise.</returns>
         private bool ValidateCategoryModify()
         {
-            return true;
+            bool isValidCategory = true;
+            List<string> errors = new List<string>();
+
+            // check that the name field is not empty
+            if (string.IsNullOrWhiteSpace(nameField.Text)) {
+                errors.Add("Error: Event label cannot be empty");
+                isValidCategory = false;
+            } else {
+                // check if the name of the category already exists
+                if (nameField.Text == "All" ||
+                    (currentCategory == null && eventCategories.ContainsKey(nameField.Text)) ||
+                    (currentCategory != null && eventCategories.ContainsKey(nameField.Text) && nameField.Text != currentCategory.Name)) {
+                    errors.Add("Error: Category name already in use");
+                    isValidCategory = false;
+                }
+            }
+
+            // check that a symbol for the category has been selected
+            if (string.IsNullOrWhiteSpace(symbolDropDown.Text)) {
+                errors.Add("Error: Category must be assigned a symbol");
+                isValidCategory = false;
+            }
+
+            // check that a colour for the category has been selected
+            if (string.IsNullOrWhiteSpace(colorDropDown.Text)) {
+                errors.Add("Error: Category must be assigned a colour");
+                isValidCategory = false;
+            }
+
+            // check that the symbol-colour combination is not already in use
+            if (!string.IsNullOrWhiteSpace(symbolDropDown.Text) && !string.IsNullOrWhiteSpace(colorDropDown.Text)) {
+                if (symbolDropDown.Text == "Square" && colorDropDown.Text == "Blue") {
+                    // blue square reserved for "All" category
+                    errors.Add("Error: Symbol-colour combination is already in use");
+                    isValidCategory = false;
+                } else {
+                    if (currentCategory == null ||
+                        (currentCategory.Symbol.ToString() != symbolDropDown.Text && currentCategory.Colour.ToKnownColor().ToString() != colorDropDown.Text)) {
+                        // check every category for a match in symbol-colour combination
+                        foreach (CalendarCategory cat in eventCategories.Values) {
+                            if (cat.Symbol.ToString() == symbolDropDown.Text && cat.Colour.ToKnownColor().ToString() == colorDropDown.Text) {
+                                errors.Add("Error: Symbol-colour combination is already in use");
+                                isValidCategory = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // write errors to output
+            categoryErrors.Clear();
+            if (errors.Count >= 0) {
+                categoryErrors.Text += "Please resolve the following errors:";
+
+                foreach (string err in errors) {
+                    categoryErrors.Text += "\r\n  " + err;
+                }
+            }
+
+            return isValidCategory;
         }
         #endregion
     }
