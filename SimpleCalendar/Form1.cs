@@ -23,15 +23,15 @@ namespace SimpleCalendar
 
         /// <summary>
         /// All user-created events.</summary>
-        private SortedSet<CalendarEvent> allEvents;
+        private List<CalendarEvent> allEvents;
 
         /// <summary>
         /// All events which start on the currently selected date.</summary>
-        private SortedSet<CalendarEvent> todaysEvents;
+        private List<CalendarEvent> todaysEvents;
 
         /// <summary>
         /// All events which start 24 hours after the currently selected date.</summary>
-        private SortedSet<CalendarEvent> tomorrowsEvents;
+        private List<CalendarEvent> tomorrowsEvents;
 
         /// <summary>
         /// The current event being modified.</summary>
@@ -496,10 +496,17 @@ namespace SimpleCalendar
         private void RefreshCalendar()
         {
             // determine today's and tomorrow's events
-            todaysEvents = allEvents.GetViewBetween(new CalendarEvent() { StartingTime = dateSelected },
-                new CalendarEvent() { StartingTime = dateSelected.AddDays(1) });
-            tomorrowsEvents = allEvents.GetViewBetween(new CalendarEvent() { StartingTime = dateSelected.AddDays(1) },
-                new CalendarEvent() { StartingTime = dateSelected.AddDays(2) });
+            DateTime x = dateSelected;
+            DateTime y = x.AddDays(1);
+            DateTime z = y.AddDays(1);
+            todaysEvents = allEvents.Where((ev) =>
+                (x <= ev.StartingTime && ev.StartingTime <= y) || (x <= ev.EndingTime && ev.EndingTime <= y) || (x >= ev.StartingTime && y <= ev.EndingTime)
+            ).ToList();
+            tomorrowsEvents = allEvents.Where((ev) =>
+                (y <= ev.StartingTime && ev.StartingTime <= z) || (y <= ev.EndingTime && ev.EndingTime <= z) || (y >= ev.StartingTime && z <= ev.EndingTime)
+            ).ToList();
+            todaysEvents.Sort(new SortEventsByDate());
+            tomorrowsEvents.Sort(new SortEventsByDate());
 
             // refresh the events list
             refreshTree(dateSelected);
@@ -514,7 +521,9 @@ namespace SimpleCalendar
         {
             if (twoDayViewPanel.Visible) {
                 // update the two-day view calendar
+                todayLabel.Text = dateSelected.DayOfWeek.ToString() + "\r\n" + dateSelected.ToLongDateString();
                 todayCalendar.ChangeDate(dateSelected, todaysEvents);
+                tomorrowLabel.Text = dateSelected.AddDays(1).DayOfWeek.ToString() + "\r\n" + dateSelected.AddDays(1).ToLongDateString();
                 tomorrowCalendar.ChangeDate(dateSelected.AddDays(1), tomorrowsEvents);
             } else if (monthViewPanel.Visible) {
                 // TODO: update monthly calendar
@@ -531,7 +540,7 @@ namespace SimpleCalendar
             currentTimeDisplay.Text = DateTime.Now.ToString("h:mm tt", CultureInfo.InvariantCulture);
         }
 
-        private void loadEventsFromFile(string filename, out Dictionary<string, CalendarCategory> categories, out SortedSet<CalendarEvent> events)
+        private void loadEventsFromFile(string filename, out Dictionary<string, CalendarCategory> categories, out List<CalendarEvent> events)
         {
             categories = new Dictionary<string, CalendarCategory>();
             List<CalendarCategory> categoriesData = File.ReadAllLines("categoriesData.csv")
@@ -543,7 +552,7 @@ namespace SimpleCalendar
                        Colour = Color.FromName(x[2])
                    }).ToList();
 
-            events = new SortedSet<CalendarEvent>(File.ReadAllLines("eventsData.csv")
+            events = new List<CalendarEvent>(File.ReadAllLines("eventsData.csv")
                    .Skip(1)
                    .Select(x => x.Split(','))
                    .Select(x => new CalendarEvent {
@@ -556,109 +565,12 @@ namespace SimpleCalendar
                        },
                        Category = x[5],
                        Repetition = (RecurringType) Enum.Parse(typeof(RecurringType), x[6])
-                   }).ToList(), new SortEventsByDate());
+                   }).ToList());
 
             foreach (CalendarCategory cat in categoriesData) {
                 cat.Events.AddRange(events.Where(a => a.Category == cat.Name));
                 categories.Add(cat.Name, cat);
             }
-
-            #region if not from file, for testing
-
-            //// dummy categories
-            //CalendarCategory cat2 = new CalendarCategory() {
-            //    Name = "Work",
-            //    Symbol = Shape.Triangle,
-            //    Colour = Color.Red
-            //};
-            //CalendarCategory cat3 = new CalendarCategory() {
-            //    Name = "Soccer",
-            //    Symbol = Shape.Circle,
-            //    Colour = Color.Purple
-            //};
-            //CalendarCategory cat4 = new CalendarCategory() {
-            //    Name = "Other",
-            //    Symbol = Shape.Star,
-            //    Colour = Color.Green
-            //};
-
-            //// dummy events
-            //CalendarEvent testEventA = new CalendarEvent() {
-            //    Label = "TestEvent_A",
-            //    Description = "This is TestEvent_A",
-            //    StartingTime = DateTime.Today.AddHours(9),
-            //    EndingTime = DateTime.Today.AddHours(17),
-            //    Location = new Location() {
-            //        Name = "Western University"
-            //    },
-            //    Category = cat2.Name,
-            //    Repetition = RecurringType.None
-            //};
-            //CalendarEvent testEventB = new CalendarEvent() {
-            //    Label = "TestEvent_B",
-            //    Description = "This is TestEvent_B",
-            //    StartingTime = DateTime.Today.AddHours(12),
-            //    EndingTime = DateTime.Today.AddHours(13).AddMinutes(30),
-            //    Location = new Location() {
-            //        Name = "Western University"
-            //    },
-            //    Category = cat2.Name,
-            //    Repetition = RecurringType.None
-            //};
-            //CalendarEvent testEventC = new CalendarEvent() {
-            //    Label = "TestEvent_C",
-            //    Description = "This is TestEvent_C",
-            //    StartingTime = DateTime.Today.AddHours(18),
-            //    EndingTime = DateTime.Today.AddHours(20).AddMinutes(45),
-            //    Location = new Location() {
-            //        Name = "Western University"
-            //    },
-            //    Category = cat3.Name,
-            //    Repetition = RecurringType.None
-            //};
-            //CalendarEvent testEventD = new CalendarEvent() {
-            //    Label = "TestEvent_D",
-            //    Description = "This is TestEvent_D",
-            //    StartingTime = DateTime.Today.AddHours(22),
-            //    EndingTime = DateTime.Today.AddHours(30),
-            //    Location = new Location() {
-            //        Name = "Home"
-            //    },
-            //    Category = cat4.Name,
-            //    Repetition = RecurringType.None
-            //};
-            //CalendarEvent testEventE = new CalendarEvent() {
-            //    Label = "TestEvent_E",
-            //    Description = "This is TestEvent_E",
-            //    StartingTime = DateTime.Today.AddDays(1).AddHours(9),
-            //    EndingTime = DateTime.Today.AddDays(1).AddHours(17),
-            //    Location = new Location() {
-            //        Name = "Western University"
-            //    },
-            //    Category = cat2.Name,
-            //    Repetition = RecurringType.None
-            //};
-
-            //// create references to events in categories
-            //cat2.Events.Add(testEventA);
-            //cat2.Events.Add(testEventB);
-            //cat3.Events.Add(testEventC);
-            //cat4.Events.Add(testEventD);
-            //cat2.Events.Add(testEventE);
-
-            //events = new SortedSet<CalendarEvent>(new SortEventsByDate());
-            //events.Add(testEventA);
-            //events.Add(testEventB);
-            //events.Add(testEventC);
-            //events.Add(testEventD);
-            //events.Add(testEventE);
-
-            //categories = new Dictionary<string, CalendarCategory>();
-            //categories.Add(cat2.Name, cat2);
-            //categories.Add(cat3.Name, cat3);
-            //categories.Add(cat4.Name, cat4);
-
-            #endregion
         }
 
         public void refreshTree(DateTime date)

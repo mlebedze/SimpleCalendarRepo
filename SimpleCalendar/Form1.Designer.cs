@@ -74,7 +74,6 @@
             this.saveEventModifyButton = new System.Windows.Forms.Button();
             this.cancelEventModifyButton = new System.Windows.Forms.Button();
             this.dayViewPanel = new System.Windows.Forms.Panel();
-            this.dailyCalendar = new SimpleCalendar.DailyCalendar();
             this.spacerDayCalendarRemaining = new System.Windows.Forms.Label();
             this.dayRemainingLabel = new System.Windows.Forms.Label();
             this.dayRemainingEventsLabel = new System.Windows.Forms.Label();
@@ -82,10 +81,8 @@
             this.twoDayViewPanel = new System.Windows.Forms.Panel();
             this.tomorrowViewPanel = new System.Windows.Forms.Panel();
             this.tomorrowLabel = new System.Windows.Forms.Label();
-            this.tomorrowCalendar = new SimpleCalendar.DailyCalendar();
             this.todayViewPanel = new System.Windows.Forms.Panel();
             this.todayLabel = new System.Windows.Forms.Label();
-            this.todayCalendar = new SimpleCalendar.DailyCalendar();
             this.spacerTwoDayCalendarRemaining = new System.Windows.Forms.Label();
             this.twoDayRemainingLabel = new System.Windows.Forms.Label();
             this.twoDayRemainingEventsLabel = new System.Windows.Forms.Label();
@@ -115,6 +112,9 @@
             this.deleteEventToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.secondClock = new System.Windows.Forms.Timer(this.components);
             this.minuteClock = new System.Windows.Forms.Timer(this.components);
+            this.tomorrowCalendar = new SimpleCalendar.DailyCalendar();
+            this.todayCalendar = new SimpleCalendar.DailyCalendar();
+            this.dailyCalendar = new SimpleCalendar.DailyCalendar();
             this.mainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -160,15 +160,15 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.categoryModifyPanel);
             this.splitContainer1.Panel1.Controls.Add(this.eventsDisplayPanel);
             this.splitContainer1.Panel1.Controls.Add(this.eventModifyPanel);
+            this.splitContainer1.Panel1.Controls.Add(this.categoryModifyPanel);
             this.splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(10);
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.dayViewPanel);
             this.splitContainer1.Panel2.Controls.Add(this.twoDayViewPanel);
+            this.splitContainer1.Panel2.Controls.Add(this.dayViewPanel);
             this.splitContainer1.Panel2.Controls.Add(this.monthViewPanel);
             this.splitContainer1.Panel2.Controls.Add(this.viewSelectionPanel);
             this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(10);
@@ -728,16 +728,6 @@
             this.dayViewPanel.Size = new System.Drawing.Size(608, 458);
             this.dayViewPanel.TabIndex = 23;
             // 
-            // dailyCalendar
-            // 
-            this.dailyCalendar.BackColor = System.Drawing.Color.White;
-            this.dailyCalendar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.dailyCalendar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dailyCalendar.Location = new System.Drawing.Point(0, 0);
-            this.dailyCalendar.Name = "dailyCalendar";
-            this.dailyCalendar.Size = new System.Drawing.Size(608, 270);
-            this.dailyCalendar.TabIndex = 21;
-            // 
             // spacerDayCalendarRemaining
             // 
             this.spacerDayCalendarRemaining.BackColor = System.Drawing.Color.Transparent;
@@ -808,25 +798,14 @@
             // tomorrowLabel
             // 
             this.tomorrowLabel.BackColor = System.Drawing.Color.Transparent;
-            this.tomorrowLabel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.tomorrowLabel.Dock = System.Windows.Forms.DockStyle.Right;
             this.tomorrowLabel.Font = new System.Drawing.Font("Tw Cen MT", 12F);
             this.tomorrowLabel.ForeColor = System.Drawing.Color.White;
             this.tomorrowLabel.Location = new System.Drawing.Point(0, 0);
             this.tomorrowLabel.Name = "tomorrowLabel";
-            this.tomorrowLabel.Size = new System.Drawing.Size(74, 135);
+            this.tomorrowLabel.Size = new System.Drawing.Size(158, 135);
             this.tomorrowLabel.TabIndex = 25;
-            this.tomorrowLabel.Text = "Tomorrow";
-            this.tomorrowLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tomorrowCalendar
-            // 
-            this.tomorrowCalendar.BackColor = System.Drawing.Color.White;
-            this.tomorrowCalendar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tomorrowCalendar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.tomorrowCalendar.Location = new System.Drawing.Point(86, 0);
-            this.tomorrowCalendar.Name = "tomorrowCalendar";
-            this.tomorrowCalendar.Size = new System.Drawing.Size(522, 135);
-            this.tomorrowCalendar.TabIndex = 24;
+            this.tomorrowLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // todayViewPanel
             // 
@@ -841,25 +820,14 @@
             // todayLabel
             // 
             this.todayLabel.BackColor = System.Drawing.Color.Transparent;
-            this.todayLabel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.todayLabel.Dock = System.Windows.Forms.DockStyle.Right;
             this.todayLabel.Font = new System.Drawing.Font("Tw Cen MT", 12F);
             this.todayLabel.ForeColor = System.Drawing.Color.White;
             this.todayLabel.Location = new System.Drawing.Point(0, 0);
             this.todayLabel.Name = "todayLabel";
-            this.todayLabel.Size = new System.Drawing.Size(74, 135);
+            this.todayLabel.Size = new System.Drawing.Size(158, 135);
             this.todayLabel.TabIndex = 26;
-            this.todayLabel.Text = "Today";
-            this.todayLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // todayCalendar
-            // 
-            this.todayCalendar.BackColor = System.Drawing.Color.White;
-            this.todayCalendar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.todayCalendar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.todayCalendar.Location = new System.Drawing.Point(86, 0);
-            this.todayCalendar.Name = "todayCalendar";
-            this.todayCalendar.Size = new System.Drawing.Size(522, 135);
-            this.todayCalendar.TabIndex = 25;
+            this.todayLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // spacerTwoDayCalendarRemaining
             // 
@@ -1152,6 +1120,36 @@
             // 
             this.minuteClock.Enabled = true;
             this.minuteClock.Interval = 60000;
+            // 
+            // tomorrowCalendar
+            // 
+            this.tomorrowCalendar.BackColor = System.Drawing.Color.White;
+            this.tomorrowCalendar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tomorrowCalendar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.tomorrowCalendar.Location = new System.Drawing.Point(158, 0);
+            this.tomorrowCalendar.Name = "tomorrowCalendar";
+            this.tomorrowCalendar.Size = new System.Drawing.Size(450, 135);
+            this.tomorrowCalendar.TabIndex = 24;
+            // 
+            // todayCalendar
+            // 
+            this.todayCalendar.BackColor = System.Drawing.Color.White;
+            this.todayCalendar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.todayCalendar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.todayCalendar.Location = new System.Drawing.Point(158, 0);
+            this.todayCalendar.Name = "todayCalendar";
+            this.todayCalendar.Size = new System.Drawing.Size(450, 135);
+            this.todayCalendar.TabIndex = 25;
+            // 
+            // dailyCalendar
+            // 
+            this.dailyCalendar.BackColor = System.Drawing.Color.White;
+            this.dailyCalendar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dailyCalendar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dailyCalendar.Location = new System.Drawing.Point(0, 0);
+            this.dailyCalendar.Name = "dailyCalendar";
+            this.dailyCalendar.Size = new System.Drawing.Size(608, 270);
+            this.dailyCalendar.TabIndex = 21;
             // 
             // Form1
             // 

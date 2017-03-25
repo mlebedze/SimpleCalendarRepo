@@ -15,7 +15,7 @@ namespace SimpleCalendar
 
         /// <summary>
         /// The events which are currently represented on the calendar.</summary>
-        private SortedSet<CalendarEvent> currentEvents;
+        private List<CalendarEvent> currentEvents;
 
         /// <summary>
         /// The set of pens to use when drawing events.</summary>
@@ -34,7 +34,7 @@ namespace SimpleCalendar
         public DailyCalendar()
         {
             currentDate = DateTime.Today;
-            currentEvents = new SortedSet<CalendarEvent>();
+            currentEvents = new List<CalendarEvent>();
 
             InitializeComponent();
         }
@@ -43,7 +43,7 @@ namespace SimpleCalendar
         /// Changes the represented date on the calendar.</summary>
         /// <param name="newDate">The new date to represent.</param>
         /// <param name="events">The new events to represent.</param>
-        public void ChangeDate(DateTime newDate, SortedSet<CalendarEvent> events)
+        public void ChangeDate(DateTime newDate, List<CalendarEvent> events)
         {
             // change the current represented date
             currentDate = newDate;
