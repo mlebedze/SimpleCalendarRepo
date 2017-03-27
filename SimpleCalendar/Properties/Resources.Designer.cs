@@ -59,5 +59,25 @@ namespace SimpleCalendar.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Tw_Cen_MT_condensed_bold_RESOURCE {
+            get {
+                object obj = ResourceManager.GetObject("Tw_Cen_MT_condensed_bold_RESOURCE", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Tw_Cen_MT_RESOURCE {
+            get {
+                object obj = ResourceManager.GetObject("Tw_Cen_MT_RESOURCE", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

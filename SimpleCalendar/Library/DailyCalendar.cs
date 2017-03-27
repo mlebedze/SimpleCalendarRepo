@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Windows.Forms;
 
 namespace SimpleCalendar
@@ -16,6 +17,8 @@ namespace SimpleCalendar
         /// <summary>
         /// The events which are currently represented on the calendar.</summary>
         private List<CalendarEvent> currentEvents;
+
+        private PrivateFontCollection pfc;
 
         /// <summary>
         /// The set of pens to use when drawing events.</summary>
@@ -33,6 +36,8 @@ namespace SimpleCalendar
         /// Creates the <c>DailyCalendar</c> control.</summary>
         public DailyCalendar()
         {
+            pfc = new PrivateFontCollection();
+            pfc.AddFontFile("Tw Cen MT RESOURCE.ttf");
             currentDate = DateTime.Today;
             currentEvents = new List<CalendarEvent>();
 
@@ -75,7 +80,7 @@ namespace SimpleCalendar
         {
             // define grid style
             Color gridColour = Color.FromArgb(255, 52, 73, 94);
-            Font gridFont = new Font("Tw Cen MT", 9, FontStyle.Italic);
+            Font gridFont = new Font(pfc.Families[0], 9, FontStyle.Italic);
 
             // create drawing tools
             Pen pen = new Pen(gridColour, 2F);

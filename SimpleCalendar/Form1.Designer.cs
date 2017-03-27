@@ -32,19 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.mainPanel = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.categoryModifyPanel = new System.Windows.Forms.Panel();
-            this.categoryModifyBody = new System.Windows.Forms.TableLayoutPanel();
-            this.nameLabel = new System.Windows.Forms.Label();
-            this.nameField = new System.Windows.Forms.TextBox();
-            this.symbolLabel = new System.Windows.Forms.Label();
-            this.symbolDropDown = new System.Windows.Forms.ComboBox();
-            this.colorLabel = new System.Windows.Forms.Label();
-            this.colorDropDown = new System.Windows.Forms.ComboBox();
-            this.categoryErrors = new System.Windows.Forms.TextBox();
-            this.categoryModifyLabel = new System.Windows.Forms.Label();
-            this.categoryModifyButtonsPanel = new System.Windows.Forms.Panel();
-            this.saveCategoryModifyButton = new System.Windows.Forms.Button();
-            this.cancelCategoryModifyButton = new System.Windows.Forms.Button();
             this.eventsDisplayPanel = new System.Windows.Forms.Panel();
             this.eventsTreeView = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
@@ -73,20 +60,36 @@
             this.eventModifyButtonsPanel = new System.Windows.Forms.Panel();
             this.saveEventModifyButton = new System.Windows.Forms.Button();
             this.cancelEventModifyButton = new System.Windows.Forms.Button();
-            this.dayViewPanel = new System.Windows.Forms.Panel();
-            this.spacerDayCalendarRemaining = new System.Windows.Forms.Label();
-            this.dayRemainingLabel = new System.Windows.Forms.Label();
-            this.dayRemainingEventsLabel = new System.Windows.Forms.Label();
-            this.spacerDayEventsPanel = new System.Windows.Forms.Label();
+            this.categoryModifyPanel = new System.Windows.Forms.Panel();
+            this.categoryModifyBody = new System.Windows.Forms.TableLayoutPanel();
+            this.nameLabel = new System.Windows.Forms.Label();
+            this.nameField = new System.Windows.Forms.TextBox();
+            this.symbolLabel = new System.Windows.Forms.Label();
+            this.symbolDropDown = new System.Windows.Forms.ComboBox();
+            this.colorLabel = new System.Windows.Forms.Label();
+            this.colorDropDown = new System.Windows.Forms.ComboBox();
+            this.categoryErrors = new System.Windows.Forms.TextBox();
+            this.categoryModifyLabel = new System.Windows.Forms.Label();
+            this.categoryModifyButtonsPanel = new System.Windows.Forms.Panel();
+            this.saveCategoryModifyButton = new System.Windows.Forms.Button();
+            this.cancelCategoryModifyButton = new System.Windows.Forms.Button();
             this.twoDayViewPanel = new System.Windows.Forms.Panel();
             this.tomorrowViewPanel = new System.Windows.Forms.Panel();
             this.tomorrowLabel = new System.Windows.Forms.Label();
+            this.tomorrowCalendar = new SimpleCalendar.DailyCalendar();
             this.todayViewPanel = new System.Windows.Forms.Panel();
             this.todayLabel = new System.Windows.Forms.Label();
+            this.todayCalendar = new SimpleCalendar.DailyCalendar();
             this.spacerTwoDayCalendarRemaining = new System.Windows.Forms.Label();
             this.twoDayRemainingLabel = new System.Windows.Forms.Label();
             this.twoDayRemainingEventsLabel = new System.Windows.Forms.Label();
             this.spacerTwoDayEventsPanel = new System.Windows.Forms.Label();
+            this.dayViewPanel = new System.Windows.Forms.Panel();
+            this.dailyCalendar = new SimpleCalendar.DailyCalendar();
+            this.spacerDayCalendarRemaining = new System.Windows.Forms.Label();
+            this.dayRemainingLabel = new System.Windows.Forms.Label();
+            this.dayRemainingEventsLabel = new System.Windows.Forms.Label();
+            this.spacerDayEventsPanel = new System.Windows.Forms.Label();
             this.monthViewPanel = new System.Windows.Forms.Panel();
             this.viewSelectionPanel = new System.Windows.Forms.Panel();
             this.viewLabel = new System.Windows.Forms.Label();
@@ -112,26 +115,23 @@
             this.deleteEventToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.secondClock = new System.Windows.Forms.Timer(this.components);
             this.minuteClock = new System.Windows.Forms.Timer(this.components);
-            this.tomorrowCalendar = new SimpleCalendar.DailyCalendar();
-            this.todayCalendar = new SimpleCalendar.DailyCalendar();
-            this.dailyCalendar = new SimpleCalendar.DailyCalendar();
             this.mainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.categoryModifyPanel.SuspendLayout();
-            this.categoryModifyBody.SuspendLayout();
-            this.categoryModifyButtonsPanel.SuspendLayout();
             this.eventsDisplayPanel.SuspendLayout();
             this.eventButtonsPanel.SuspendLayout();
             this.eventModifyPanel.SuspendLayout();
             this.eventModifyBody.SuspendLayout();
             this.eventModifyButtonsPanel.SuspendLayout();
-            this.dayViewPanel.SuspendLayout();
+            this.categoryModifyPanel.SuspendLayout();
+            this.categoryModifyBody.SuspendLayout();
+            this.categoryModifyButtonsPanel.SuspendLayout();
             this.twoDayViewPanel.SuspendLayout();
             this.tomorrowViewPanel.SuspendLayout();
             this.todayViewPanel.SuspendLayout();
+            this.dayViewPanel.SuspendLayout();
             this.viewSelectionPanel.SuspendLayout();
             this.bottomPanel.SuspendLayout();
             this.topPanel.SuspendLayout();
@@ -176,176 +176,6 @@
             this.splitContainer1.SplitterDistance = 390;
             this.splitContainer1.TabIndex = 17;
             this.splitContainer1.TabStop = false;
-            // 
-            // categoryModifyPanel
-            // 
-            this.categoryModifyPanel.Controls.Add(this.categoryModifyBody);
-            this.categoryModifyPanel.Controls.Add(this.categoryErrors);
-            this.categoryModifyPanel.Controls.Add(this.categoryModifyLabel);
-            this.categoryModifyPanel.Controls.Add(this.categoryModifyButtonsPanel);
-            this.categoryModifyPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.categoryModifyPanel.Location = new System.Drawing.Point(10, 10);
-            this.categoryModifyPanel.Name = "categoryModifyPanel";
-            this.categoryModifyPanel.Size = new System.Drawing.Size(368, 490);
-            this.categoryModifyPanel.TabIndex = 23;
-            this.categoryModifyPanel.Visible = false;
-            // 
-            // categoryModifyBody
-            // 
-            this.categoryModifyBody.ColumnCount = 2;
-            this.categoryModifyBody.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.categoryModifyBody.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.categoryModifyBody.Controls.Add(this.nameLabel, 0, 0);
-            this.categoryModifyBody.Controls.Add(this.nameField, 1, 0);
-            this.categoryModifyBody.Controls.Add(this.symbolLabel, 0, 1);
-            this.categoryModifyBody.Controls.Add(this.symbolDropDown, 1, 1);
-            this.categoryModifyBody.Controls.Add(this.colorLabel, 0, 2);
-            this.categoryModifyBody.Controls.Add(this.colorDropDown, 1, 2);
-            this.categoryModifyBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.categoryModifyBody.Location = new System.Drawing.Point(0, 28);
-            this.categoryModifyBody.Name = "categoryModifyBody";
-            this.categoryModifyBody.Padding = new System.Windows.Forms.Padding(8);
-            this.categoryModifyBody.RowCount = 4;
-            this.categoryModifyBody.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.categoryModifyBody.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.categoryModifyBody.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.categoryModifyBody.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.categoryModifyBody.Size = new System.Drawing.Size(368, 108);
-            this.categoryModifyBody.TabIndex = 89;
-            // 
-            // nameLabel
-            // 
-            this.nameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nameLabel.Font = new System.Drawing.Font("Tw Cen MT", 12F, System.Drawing.FontStyle.Bold);
-            this.nameLabel.ForeColor = System.Drawing.Color.White;
-            this.nameLabel.Location = new System.Drawing.Point(11, 8);
-            this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(99, 32);
-            this.nameLabel.TabIndex = 80;
-            this.nameLabel.Text = "Name:";
-            this.nameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // nameField
-            // 
-            this.nameField.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.nameField.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nameField.Font = new System.Drawing.Font("Tw Cen MT", 12F);
-            this.nameField.Location = new System.Drawing.Point(116, 11);
-            this.nameField.Name = "nameField";
-            this.nameField.Size = new System.Drawing.Size(241, 25);
-            this.nameField.TabIndex = 89;
-            // 
-            // symbolLabel
-            // 
-            this.symbolLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.symbolLabel.Font = new System.Drawing.Font("Tw Cen MT", 12F, System.Drawing.FontStyle.Bold);
-            this.symbolLabel.ForeColor = System.Drawing.Color.White;
-            this.symbolLabel.Location = new System.Drawing.Point(11, 40);
-            this.symbolLabel.Name = "symbolLabel";
-            this.symbolLabel.Size = new System.Drawing.Size(99, 33);
-            this.symbolLabel.TabIndex = 82;
-            this.symbolLabel.Text = "Symbol:";
-            this.symbolLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // symbolDropDown
-            // 
-            this.symbolDropDown.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.symbolDropDown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.symbolDropDown.Font = new System.Drawing.Font("Tw Cen MT", 12F);
-            this.symbolDropDown.FormattingEnabled = true;
-            this.symbolDropDown.Location = new System.Drawing.Point(116, 43);
-            this.symbolDropDown.Name = "symbolDropDown";
-            this.symbolDropDown.Size = new System.Drawing.Size(241, 27);
-            this.symbolDropDown.TabIndex = 91;
-            // 
-            // colorLabel
-            // 
-            this.colorLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.colorLabel.Font = new System.Drawing.Font("Tw Cen MT", 12F, System.Drawing.FontStyle.Bold);
-            this.colorLabel.ForeColor = System.Drawing.Color.White;
-            this.colorLabel.Location = new System.Drawing.Point(11, 73);
-            this.colorLabel.Name = "colorLabel";
-            this.colorLabel.Size = new System.Drawing.Size(99, 33);
-            this.colorLabel.TabIndex = 84;
-            this.colorLabel.Text = "Color:";
-            this.colorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // colorDropDown
-            // 
-            this.colorDropDown.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.colorDropDown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.colorDropDown.Font = new System.Drawing.Font("Tw Cen MT", 12F);
-            this.colorDropDown.FormattingEnabled = true;
-            this.colorDropDown.Location = new System.Drawing.Point(116, 76);
-            this.colorDropDown.Name = "colorDropDown";
-            this.colorDropDown.Size = new System.Drawing.Size(241, 27);
-            this.colorDropDown.TabIndex = 90;
-            // 
-            // categoryErrors
-            // 
-            this.categoryErrors.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.categoryErrors.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.categoryErrors.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.categoryErrors.Font = new System.Drawing.Font("Tw Cen MT", 12F, System.Drawing.FontStyle.Bold);
-            this.categoryErrors.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
-            this.categoryErrors.Location = new System.Drawing.Point(0, 136);
-            this.categoryErrors.Multiline = true;
-            this.categoryErrors.Name = "categoryErrors";
-            this.categoryErrors.ReadOnly = true;
-            this.categoryErrors.Size = new System.Drawing.Size(368, 322);
-            this.categoryErrors.TabIndex = 88;
-            this.categoryErrors.TabStop = false;
-            // 
-            // categoryModifyLabel
-            // 
-            this.categoryModifyLabel.BackColor = System.Drawing.Color.Transparent;
-            this.categoryModifyLabel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.categoryModifyLabel.Font = new System.Drawing.Font("Tw Cen MT", 18F);
-            this.categoryModifyLabel.ForeColor = System.Drawing.Color.White;
-            this.categoryModifyLabel.Location = new System.Drawing.Point(0, 0);
-            this.categoryModifyLabel.Name = "categoryModifyLabel";
-            this.categoryModifyLabel.Size = new System.Drawing.Size(368, 28);
-            this.categoryModifyLabel.TabIndex = 77;
-            this.categoryModifyLabel.Text = "Modify Category Panel";
-            this.categoryModifyLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // categoryModifyButtonsPanel
-            // 
-            this.categoryModifyButtonsPanel.Controls.Add(this.saveCategoryModifyButton);
-            this.categoryModifyButtonsPanel.Controls.Add(this.cancelCategoryModifyButton);
-            this.categoryModifyButtonsPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.categoryModifyButtonsPanel.Location = new System.Drawing.Point(0, 458);
-            this.categoryModifyButtonsPanel.Name = "categoryModifyButtonsPanel";
-            this.categoryModifyButtonsPanel.Size = new System.Drawing.Size(368, 32);
-            this.categoryModifyButtonsPanel.TabIndex = 64;
-            // 
-            // saveCategoryModifyButton
-            // 
-            this.saveCategoryModifyButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(68)))), ((int)(((byte)(173)))));
-            this.saveCategoryModifyButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.saveCategoryModifyButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.saveCategoryModifyButton.Font = new System.Drawing.Font("Tw Cen MT", 12F);
-            this.saveCategoryModifyButton.Location = new System.Drawing.Point(208, 0);
-            this.saveCategoryModifyButton.Name = "saveCategoryModifyButton";
-            this.saveCategoryModifyButton.Size = new System.Drawing.Size(160, 32);
-            this.saveCategoryModifyButton.TabIndex = 80;
-            this.saveCategoryModifyButton.TabStop = false;
-            this.saveCategoryModifyButton.Text = "Save Changes";
-            this.saveCategoryModifyButton.UseVisualStyleBackColor = false;
-            // 
-            // cancelCategoryModifyButton
-            // 
-            this.cancelCategoryModifyButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(68)))), ((int)(((byte)(173)))));
-            this.cancelCategoryModifyButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.cancelCategoryModifyButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cancelCategoryModifyButton.Font = new System.Drawing.Font("Tw Cen MT", 12F);
-            this.cancelCategoryModifyButton.Location = new System.Drawing.Point(0, 0);
-            this.cancelCategoryModifyButton.Name = "cancelCategoryModifyButton";
-            this.cancelCategoryModifyButton.Size = new System.Drawing.Size(160, 32);
-            this.cancelCategoryModifyButton.TabIndex = 81;
-            this.cancelCategoryModifyButton.TabStop = false;
-            this.cancelCategoryModifyButton.Text = "Cancel";
-            this.cancelCategoryModifyButton.UseVisualStyleBackColor = false;
             // 
             // eventsDisplayPanel
             // 
@@ -401,7 +231,7 @@
             // 
             this.eventsLabel.BackColor = System.Drawing.Color.Transparent;
             this.eventsLabel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.eventsLabel.Font = new System.Drawing.Font("Tw Cen MT", 18F);
+            this.eventsLabel.Font = new System.Drawing.Font(pfc.Families[0], 18F);
             this.eventsLabel.ForeColor = System.Drawing.Color.White;
             this.eventsLabel.Location = new System.Drawing.Point(0, 0);
             this.eventsLabel.Name = "eventsLabel";
@@ -425,7 +255,7 @@
             this.createEventButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(68)))), ((int)(((byte)(173)))));
             this.createEventButton.Dock = System.Windows.Forms.DockStyle.Left;
             this.createEventButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.createEventButton.Font = new System.Drawing.Font("Tw Cen MT", 12F);
+            this.createEventButton.Font = new System.Drawing.Font(pfc.Families[0], 12F);
             this.createEventButton.Location = new System.Drawing.Point(0, 0);
             this.createEventButton.Name = "createEventButton";
             this.createEventButton.Size = new System.Drawing.Size(160, 32);
@@ -439,7 +269,7 @@
             this.createCategoryButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(68)))), ((int)(((byte)(173)))));
             this.createCategoryButton.Dock = System.Windows.Forms.DockStyle.Right;
             this.createCategoryButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.createCategoryButton.Font = new System.Drawing.Font("Tw Cen MT", 12F);
+            this.createCategoryButton.Font = new System.Drawing.Font(pfc.Families[0], 12F);
             this.createCategoryButton.Location = new System.Drawing.Point(208, 0);
             this.createCategoryButton.Name = "createCategoryButton";
             this.createCategoryButton.Size = new System.Drawing.Size(160, 32);
@@ -499,7 +329,7 @@
             // labelLabel
             // 
             this.labelLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelLabel.Font = new System.Drawing.Font("Tw Cen MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelLabel.Font = new System.Drawing.Font(pfc.Families[0], 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelLabel.ForeColor = System.Drawing.Color.White;
             this.labelLabel.Location = new System.Drawing.Point(11, 8);
             this.labelLabel.Name = "labelLabel";
@@ -512,7 +342,7 @@
             // 
             this.labelField.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.labelField.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelField.Font = new System.Drawing.Font("Tw Cen MT", 12F);
+            this.labelField.Font = new System.Drawing.Font(pfc.Families[0], 12F);
             this.labelField.Location = new System.Drawing.Point(116, 11);
             this.labelField.Name = "labelField";
             this.labelField.Size = new System.Drawing.Size(241, 25);
@@ -521,7 +351,7 @@
             // startDateLabel
             // 
             this.startDateLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.startDateLabel.Font = new System.Drawing.Font("Tw Cen MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.startDateLabel.Font = new System.Drawing.Font(pfc.Families[0], 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.startDateLabel.ForeColor = System.Drawing.Color.White;
             this.startDateLabel.Location = new System.Drawing.Point(11, 39);
             this.startDateLabel.Name = "startDateLabel";
@@ -533,7 +363,7 @@
             // startingDate
             // 
             this.startingDate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.startingDate.Font = new System.Drawing.Font("Tw Cen MT", 12F);
+            this.startingDate.Font = new System.Drawing.Font(pfc.Families[0], 12F);
             this.startingDate.Location = new System.Drawing.Point(116, 42);
             this.startingDate.Name = "startingDate";
             this.startingDate.ShowUpDown = true;
@@ -543,7 +373,7 @@
             // startingTime
             // 
             this.startingTime.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.startingTime.Font = new System.Drawing.Font("Tw Cen MT", 12F);
+            this.startingTime.Font = new System.Drawing.Font(pfc.Families[0], 12F);
             this.startingTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.startingTime.Location = new System.Drawing.Point(116, 73);
             this.startingTime.Name = "startingTime";
@@ -554,7 +384,7 @@
             // endDateLabel
             // 
             this.endDateLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.endDateLabel.Font = new System.Drawing.Font("Tw Cen MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.endDateLabel.Font = new System.Drawing.Font(pfc.Families[0], 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.endDateLabel.ForeColor = System.Drawing.Color.White;
             this.endDateLabel.Location = new System.Drawing.Point(11, 101);
             this.endDateLabel.Name = "endDateLabel";
@@ -565,7 +395,7 @@
             // 
             // endingDate
             // 
-            this.endingDate.Font = new System.Drawing.Font("Tw Cen MT", 12F);
+            this.endingDate.Font = new System.Drawing.Font(pfc.Families[0], 12F);
             this.endingDate.Location = new System.Drawing.Point(116, 104);
             this.endingDate.Name = "endingDate";
             this.endingDate.ShowUpDown = true;
@@ -574,7 +404,7 @@
             // 
             // endingTime
             // 
-            this.endingTime.Font = new System.Drawing.Font("Tw Cen MT", 12F);
+            this.endingTime.Font = new System.Drawing.Font(pfc.Families[0], 12F);
             this.endingTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.endingTime.Location = new System.Drawing.Point(116, 135);
             this.endingTime.Name = "endingTime";
@@ -585,7 +415,7 @@
             // categoryLabel
             // 
             this.categoryLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.categoryLabel.Font = new System.Drawing.Font("Tw Cen MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.categoryLabel.Font = new System.Drawing.Font(pfc.Families[0], 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.categoryLabel.ForeColor = System.Drawing.Color.White;
             this.categoryLabel.Location = new System.Drawing.Point(11, 163);
             this.categoryLabel.Name = "categoryLabel";
@@ -598,7 +428,7 @@
             // 
             this.categoryDropDown.Dock = System.Windows.Forms.DockStyle.Fill;
             this.categoryDropDown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.categoryDropDown.Font = new System.Drawing.Font("Tw Cen MT", 12F);
+            this.categoryDropDown.Font = new System.Drawing.Font(pfc.Families[0], 12F);
             this.categoryDropDown.FormattingEnabled = true;
             this.categoryDropDown.Location = new System.Drawing.Point(116, 166);
             this.categoryDropDown.Name = "categoryDropDown";
@@ -608,7 +438,7 @@
             // locationLabel
             // 
             this.locationLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.locationLabel.Font = new System.Drawing.Font("Tw Cen MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.locationLabel.Font = new System.Drawing.Font(pfc.Families[0], 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.locationLabel.ForeColor = System.Drawing.Color.White;
             this.locationLabel.Location = new System.Drawing.Point(11, 196);
             this.locationLabel.Name = "locationLabel";
@@ -621,7 +451,7 @@
             // 
             this.locationField.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.locationField.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.locationField.Font = new System.Drawing.Font("Tw Cen MT", 12F);
+            this.locationField.Font = new System.Drawing.Font(pfc.Families[0], 12F);
             this.locationField.Location = new System.Drawing.Point(116, 199);
             this.locationField.Name = "locationField";
             this.locationField.Size = new System.Drawing.Size(241, 25);
@@ -630,7 +460,7 @@
             // descriptionLabel
             // 
             this.descriptionLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.descriptionLabel.Font = new System.Drawing.Font("Tw Cen MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.descriptionLabel.Font = new System.Drawing.Font(pfc.Families[0], 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.descriptionLabel.ForeColor = System.Drawing.Color.White;
             this.descriptionLabel.Location = new System.Drawing.Point(11, 227);
             this.descriptionLabel.Name = "descriptionLabel";
@@ -642,7 +472,7 @@
             // descriptionField
             // 
             this.descriptionField.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.descriptionField.Font = new System.Drawing.Font("Tw Cen MT", 12F);
+            this.descriptionField.Font = new System.Drawing.Font(pfc.Families[0], 12F);
             this.descriptionField.Location = new System.Drawing.Point(116, 230);
             this.descriptionField.Multiline = true;
             this.descriptionField.Name = "descriptionField";
@@ -654,7 +484,7 @@
             this.eventErrors.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
             this.eventErrors.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.eventErrors.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.eventErrors.Font = new System.Drawing.Font("Tw Cen MT", 12F, System.Drawing.FontStyle.Bold);
+            this.eventErrors.Font = new System.Drawing.Font(pfc.Families[0], 12F, System.Drawing.FontStyle.Bold);
             this.eventErrors.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
             this.eventErrors.Location = new System.Drawing.Point(0, 353);
             this.eventErrors.Multiline = true;
@@ -668,7 +498,7 @@
             // 
             this.eventModifyLabel.BackColor = System.Drawing.Color.Transparent;
             this.eventModifyLabel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.eventModifyLabel.Font = new System.Drawing.Font("Tw Cen MT", 18F);
+            this.eventModifyLabel.Font = new System.Drawing.Font(pfc.Families[0], 18F);
             this.eventModifyLabel.ForeColor = System.Drawing.Color.White;
             this.eventModifyLabel.Location = new System.Drawing.Point(0, 0);
             this.eventModifyLabel.Name = "eventModifyLabel";
@@ -692,7 +522,7 @@
             this.saveEventModifyButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(68)))), ((int)(((byte)(173)))));
             this.saveEventModifyButton.Dock = System.Windows.Forms.DockStyle.Right;
             this.saveEventModifyButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.saveEventModifyButton.Font = new System.Drawing.Font("Tw Cen MT", 12F);
+            this.saveEventModifyButton.Font = new System.Drawing.Font(pfc.Families[0], 12F);
             this.saveEventModifyButton.Location = new System.Drawing.Point(208, 0);
             this.saveEventModifyButton.Name = "saveEventModifyButton";
             this.saveEventModifyButton.Size = new System.Drawing.Size(160, 32);
@@ -706,7 +536,7 @@
             this.cancelEventModifyButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(68)))), ((int)(((byte)(173)))));
             this.cancelEventModifyButton.Dock = System.Windows.Forms.DockStyle.Left;
             this.cancelEventModifyButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cancelEventModifyButton.Font = new System.Drawing.Font("Tw Cen MT", 12F);
+            this.cancelEventModifyButton.Font = new System.Drawing.Font(pfc.Families[0], 12F);
             this.cancelEventModifyButton.Location = new System.Drawing.Point(0, 0);
             this.cancelEventModifyButton.Name = "cancelEventModifyButton";
             this.cancelEventModifyButton.Size = new System.Drawing.Size(160, 32);
@@ -715,60 +545,175 @@
             this.cancelEventModifyButton.Text = "Cancel";
             this.cancelEventModifyButton.UseVisualStyleBackColor = false;
             // 
-            // dayViewPanel
+            // categoryModifyPanel
             // 
-            this.dayViewPanel.Controls.Add(this.dailyCalendar);
-            this.dayViewPanel.Controls.Add(this.spacerDayCalendarRemaining);
-            this.dayViewPanel.Controls.Add(this.dayRemainingLabel);
-            this.dayViewPanel.Controls.Add(this.dayRemainingEventsLabel);
-            this.dayViewPanel.Controls.Add(this.spacerDayEventsPanel);
-            this.dayViewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dayViewPanel.Location = new System.Drawing.Point(10, 10);
-            this.dayViewPanel.Name = "dayViewPanel";
-            this.dayViewPanel.Size = new System.Drawing.Size(608, 458);
-            this.dayViewPanel.TabIndex = 23;
+            this.categoryModifyPanel.Controls.Add(this.categoryModifyBody);
+            this.categoryModifyPanel.Controls.Add(this.categoryErrors);
+            this.categoryModifyPanel.Controls.Add(this.categoryModifyLabel);
+            this.categoryModifyPanel.Controls.Add(this.categoryModifyButtonsPanel);
+            this.categoryModifyPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.categoryModifyPanel.Location = new System.Drawing.Point(10, 10);
+            this.categoryModifyPanel.Name = "categoryModifyPanel";
+            this.categoryModifyPanel.Size = new System.Drawing.Size(368, 490);
+            this.categoryModifyPanel.TabIndex = 23;
+            this.categoryModifyPanel.Visible = false;
             // 
-            // spacerDayCalendarRemaining
+            // categoryModifyBody
             // 
-            this.spacerDayCalendarRemaining.BackColor = System.Drawing.Color.Transparent;
-            this.spacerDayCalendarRemaining.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.spacerDayCalendarRemaining.Location = new System.Drawing.Point(0, 270);
-            this.spacerDayCalendarRemaining.Name = "spacerDayCalendarRemaining";
-            this.spacerDayCalendarRemaining.Size = new System.Drawing.Size(608, 13);
-            this.spacerDayCalendarRemaining.TabIndex = 24;
+            this.categoryModifyBody.ColumnCount = 2;
+            this.categoryModifyBody.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.categoryModifyBody.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.categoryModifyBody.Controls.Add(this.nameLabel, 0, 0);
+            this.categoryModifyBody.Controls.Add(this.nameField, 1, 0);
+            this.categoryModifyBody.Controls.Add(this.symbolLabel, 0, 1);
+            this.categoryModifyBody.Controls.Add(this.symbolDropDown, 1, 1);
+            this.categoryModifyBody.Controls.Add(this.colorLabel, 0, 2);
+            this.categoryModifyBody.Controls.Add(this.colorDropDown, 1, 2);
+            this.categoryModifyBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.categoryModifyBody.Location = new System.Drawing.Point(0, 28);
+            this.categoryModifyBody.Name = "categoryModifyBody";
+            this.categoryModifyBody.Padding = new System.Windows.Forms.Padding(8);
+            this.categoryModifyBody.RowCount = 4;
+            this.categoryModifyBody.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.categoryModifyBody.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.categoryModifyBody.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.categoryModifyBody.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.categoryModifyBody.Size = new System.Drawing.Size(368, 108);
+            this.categoryModifyBody.TabIndex = 89;
             // 
-            // dayRemainingLabel
+            // nameLabel
             // 
-            this.dayRemainingLabel.BackColor = System.Drawing.Color.Transparent;
-            this.dayRemainingLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dayRemainingLabel.Font = new System.Drawing.Font("Tw Cen MT", 15F, System.Drawing.FontStyle.Underline);
-            this.dayRemainingLabel.ForeColor = System.Drawing.Color.White;
-            this.dayRemainingLabel.Location = new System.Drawing.Point(0, 283);
-            this.dayRemainingLabel.Name = "dayRemainingLabel";
-            this.dayRemainingLabel.Size = new System.Drawing.Size(608, 23);
-            this.dayRemainingLabel.TabIndex = 11;
-            this.dayRemainingLabel.Text = "Remaining Today";
+            this.nameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.nameLabel.Font = new System.Drawing.Font(pfc.Families[0], 12F, System.Drawing.FontStyle.Bold);
+            this.nameLabel.ForeColor = System.Drawing.Color.White;
+            this.nameLabel.Location = new System.Drawing.Point(11, 8);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(99, 32);
+            this.nameLabel.TabIndex = 80;
+            this.nameLabel.Text = "Name:";
+            this.nameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // dayRemainingEventsLabel
+            // nameField
             // 
-            this.dayRemainingEventsLabel.BackColor = System.Drawing.Color.Transparent;
-            this.dayRemainingEventsLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dayRemainingEventsLabel.Font = new System.Drawing.Font("Tw Cen MT", 12F);
-            this.dayRemainingEventsLabel.ForeColor = System.Drawing.Color.White;
-            this.dayRemainingEventsLabel.Location = new System.Drawing.Point(0, 306);
-            this.dayRemainingEventsLabel.Name = "dayRemainingEventsLabel";
-            this.dayRemainingEventsLabel.Size = new System.Drawing.Size(608, 139);
-            this.dayRemainingEventsLabel.TabIndex = 12;
-            this.dayRemainingEventsLabel.Text = "Nothing.";
+            this.nameField.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.nameField.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.nameField.Font = new System.Drawing.Font(pfc.Families[0], 12F);
+            this.nameField.Location = new System.Drawing.Point(116, 11);
+            this.nameField.Name = "nameField";
+            this.nameField.Size = new System.Drawing.Size(241, 25);
+            this.nameField.TabIndex = 89;
             // 
-            // spacerDayEventsPanel
+            // symbolLabel
             // 
-            this.spacerDayEventsPanel.BackColor = System.Drawing.Color.Transparent;
-            this.spacerDayEventsPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.spacerDayEventsPanel.Location = new System.Drawing.Point(0, 445);
-            this.spacerDayEventsPanel.Name = "spacerDayEventsPanel";
-            this.spacerDayEventsPanel.Size = new System.Drawing.Size(608, 13);
-            this.spacerDayEventsPanel.TabIndex = 23;
+            this.symbolLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.symbolLabel.Font = new System.Drawing.Font(pfc.Families[0], 12F, System.Drawing.FontStyle.Bold);
+            this.symbolLabel.ForeColor = System.Drawing.Color.White;
+            this.symbolLabel.Location = new System.Drawing.Point(11, 40);
+            this.symbolLabel.Name = "symbolLabel";
+            this.symbolLabel.Size = new System.Drawing.Size(99, 33);
+            this.symbolLabel.TabIndex = 82;
+            this.symbolLabel.Text = "Symbol:";
+            this.symbolLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // symbolDropDown
+            // 
+            this.symbolDropDown.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.symbolDropDown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.symbolDropDown.Font = new System.Drawing.Font(pfc.Families[0], 12F);
+            this.symbolDropDown.FormattingEnabled = true;
+            this.symbolDropDown.Location = new System.Drawing.Point(116, 43);
+            this.symbolDropDown.Name = "symbolDropDown";
+            this.symbolDropDown.Size = new System.Drawing.Size(241, 27);
+            this.symbolDropDown.TabIndex = 91;
+            // 
+            // colorLabel
+            // 
+            this.colorLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.colorLabel.Font = new System.Drawing.Font(pfc.Families[0], 12F, System.Drawing.FontStyle.Bold);
+            this.colorLabel.ForeColor = System.Drawing.Color.White;
+            this.colorLabel.Location = new System.Drawing.Point(11, 73);
+            this.colorLabel.Name = "colorLabel";
+            this.colorLabel.Size = new System.Drawing.Size(99, 33);
+            this.colorLabel.TabIndex = 84;
+            this.colorLabel.Text = "Color:";
+            this.colorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // colorDropDown
+            // 
+            this.colorDropDown.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.colorDropDown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.colorDropDown.Font = new System.Drawing.Font(pfc.Families[0], 12F);
+            this.colorDropDown.FormattingEnabled = true;
+            this.colorDropDown.Location = new System.Drawing.Point(116, 76);
+            this.colorDropDown.Name = "colorDropDown";
+            this.colorDropDown.Size = new System.Drawing.Size(241, 27);
+            this.colorDropDown.TabIndex = 90;
+            // 
+            // categoryErrors
+            // 
+            this.categoryErrors.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.categoryErrors.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.categoryErrors.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.categoryErrors.Font = new System.Drawing.Font(pfc.Families[0], 12F, System.Drawing.FontStyle.Bold);
+            this.categoryErrors.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
+            this.categoryErrors.Location = new System.Drawing.Point(0, 136);
+            this.categoryErrors.Multiline = true;
+            this.categoryErrors.Name = "categoryErrors";
+            this.categoryErrors.ReadOnly = true;
+            this.categoryErrors.Size = new System.Drawing.Size(368, 322);
+            this.categoryErrors.TabIndex = 88;
+            this.categoryErrors.TabStop = false;
+            // 
+            // categoryModifyLabel
+            // 
+            this.categoryModifyLabel.BackColor = System.Drawing.Color.Transparent;
+            this.categoryModifyLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.categoryModifyLabel.Font = new System.Drawing.Font(pfc.Families[0], 18F);
+            this.categoryModifyLabel.ForeColor = System.Drawing.Color.White;
+            this.categoryModifyLabel.Location = new System.Drawing.Point(0, 0);
+            this.categoryModifyLabel.Name = "categoryModifyLabel";
+            this.categoryModifyLabel.Size = new System.Drawing.Size(368, 28);
+            this.categoryModifyLabel.TabIndex = 77;
+            this.categoryModifyLabel.Text = "Modify Category Panel";
+            this.categoryModifyLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // categoryModifyButtonsPanel
+            // 
+            this.categoryModifyButtonsPanel.Controls.Add(this.saveCategoryModifyButton);
+            this.categoryModifyButtonsPanel.Controls.Add(this.cancelCategoryModifyButton);
+            this.categoryModifyButtonsPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.categoryModifyButtonsPanel.Location = new System.Drawing.Point(0, 458);
+            this.categoryModifyButtonsPanel.Name = "categoryModifyButtonsPanel";
+            this.categoryModifyButtonsPanel.Size = new System.Drawing.Size(368, 32);
+            this.categoryModifyButtonsPanel.TabIndex = 64;
+            // 
+            // saveCategoryModifyButton
+            // 
+            this.saveCategoryModifyButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(68)))), ((int)(((byte)(173)))));
+            this.saveCategoryModifyButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.saveCategoryModifyButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.saveCategoryModifyButton.Font = new System.Drawing.Font(pfc.Families[0], 12F);
+            this.saveCategoryModifyButton.Location = new System.Drawing.Point(208, 0);
+            this.saveCategoryModifyButton.Name = "saveCategoryModifyButton";
+            this.saveCategoryModifyButton.Size = new System.Drawing.Size(160, 32);
+            this.saveCategoryModifyButton.TabIndex = 80;
+            this.saveCategoryModifyButton.TabStop = false;
+            this.saveCategoryModifyButton.Text = "Save Changes";
+            this.saveCategoryModifyButton.UseVisualStyleBackColor = false;
+            // 
+            // cancelCategoryModifyButton
+            // 
+            this.cancelCategoryModifyButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(68)))), ((int)(((byte)(173)))));
+            this.cancelCategoryModifyButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.cancelCategoryModifyButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cancelCategoryModifyButton.Font = new System.Drawing.Font(pfc.Families[0], 12F);
+            this.cancelCategoryModifyButton.Location = new System.Drawing.Point(0, 0);
+            this.cancelCategoryModifyButton.Name = "cancelCategoryModifyButton";
+            this.cancelCategoryModifyButton.Size = new System.Drawing.Size(160, 32);
+            this.cancelCategoryModifyButton.TabIndex = 81;
+            this.cancelCategoryModifyButton.TabStop = false;
+            this.cancelCategoryModifyButton.Text = "Cancel";
+            this.cancelCategoryModifyButton.UseVisualStyleBackColor = false;
             // 
             // twoDayViewPanel
             // 
@@ -799,13 +744,23 @@
             // 
             this.tomorrowLabel.BackColor = System.Drawing.Color.Transparent;
             this.tomorrowLabel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.tomorrowLabel.Font = new System.Drawing.Font("Tw Cen MT", 12F);
+            this.tomorrowLabel.Font = new System.Drawing.Font(pfc.Families[0], 12F);
             this.tomorrowLabel.ForeColor = System.Drawing.Color.White;
             this.tomorrowLabel.Location = new System.Drawing.Point(0, 0);
             this.tomorrowLabel.Name = "tomorrowLabel";
             this.tomorrowLabel.Size = new System.Drawing.Size(158, 135);
             this.tomorrowLabel.TabIndex = 25;
             this.tomorrowLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // tomorrowCalendar
+            // 
+            this.tomorrowCalendar.BackColor = System.Drawing.Color.White;
+            this.tomorrowCalendar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tomorrowCalendar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.tomorrowCalendar.Location = new System.Drawing.Point(158, 0);
+            this.tomorrowCalendar.Name = "tomorrowCalendar";
+            this.tomorrowCalendar.Size = new System.Drawing.Size(450, 135);
+            this.tomorrowCalendar.TabIndex = 24;
             // 
             // todayViewPanel
             // 
@@ -821,13 +776,23 @@
             // 
             this.todayLabel.BackColor = System.Drawing.Color.Transparent;
             this.todayLabel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.todayLabel.Font = new System.Drawing.Font("Tw Cen MT", 12F);
+            this.todayLabel.Font = new System.Drawing.Font(pfc.Families[0], 12F);
             this.todayLabel.ForeColor = System.Drawing.Color.White;
             this.todayLabel.Location = new System.Drawing.Point(0, 0);
             this.todayLabel.Name = "todayLabel";
             this.todayLabel.Size = new System.Drawing.Size(158, 135);
             this.todayLabel.TabIndex = 26;
             this.todayLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // todayCalendar
+            // 
+            this.todayCalendar.BackColor = System.Drawing.Color.White;
+            this.todayCalendar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.todayCalendar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.todayCalendar.Location = new System.Drawing.Point(158, 0);
+            this.todayCalendar.Name = "todayCalendar";
+            this.todayCalendar.Size = new System.Drawing.Size(450, 135);
+            this.todayCalendar.TabIndex = 25;
             // 
             // spacerTwoDayCalendarRemaining
             // 
@@ -842,7 +807,7 @@
             // 
             this.twoDayRemainingLabel.BackColor = System.Drawing.Color.Transparent;
             this.twoDayRemainingLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.twoDayRemainingLabel.Font = new System.Drawing.Font("Tw Cen MT", 15F, System.Drawing.FontStyle.Underline);
+            this.twoDayRemainingLabel.Font = new System.Drawing.Font(pfc.Families[0], 15F, System.Drawing.FontStyle.Underline);
             this.twoDayRemainingLabel.ForeColor = System.Drawing.Color.White;
             this.twoDayRemainingLabel.Location = new System.Drawing.Point(0, 283);
             this.twoDayRemainingLabel.Name = "twoDayRemainingLabel";
@@ -854,7 +819,7 @@
             // 
             this.twoDayRemainingEventsLabel.BackColor = System.Drawing.Color.Transparent;
             this.twoDayRemainingEventsLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.twoDayRemainingEventsLabel.Font = new System.Drawing.Font("Tw Cen MT", 12F);
+            this.twoDayRemainingEventsLabel.Font = new System.Drawing.Font(pfc.Families[0], 12F);
             this.twoDayRemainingEventsLabel.ForeColor = System.Drawing.Color.White;
             this.twoDayRemainingEventsLabel.Location = new System.Drawing.Point(0, 306);
             this.twoDayRemainingEventsLabel.Name = "twoDayRemainingEventsLabel";
@@ -870,6 +835,71 @@
             this.spacerTwoDayEventsPanel.Name = "spacerTwoDayEventsPanel";
             this.spacerTwoDayEventsPanel.Size = new System.Drawing.Size(608, 13);
             this.spacerTwoDayEventsPanel.TabIndex = 23;
+            // 
+            // dayViewPanel
+            // 
+            this.dayViewPanel.Controls.Add(this.dailyCalendar);
+            this.dayViewPanel.Controls.Add(this.spacerDayCalendarRemaining);
+            this.dayViewPanel.Controls.Add(this.dayRemainingLabel);
+            this.dayViewPanel.Controls.Add(this.dayRemainingEventsLabel);
+            this.dayViewPanel.Controls.Add(this.spacerDayEventsPanel);
+            this.dayViewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dayViewPanel.Location = new System.Drawing.Point(10, 10);
+            this.dayViewPanel.Name = "dayViewPanel";
+            this.dayViewPanel.Size = new System.Drawing.Size(608, 458);
+            this.dayViewPanel.TabIndex = 23;
+            // 
+            // dailyCalendar
+            // 
+            this.dailyCalendar.BackColor = System.Drawing.Color.White;
+            this.dailyCalendar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dailyCalendar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dailyCalendar.Location = new System.Drawing.Point(0, 0);
+            this.dailyCalendar.Name = "dailyCalendar";
+            this.dailyCalendar.Size = new System.Drawing.Size(608, 270);
+            this.dailyCalendar.TabIndex = 21;
+            // 
+            // spacerDayCalendarRemaining
+            // 
+            this.spacerDayCalendarRemaining.BackColor = System.Drawing.Color.Transparent;
+            this.spacerDayCalendarRemaining.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.spacerDayCalendarRemaining.Location = new System.Drawing.Point(0, 270);
+            this.spacerDayCalendarRemaining.Name = "spacerDayCalendarRemaining";
+            this.spacerDayCalendarRemaining.Size = new System.Drawing.Size(608, 13);
+            this.spacerDayCalendarRemaining.TabIndex = 24;
+            // 
+            // dayRemainingLabel
+            // 
+            this.dayRemainingLabel.BackColor = System.Drawing.Color.Transparent;
+            this.dayRemainingLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dayRemainingLabel.Font = new System.Drawing.Font(pfc.Families[0], 15F, System.Drawing.FontStyle.Underline);
+            this.dayRemainingLabel.ForeColor = System.Drawing.Color.White;
+            this.dayRemainingLabel.Location = new System.Drawing.Point(0, 283);
+            this.dayRemainingLabel.Name = "dayRemainingLabel";
+            this.dayRemainingLabel.Size = new System.Drawing.Size(608, 23);
+            this.dayRemainingLabel.TabIndex = 11;
+            this.dayRemainingLabel.Text = "Remaining Today";
+            // 
+            // dayRemainingEventsLabel
+            // 
+            this.dayRemainingEventsLabel.BackColor = System.Drawing.Color.Transparent;
+            this.dayRemainingEventsLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dayRemainingEventsLabel.Font = new System.Drawing.Font(pfc.Families[0], 12F);
+            this.dayRemainingEventsLabel.ForeColor = System.Drawing.Color.White;
+            this.dayRemainingEventsLabel.Location = new System.Drawing.Point(0, 306);
+            this.dayRemainingEventsLabel.Name = "dayRemainingEventsLabel";
+            this.dayRemainingEventsLabel.Size = new System.Drawing.Size(608, 139);
+            this.dayRemainingEventsLabel.TabIndex = 12;
+            this.dayRemainingEventsLabel.Text = "Nothing.";
+            // 
+            // spacerDayEventsPanel
+            // 
+            this.spacerDayEventsPanel.BackColor = System.Drawing.Color.Transparent;
+            this.spacerDayEventsPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.spacerDayEventsPanel.Location = new System.Drawing.Point(0, 445);
+            this.spacerDayEventsPanel.Name = "spacerDayEventsPanel";
+            this.spacerDayEventsPanel.Size = new System.Drawing.Size(608, 13);
+            this.spacerDayEventsPanel.TabIndex = 23;
             // 
             // monthViewPanel
             // 
@@ -899,7 +929,7 @@
             // 
             this.viewLabel.BackColor = System.Drawing.Color.Transparent;
             this.viewLabel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.viewLabel.Font = new System.Drawing.Font("Tw Cen MT", 12F);
+            this.viewLabel.Font = new System.Drawing.Font(pfc.Families[0], 12F);
             this.viewLabel.ForeColor = System.Drawing.Color.White;
             this.viewLabel.Location = new System.Drawing.Point(343, 0);
             this.viewLabel.Name = "viewLabel";
@@ -922,7 +952,7 @@
             this.dayViewButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(68)))), ((int)(((byte)(173)))));
             this.dayViewButton.Dock = System.Windows.Forms.DockStyle.Right;
             this.dayViewButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.dayViewButton.Font = new System.Drawing.Font("Tw Cen MT", 12F);
+            this.dayViewButton.Font = new System.Drawing.Font(pfc.Families[0], 12F);
             this.dayViewButton.Location = new System.Drawing.Point(400, 0);
             this.dayViewButton.Name = "dayViewButton";
             this.dayViewButton.Size = new System.Drawing.Size(64, 32);
@@ -945,7 +975,7 @@
             this.twoDayViewButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(68)))), ((int)(((byte)(173)))));
             this.twoDayViewButton.Dock = System.Windows.Forms.DockStyle.Right;
             this.twoDayViewButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.twoDayViewButton.Font = new System.Drawing.Font("Tw Cen MT", 12F);
+            this.twoDayViewButton.Font = new System.Drawing.Font(pfc.Families[0], 12F);
             this.twoDayViewButton.Location = new System.Drawing.Point(472, 0);
             this.twoDayViewButton.Name = "twoDayViewButton";
             this.twoDayViewButton.Size = new System.Drawing.Size(64, 32);
@@ -968,7 +998,7 @@
             this.monthViewButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(68)))), ((int)(((byte)(173)))));
             this.monthViewButton.Dock = System.Windows.Forms.DockStyle.Right;
             this.monthViewButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.monthViewButton.Font = new System.Drawing.Font("Tw Cen MT", 12F);
+            this.monthViewButton.Font = new System.Drawing.Font(pfc.Families[0], 12F);
             this.monthViewButton.Location = new System.Drawing.Point(544, 0);
             this.monthViewButton.Name = "monthViewButton";
             this.monthViewButton.Size = new System.Drawing.Size(64, 32);
@@ -991,7 +1021,7 @@
             // 
             // dateSelector
             // 
-            this.dateSelector.Font = new System.Drawing.Font("Tw Cen MT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateSelector.Font = new System.Drawing.Font(pfc.Families[0], 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateSelector.Location = new System.Drawing.Point(412, 2);
             this.dateSelector.Name = "dateSelector";
             this.dateSelector.ShowUpDown = true;
@@ -1003,7 +1033,7 @@
             // 
             this.nextDayButton.BackColor = System.Drawing.Color.Transparent;
             this.nextDayButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.nextDayButton.Font = new System.Drawing.Font("Tw Cen MT", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nextDayButton.Font = new System.Drawing.Font(pfc.Families[0], 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nextDayButton.ForeColor = System.Drawing.Color.White;
             this.nextDayButton.Location = new System.Drawing.Point(992, 0);
             this.nextDayButton.Name = "nextDayButton";
@@ -1016,7 +1046,7 @@
             // 
             this.prevDayButton.BackColor = System.Drawing.Color.Transparent;
             this.prevDayButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.prevDayButton.Font = new System.Drawing.Font("Tw Cen MT", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.prevDayButton.Font = new System.Drawing.Font(pfc.Families[0], 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.prevDayButton.ForeColor = System.Drawing.Color.White;
             this.prevDayButton.Location = new System.Drawing.Point(0, 0);
             this.prevDayButton.Name = "prevDayButton";
@@ -1029,7 +1059,7 @@
             // 
             this.currentTimeDisplay.BackColor = System.Drawing.Color.Transparent;
             this.currentTimeDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.currentTimeDisplay.Font = new System.Drawing.Font("Tw Cen MT", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.currentTimeDisplay.Font = new System.Drawing.Font(pfc.Families[0], 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.currentTimeDisplay.ForeColor = System.Drawing.Color.Transparent;
             this.currentTimeDisplay.Location = new System.Drawing.Point(23, 0);
             this.currentTimeDisplay.Name = "currentTimeDisplay";
@@ -1042,7 +1072,7 @@
             // 
             this.exitButton.BackColor = System.Drawing.Color.Transparent;
             this.exitButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.exitButton.Font = new System.Drawing.Font("Tw Cen MT", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exitButton.Font = new System.Drawing.Font(pfc.Families[0], 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.exitButton.ForeColor = System.Drawing.Color.IndianRed;
             this.exitButton.Location = new System.Drawing.Point(1001, 0);
             this.exitButton.Name = "exitButton";
@@ -1121,36 +1151,6 @@
             this.minuteClock.Enabled = true;
             this.minuteClock.Interval = 60000;
             // 
-            // tomorrowCalendar
-            // 
-            this.tomorrowCalendar.BackColor = System.Drawing.Color.White;
-            this.tomorrowCalendar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tomorrowCalendar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.tomorrowCalendar.Location = new System.Drawing.Point(158, 0);
-            this.tomorrowCalendar.Name = "tomorrowCalendar";
-            this.tomorrowCalendar.Size = new System.Drawing.Size(450, 135);
-            this.tomorrowCalendar.TabIndex = 24;
-            // 
-            // todayCalendar
-            // 
-            this.todayCalendar.BackColor = System.Drawing.Color.White;
-            this.todayCalendar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.todayCalendar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.todayCalendar.Location = new System.Drawing.Point(158, 0);
-            this.todayCalendar.Name = "todayCalendar";
-            this.todayCalendar.Size = new System.Drawing.Size(450, 135);
-            this.todayCalendar.TabIndex = 25;
-            // 
-            // dailyCalendar
-            // 
-            this.dailyCalendar.BackColor = System.Drawing.Color.White;
-            this.dailyCalendar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.dailyCalendar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dailyCalendar.Location = new System.Drawing.Point(0, 0);
-            this.dailyCalendar.Name = "dailyCalendar";
-            this.dailyCalendar.Size = new System.Drawing.Size(608, 270);
-            this.dailyCalendar.TabIndex = 21;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1168,11 +1168,6 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.categoryModifyPanel.ResumeLayout(false);
-            this.categoryModifyPanel.PerformLayout();
-            this.categoryModifyBody.ResumeLayout(false);
-            this.categoryModifyBody.PerformLayout();
-            this.categoryModifyButtonsPanel.ResumeLayout(false);
             this.eventsDisplayPanel.ResumeLayout(false);
             this.eventButtonsPanel.ResumeLayout(false);
             this.eventModifyPanel.ResumeLayout(false);
@@ -1180,10 +1175,15 @@
             this.eventModifyBody.ResumeLayout(false);
             this.eventModifyBody.PerformLayout();
             this.eventModifyButtonsPanel.ResumeLayout(false);
-            this.dayViewPanel.ResumeLayout(false);
+            this.categoryModifyPanel.ResumeLayout(false);
+            this.categoryModifyPanel.PerformLayout();
+            this.categoryModifyBody.ResumeLayout(false);
+            this.categoryModifyBody.PerformLayout();
+            this.categoryModifyButtonsPanel.ResumeLayout(false);
             this.twoDayViewPanel.ResumeLayout(false);
             this.tomorrowViewPanel.ResumeLayout(false);
             this.todayViewPanel.ResumeLayout(false);
+            this.dayViewPanel.ResumeLayout(false);
             this.viewSelectionPanel.ResumeLayout(false);
             this.bottomPanel.ResumeLayout(false);
             this.topPanel.ResumeLayout(false);

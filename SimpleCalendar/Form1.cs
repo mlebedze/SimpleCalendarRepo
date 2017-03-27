@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -41,11 +42,17 @@ namespace SimpleCalendar
         /// The current category being modified.</summary>
         private CalendarCategory currentCategory;
 
+        public PrivateFontCollection pfc;
+
         #region initialization
         /// <summary>
         /// Initializes the calendar form.</summary>
         public Form1()
         {
+            pfc = new PrivateFontCollection();
+            pfc.AddFontFile("Tw Cen MT RESOURCE.ttf");
+            pfc.AddFontFile("Tw Cen MT condensed bold RESOURCE.ttf");
+
             // set up components on the form
             InitializeComponent();
 
@@ -576,8 +583,8 @@ namespace SimpleCalendar
         public void refreshTree(DateTime date)
         {
             // define the fonts used in the tree view
-            Font treeCategoryFont = new Font("Tw Cen MT", 14.25F);
-            Font treeEventFont = new Font("Tw Cen MT Condensed", 11.25F, FontStyle.Bold);
+            Font treeCategoryFont = new Font(pfc.Families[0], 12F);
+            Font treeEventFont = new Font(pfc.Families[1], 11.25F, FontStyle.Bold);
 
             // clear out tree view
             eventsTreeView.Nodes.Clear();
