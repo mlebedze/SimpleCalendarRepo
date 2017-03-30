@@ -121,7 +121,11 @@ namespace SimpleCalendar
                 endX = (minutes * Width) / 1440F;
 
                 // draw the line
-                e.Graphics.DrawLine(new Pen(userCategories[ev.Category].Colour, 8F), startX, intialY + eventIndex * yStep, endX, intialY + eventIndex * yStep);
+                if (ev.Category == "Uncategorized") {
+                    e.Graphics.DrawLine(new Pen(Color.Blue, 8F), startX, intialY + eventIndex * yStep, endX, intialY + eventIndex * yStep);
+                } else {
+                    e.Graphics.DrawLine(new Pen(userCategories[ev.Category].Colour, 8F), startX, intialY + eventIndex * yStep, endX, intialY + eventIndex * yStep);
+                }
 
                 eventIndex++;
             }

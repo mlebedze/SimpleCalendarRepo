@@ -493,7 +493,23 @@ namespace SimpleCalendar
             TreeNode parentNode = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeView).SelectedNode;
             currentCategory = parentNode.Tag as CalendarCategory;
 
-            // TODO: Delete Category
+            // create a string with category data
+            string checkString = currentCategory.Name + "\r\n"
+                + "Symbol: " + currentCategory.Colour.ToKnownColor().ToString() + " " + currentCategory.Symbol.ToString() + "\r\n"
+                + "Events:\r\n";
+
+            // show a confirmation dialog to user before deleting event
+            DialogResult check = MessageBox.Show("Are you sure you wish to delete this category?\r\n\r\n" + checkString, "Delete Category", MessageBoxButtons.YesNo);
+            if (check == DialogResult.Yes) {
+                // delete the category
+                eventCategories.Remove(currentCategory.Name);
+                foreach (CalendarEvent ev in currentCategory.Events) {
+                    ev.Category = "Uncategorized";
+                }
+
+                // refresh the form
+                RefreshCalendar();
+            }
         }
         #endregion
 
