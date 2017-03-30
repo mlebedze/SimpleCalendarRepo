@@ -35,6 +35,14 @@ namespace SimpleCalendar
         private List<CalendarEvent> tomorrowsEvents;
 
         /// <summary>
+        /// All events which start today or after today.</summary>
+        private List<CalendarEvent> futureEvents;
+
+        /// <summary>
+        /// All events which have yet to occur for today.</summary>
+        private List<CalendarEvent> remainingEvents;
+
+        /// <summary>
         /// The current event being modified.</summary>
         private CalendarEvent currentEvent;
 
@@ -518,7 +526,7 @@ namespace SimpleCalendar
         /// Refreshes the calendar view and the events list.</summary>
         private void RefreshCalendar()
         {
-            // determine today's and tomorrow's events
+            // build event lists
             DateTime x = dateSelected;
             DateTime y = x.AddDays(1);
             DateTime z = y.AddDays(1);
@@ -528,14 +536,23 @@ namespace SimpleCalendar
             tomorrowsEvents = allEvents.Where((ev) =>
                 (y <= ev.StartingTime && ev.StartingTime <= z) || (y <= ev.EndingTime && ev.EndingTime <= z) || (y >= ev.StartingTime && z <= ev.EndingTime)
             ).ToList();
+            futureEvents = allEvents.Where((ev) => (DateTime.Today <= ev.StartingTime)).ToList();
+            remainingEvents = allEvents.Where((ev) => (DateTime.Now <= ev.StartingTime && ev.StartingTime <= y)).ToList();
+
+            // sort event lists by date
             todaysEvents.Sort(new SortEventsByDate());
             tomorrowsEvents.Sort(new SortEventsByDate());
+            futureEvents.Sort(new SortEventsByDate());
+            remainingEvents.Sort(new SortEventsByDate());
 
             // refresh the events list
             refreshTree(dateSelected);
 
             // refresh the current calendar view
             RefreshCurrentView();
+
+            // refresh remaining events list
+            RefreshRemainingEvents();
         }
 
         /// <summary>
@@ -553,6 +570,24 @@ namespace SimpleCalendar
             } else {
                 // refresh daily view
                 dailyCalendar.ChangeDate(dateSelected, todaysEvents, eventCategories);
+            }
+        }
+
+        /// <summary>
+        /// Refreshes the remaining events list.</summary>
+        private void RefreshRemainingEvents()
+        {
+            if (remainingEvents.Count == 0) {
+                dayRemainingEventsLabel.Text = "None.";
+                twoDayRemainingEventsLabel.Text = "None.";
+            } else {
+                dayRemainingEventsLabel.Text = string.Empty;
+                twoDayRemainingEventsLabel.Text = string.Empty;
+
+                foreach (CalendarEvent ev in remainingEvents) {
+                    dayRemainingEventsLabel.Text += ev.StartingTime.ToShortTimeString() + ": " + ev.Label + "\r\n";
+                    twoDayRemainingEventsLabel.Text += ev.StartingTime.ToShortTimeString() + ": " + ev.Label + "\r\n";
+                }
             }
         }
 
@@ -617,7 +652,7 @@ namespace SimpleCalendar
             eventsTreeView.Nodes.Add(node);
 
             //Add all events to the 'all' node
-            foreach (CalendarEvent ev in todaysEvents) {
+            foreach (CalendarEvent ev in futureEvents) {
                 eventsTreeView.Nodes[0].Nodes.Add(new TreeNode() {
                     ContextMenuStrip = eventContextMenu,
                     ForeColor = Color.White,
@@ -662,7 +697,7 @@ namespace SimpleCalendar
                 };
 
                 // add all of today's event under this category as children of the category tree node
-                foreach (CalendarEvent ev in todaysEvents.Where((ev) => { return ev.Category == category.Name; })) {
+                foreach (CalendarEvent ev in futureEvents.Where((ev) => { return ev.Category == category.Name; })) {
                     node.Nodes.Add(new TreeNode() {
                         ContextMenuStrip = eventContextMenu,
                         ForeColor = Color.White,
