@@ -529,14 +529,14 @@ namespace SimpleCalendar
             if (twoDayViewPanel.Visible) {
                 // update the two-day view calendar
                 todayLabel.Text = dateSelected.DayOfWeek.ToString() + "\r\n" + dateSelected.ToLongDateString();
-                todayCalendar.ChangeDate(dateSelected, todaysEvents);
+                todayCalendar.ChangeDate(dateSelected, todaysEvents, eventCategories);
                 tomorrowLabel.Text = dateSelected.AddDays(1).DayOfWeek.ToString() + "\r\n" + dateSelected.AddDays(1).ToLongDateString();
-                tomorrowCalendar.ChangeDate(dateSelected.AddDays(1), tomorrowsEvents);
+                tomorrowCalendar.ChangeDate(dateSelected.AddDays(1), tomorrowsEvents, eventCategories);
             } else if (monthViewPanel.Visible) {
                 // TODO: update monthly calendar
             } else {
                 // refresh daily view
-                dailyCalendar.ChangeDate(dateSelected, todaysEvents);
+                dailyCalendar.ChangeDate(dateSelected, todaysEvents, eventCategories);
             }
         }
 
@@ -772,7 +772,7 @@ namespace SimpleCalendar
                 isValidCategory = false;
             } else {
                 // check if the name of the category already exists
-                if (nameField.Text == "All" ||
+                if (nameField.Text == "All" || nameField.Text == "Uncategorized" ||
                     (currentCategory == null && eventCategories.ContainsKey(nameField.Text)) ||
                     (currentCategory != null && eventCategories.ContainsKey(nameField.Text) && nameField.Text != currentCategory.Name)) {
                     errors.Add("Error: Category name already in use");

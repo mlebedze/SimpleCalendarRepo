@@ -18,19 +18,11 @@ namespace SimpleCalendar
         /// The events which are currently represented on the calendar.</summary>
         private List<CalendarEvent> currentEvents;
 
-        private PrivateFontCollection pfc;
-
         /// <summary>
-        /// The set of pens to use when drawing events.</summary>
-        private Pen[] eventPens = {
-            new Pen(Color.FromArgb(255, 231, 76, 60), 8F),
-            new Pen(Color.FromArgb(255, 211, 84, 0), 8F),
-            new Pen(Color.FromArgb(255, 241, 196, 15), 8F),
-            new Pen(Color.FromArgb(255, 46, 204, 113), 8F),
-            new Pen(Color.FromArgb(255, 52, 152, 219), 8F),
-            new Pen(Color.FromArgb(255, 52, 73, 94), 8F),
-            new Pen(Color.FromArgb(255, 142, 68, 173), 8F)
-        };
+        /// All user-created event categories.</summary>
+        private Dictionary<string, CalendarCategory> userCategories;
+
+        private PrivateFontCollection pfc;
 
         /// <summary>
         /// Creates the <c>DailyCalendar</c> control.</summary>
@@ -48,11 +40,13 @@ namespace SimpleCalendar
         /// Changes the represented date on the calendar.</summary>
         /// <param name="newDate">The new date to represent.</param>
         /// <param name="events">The new events to represent.</param>
-        public void ChangeDate(DateTime newDate, List<CalendarEvent> events)
+        /// <param name="categories">The categories that the user has defined.</param>
+        public void ChangeDate(DateTime newDate, List<CalendarEvent> events, Dictionary<string, CalendarCategory> categories)
         {
             // change the current represented date
             currentDate = newDate;
             currentEvents = events;
+            userCategories = categories;
 
             // invalidate the control and repaint calendar
             Invalidate();
@@ -110,7 +104,6 @@ namespace SimpleCalendar
         /// <param name="e">A <c>PaintEventArgs</c> that contains the event data.</param>
         private void DrawEvents(PaintEventArgs e)
         {
-            int penIndex = 0;
             int eventIndex = 0;
 
             float intialY = 32F;
@@ -128,9 +121,8 @@ namespace SimpleCalendar
                 endX = (minutes * Width) / 1440F;
 
                 // draw the line
-                e.Graphics.DrawLine(eventPens[penIndex], startX, intialY + eventIndex * yStep, endX, intialY + eventIndex * yStep);
+                e.Graphics.DrawLine(new Pen(userCategories[ev.Category].Colour, 8F), startX, intialY + eventIndex * yStep, endX, intialY + eventIndex * yStep);
 
-                penIndex = (penIndex + 1) % eventPens.Length;
                 eventIndex++;
             }
         }
