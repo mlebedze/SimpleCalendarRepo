@@ -495,8 +495,7 @@ namespace SimpleCalendar
 
         /// <summary>
         /// Shows a confirmation before allowing the user to delete the selected category.</summary>
-        private void DeleteCategoryMenuItem_Click(object sender, EventArgs e)
-        {
+        private void DeleteCategoryMenuItem_Click(object sender, EventArgs e) {
             // get the selected category
             TreeNode parentNode = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeView).SelectedNode;
             currentCategory = parentNode.Tag as CalendarCategory;
@@ -505,6 +504,22 @@ namespace SimpleCalendar
             string checkString = currentCategory.Name + "\r\n"
                 + "Symbol: " + currentCategory.Colour.ToKnownColor().ToString() + " " + currentCategory.Symbol.ToString() + "\r\n"
                 + "Events:\r\n";
+            currentCategory.Events.Sort(new SortEventsByDate());
+            if (currentCategory.Events.Count > 5) {
+                for (int i = 0; i < 5; i++) {
+                    checkString += "- " + currentCategory.Events[i].Label;
+                    checkString += " (" + currentCategory.Events[i].StartingTime.ToString("MMM dd h:mmtt");
+                    checkString += " - " + currentCategory.Events[i].EndingTime.ToString("MMM dd h:mmtt") + ")\r\n";
+                }
+                checkString += string.Format("... and {0} more.", currentCategory.Events.Count - 5);
+            } else {
+                foreach (CalendarEvent ev in currentCategory.Events) {
+                    checkString += "- " + ev.Label;
+                    checkString += " (" + ev.StartingTime.ToString("MMM dd h:mmtt");
+                    checkString += " - " + ev.EndingTime.ToString("MMM dd h:mmtt") + ")\r\n";
+                }
+            }
+            checkString += "\r\n\r\nNote: Events will be recategorized to Uncategorized";
 
             // show a confirmation dialog to user before deleting event
             DialogResult check = MessageBox.Show("Are you sure you wish to delete this category?\r\n\r\n" + checkString, "Delete Category", MessageBoxButtons.YesNo);
@@ -537,7 +552,7 @@ namespace SimpleCalendar
                 (y <= ev.StartingTime && ev.StartingTime <= z) || (y <= ev.EndingTime && ev.EndingTime <= z) || (y >= ev.StartingTime && z <= ev.EndingTime)
             ).ToList();
             futureEvents = allEvents.Where((ev) => (DateTime.Today <= ev.StartingTime)).ToList();
-            remainingEvents = allEvents.Where((ev) => (DateTime.Now <= ev.StartingTime && ev.StartingTime <= y)).ToList();
+            remainingEvents = allEvents.Where((ev) => (DateTime.Now <= ev.StartingTime && ev.StartingTime <= DateTime.Today.AddDays(1))).ToList();
 
             // sort event lists by date
             todaysEvents.Sort(new SortEventsByDate());
