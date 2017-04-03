@@ -551,7 +551,7 @@ namespace SimpleCalendar
             tomorrowsEvents = allEvents.Where((ev) =>
                 (y <= ev.StartingTime && ev.StartingTime <= z) || (y <= ev.EndingTime && ev.EndingTime <= z) || (y >= ev.StartingTime && z <= ev.EndingTime)
             ).ToList();
-            futureEvents = allEvents.Where((ev) => (DateTime.Today <= ev.StartingTime)).ToList();
+            futureEvents = allEvents.Where((ev) => (x <= ev.StartingTime)).ToList();
             remainingEvents = allEvents.Where((ev) => (DateTime.Now <= ev.StartingTime && ev.StartingTime <= DateTime.Today.AddDays(1))).ToList();
 
             // sort event lists by date
